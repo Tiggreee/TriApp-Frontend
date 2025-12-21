@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { searchLocations, fetchCurrentWeather } from '../features/weather/api';
 import { SearchCity } from '../features/weather/components/SearchCity';
 import { LocationList } from '../features/weather/components/LocationList';
-import { addHistory, loadList, toggleFavorite } from '../utils/searchUtils';
+import { useFeatureHistory } from '../hooks/useFeatureHistory';
 import styles from './Music.module.css';
 
 const HISTORY_KEY = 'weather-history';
@@ -12,13 +12,12 @@ export default function Weather() {
   const [items, setItems] = useState([]);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    setHistory(loadList(HISTORY_KEY));
-    setFavorites(loadList(FAV_KEY));
-  }, []);
+  
+  const { history, favorites, addToHistory, toggleFav } = useFeatureHistory(
+    HISTORY_KEY,
+    FAV_KEY,
+    (x) => x.id
+  );
 
   async function onSearch(q) {
     if (!q) return;
@@ -27,7 +26,7 @@ export default function Weather() {
     setItems(res);
     setWeather(null);
     setLoading(false);
-    setHistory(addHistory(HISTORY_KEY, q));
+    addToHistory(q);
   }
 
   async function onPick(loc) {
@@ -37,18 +36,13 @@ export default function Weather() {
     setLoading(false);
   }
 
-  function onFav(loc) {
-    const next = toggleFavorite(FAV_KEY, loc, (x) => x.id);
-    setFavorites(next);
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.searchSection}>
         <SearchCity onSearch={onSearch} />
       </div>
       {loading && <div className={styles.loading}>Loading...</div>}
-      {!loading && <LocationList items={items} onPick={onPick} onFav={onFav} favorites={favorites} />}
+      {!loading && <LocationList items={items} onPick={onPick} onFav={toggleFav} favorites={favorites} />}
       {weather && (
         <div style={{ marginTop: '24px', padding: '20px', background: 'linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)', borderRadius: '16px', color: 'white', boxShadow: '0 4px 16px rgba(78, 205, 196, 0.3)' }}>
           <div style={{ fontSize: '20px', marginBottom: '8px' }}><strong>Temperature:</strong> {weather.temperature}°C</div>
@@ -76,7 +70,7 @@ export default function Weather() {
               <div key={l.id} style={{ display: 'flex', gap: 8, alignItems: 'center', background: 'var(--card)', padding: 8, borderRadius: 10, border: '1px solid var(--border)' }}>
                 <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{l.name}</div>
                 <div style={{ color: 'var(--text-muted)' }}>{l.country || ''}</div>
-                <button onClick={() => onFav(l)} style={{ marginLeft: 'auto', border: 'none', background: 'transparent', fontSize: 18, color: 'var(--text-primary)' }}>★</button>
+                <button onClick={() => toggleFav(l)} style={{ marginLeft: 'auto', border: 'none', background: 'transparent', fontSize: 18, color: 'var(--text-primary)' }}>★</button>
               </div>
             ))}
           </div>

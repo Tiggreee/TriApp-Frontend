@@ -1,33 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useVoiceSearch } from '../../../hooks/useVoiceSearch';
 import styles from './SearchBar.module.css';
 
 export function SearchBar({ onSearch }) {
   const [value, setValue] = useState('');
-  const [recognition, setRecognition] = useState(null);
-
-  useEffect(() => {
-    const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (Speech) {
-      const rec = new Speech();
-      rec.lang = 'es-ES';
-      rec.continuous = false;
-      rec.interimResults = false;
-      rec.onresult = (e) => {
-        const text = e.results[0][0].transcript;
-        setValue(text);
-        onSearch(text);
-      };
-      setRecognition(rec);
-    }
-  }, [onSearch]);
+  
+  const { isSupported, startListening } = useVoiceSearch('es-ES', (text) => {
+    setValue(text);
+    onSearch(text);
+  });
 
   function submit(e) {
     e.preventDefault();
     onSearch(value.trim());
-  }
-
-  function handleVoice() {
-    if (recognition) recognition.start();
   }
 
   return (
@@ -39,7 +24,7 @@ export function SearchBar({ onSearch }) {
         onChange={(e) => setValue(e.target.value)}
         className={styles.input}
       />
-      <button type="button" className={styles.voice} onClick={handleVoice} aria-label="Voice search">MIC</button>
+      {isSupported && <button type="button" className={styles.voice} onClick={startListening} aria-label="Voice search">MIC</button>}
       <button type="submit" className={styles.button}>Search</button>
     </form>
   );
