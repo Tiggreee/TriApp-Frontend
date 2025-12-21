@@ -1,78 +1,104 @@
-# TriApp Frontend
+# Renata's Finder ���
 
-Single React app with three search features using free public APIs. No setup, no auth hassle.
+A vibrant, kid-friendly web app built for Renata (age 4-6) to discover music, explore magical colors, and create unique avatars. Features voice search, favorites, and a unicorn-themed help system!
 
-## What's Inside
+## ✨ Features
 
-- **Music Finder**: Search songs and artists on iTunes. Listen to previews, check out the artwork.
-- **Weather Dashboard**: Look up any city and get the current temp and wind speed via Open-Meteo.
-- **Pokédex**: Find Pokémon by name, see their sprite and types straight from PokeAPI.
+- **��� Music**: Search and preview songs using iTunes API
+- **��� Magical Colors**: Discover colors with their names and codes using The Color API
+- **��� Avatar Creator**: Generate personalized avatars with DiceBear API
+- **⭐ Favorites**: Save favorite items (music, colors, avatars)
+- **��� History**: Track recent searches (max 10 per feature)
+- **��� Voice Search**: Hands-free music search (Spanish)
+- **��� Theme Toggle**: Switch between light and dark modes (persisted)
+- **❓ Help Modal**: Interactive unicorn-themed guide
 
-## Tech Stack
+## ���️ Tech Stack
 
-- React 18 + JavaScript
-- Vite (fast builds and HMR)
-- React Router v6 (smooth navigation)
-- CSS Modules (clean styling)
-- ESLint + Prettier (code quality)
+- **React 18** - UI library
+- **Vite** - Build tool
+- **React Router v6** - Client-side routing
+- **CSS Modules** - Scoped styling
+- **localStorage** - Data persistence
 
-> **Note:** Initially explored TypeScript (common in modern React), but switched to vanilla JavaScript to keep things simpler and more straightforward.
+## ��� Project Structure
 
-## Quick Start
-
-### You'll Need
-- Node.js 18+
-- npm
-
-### Setup
-```bash
-git clone https://github.com/tiggreee/TriApp-Frontend.git
-cd TriApp-Frontend
-npm install
-```
-
-### Run It
-```bash
-npm run dev
-```
-Heads to `http://localhost:5173`
-
-### Build & Check It Out
-```bash
-npm run build
-npm run preview
-```
-
-### Keep Code Clean
-```bash
-npm run lint
-npm run format
-```
-
-## Folder Layout
 ```
 src/
-├── components/       # Shared stuff (Header)
-├── features/         # Feature folders
-│   ├── music/       # iTunes search
-│   ├── weather/     # City + weather
-│   └── pokedex/     # Pokémon lookup
-├── pages/           # Route components
-├── App.jsx          # Router
-└── main.jsx         # Entry
+├── components/
+│   ├── Header.jsx          # Navigation + theme toggle
+│   └── HelpModal.jsx        # Help overlay
+├── pages/
+│   ├── Music.jsx            # iTunes music search
+│   ├── Colors.jsx           # Color explorer
+│   └── Avatar.jsx           # Avatar generator
+├── features/music/
+│   ├── api.js               # iTunes API
+│   └── components/          # SearchBar, TrackCard, Results
+├── hooks/
+│   ├── useVoiceSearch.js    # SpeechRecognition logic
+│   └── useFeatureHistory.js # History/favorites management
+├── utils/
+│   └── searchUtils.js       # localStorage helpers
+├── App.jsx                  # Root + routing
+├── index.css                # Global styles + CSS variables
+└── main.jsx                 # Entry point
 ```
 
-## Branches & Pull Requests
+## ��� Getting Started
 
-- [feat/router](TBD) – Header and routes
-- [feat/music](TBD) – iTunes search UI
-- [feat/weather](TBD) – City search + weather
-- [feat/pokedex](TBD) – Pokémon lookup
-- [chore/lint](TBD) – ESLint and Prettier config
+### Prerequisites
+- Node.js 16+ & npm
 
-## How We Work
+### Installation
 
-- One branch per feature, PR to main
-- Small, clear commits (English)
-- Git Bash for all commands
-- Stage-based development: 3–4 days per cycle
+```bash
+# Clone repo
+git clone https://github.com/Tiggreee/TriApp-Frontend.git
+cd TriApp-Frontend
+
+# Install dependencies
+npm install
+
+# Start dev server (http://localhost:5173)
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## ��� APIs Used
+
+1. **iTunes Search API** - Music search and previews
+2. **The Color API** - Color information and palettes
+3. **DiceBear Avatars API** - SVG avatar generation
+
+## ��� Design Highlights
+
+- Vibrant gradients and smooth animations
+- Responsive mobile-first design
+- Custom unicorn favicon
+- Theme-aware color palette (CSS variables)
+- Emoji-based navigation
+
+## ��� Development Notes
+
+- Originally built with TypeScript, converted to JavaScript for simplicity
+- Custom hooks eliminate code duplication (~120 lines saved)
+- Git workflow: Feature branches → PR → main
+
+## ��� Roadmap (BACKLOG.md)
+
+- Error boundaries
+- Loading skeletons
+- Search debouncing
+- Performance optimization (memoization)
+- Backend integration (Node.js + MongoDB)
+
+## ��� License
+
+MIT
+
+---
+
+Made with ��� for Renata

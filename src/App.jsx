@@ -3,8 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { HelpModal } from './components/HelpModal';
 import Music from './pages/Music';
-import Weather from './pages/Weather';
-import Pokedex from './pages/Pokedex';
+import Colors from './pages/Colors';
+import Avatar from './pages/Avatar';
 import './App.css';
 
 function getInitialTheme() {
@@ -41,8 +41,8 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/music" element={<Music theme={theme} />} />
-          <Route path="/weather" element={<Weather theme={theme} />} />
-          <Route path="/pokedex" element={<Pokedex theme={theme} />} />
+          <Route path="/colors" element={<Colors theme={theme} />} />
+          <Route path="/avatar" element={<Avatar theme={theme} />} />
           <Route path="*" element={<Navigate to="/music" replace />} />
         </Routes>
       </main>

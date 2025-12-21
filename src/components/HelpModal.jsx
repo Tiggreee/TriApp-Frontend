@@ -1,25 +1,23 @@
 import styles from './HelpModal.module.css';
 
-const uc = String.fromCodePoint(0x1F984);
+const unicorn = String.fromCodePoint(0x1F984);
 
 export function HelpModal({ onClose }) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <div className={styles.title}>Unicorn Guide by Renata {uc}</div>
-          <button className={styles.close} onClick={onClose} aria-label="Close help">âœ–</button>
-        </div>
-        <div className={styles.body}>
-          <ul>
-            <li>ğŸµ Music: busca artistas o canciones.</li>
-            <li>ğŸŒ¦ï¸ Weather: ciudad y clima.</li>
-            <li>ğŸ¦„ PokÃ©dex: encuentra PokÃ©mon.</li>
-            <li>â­ Favoritos: guarda top items.</li>
-            <li>ğŸ•’ Recientes: Ãºltimo buscado.</li>
-            <li>ğŸ™ï¸ Voz: bÃºsqueda por voz.</li>
-            <li>ğŸŒ“ Tema: modo claro/oscuro.</li>
-          </ul>
+        <button className={styles.close} onClick={onClose} aria-label="Close help">
+          âœ–
+        </button>
+        <h2 className={styles.title}>{unicorn} Ayuda de Renata {unicorn}</h2>
+        <div className={styles.content}>
+          <p><strong>ï¿½ï¿½ Music:</strong> Busca tus canciones favoritas y escucha previews</p>
+          <p><strong>í¾¨ Colores:</strong> Descubre colores mÃ¡gicos con sus nombres y cÃ³digos</p>
+          <p><strong>í¶„ Avatar:</strong> Crea tu propio personaje escribiendo tu nombre</p>
+          <p><strong>â­ Favoritos:</strong> Guarda tus cosas favoritas con la estrella</p>
+          <p><strong>í³œ Recientes:</strong> Ve tu historial de bÃºsquedas</p>
+          <p><strong>í¾¤ Voz:</strong> Usa el micrÃ³fono para buscar (Music)</p>
+          <p><strong>í¼™ Tema:</strong> Cambia entre modo claro y oscuro</p>
         </div>
       </div>
     </div>
