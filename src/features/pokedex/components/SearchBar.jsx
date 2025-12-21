@@ -1,12 +1,8 @@
 import { useState } from 'react';
 
-type Props = {
-  onSearch: (q: string) => void;
-};
-
-export function SearchBar({ onSearch }: Props) {
+export function SearchBar({ onSearch }) {
   const [v, setV] = useState('');
-  function submit(e: React.FormEvent) {
+  function submit(e) {
     e.preventDefault();
     onSearch(v);
   }

@@ -1,11 +1,4 @@
-export type Pokemon = {
-  id: number;
-  name: string;
-  sprite: string;
-  types: string[];
-};
-
-export async function fetchPokemon(name: string): Promise<Pokemon | null> {
+export async function fetchPokemon(name) {
   const n = name.toLowerCase().trim();
   if (!n) return null;
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(n)}`);
@@ -15,6 +8,6 @@ export async function fetchPokemon(name: string): Promise<Pokemon | null> {
     id: d.id,
     name: d.name,
     sprite: d.sprites?.front_default || '',
-    types: (d.types || []).map((t: any) => t.type?.name).filter(Boolean),
+    types: (d.types || []).map((t) => t.type?.name).filter(Boolean),
   };
 }

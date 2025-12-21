@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { searchTracks, type Track } from '../features/music/api';
+import { searchTracks } from '../features/music/api';
 import { SearchBar } from '../features/music/components/SearchBar';
 import { Results } from '../features/music/components/Results';
 
 export default function Music() {
-  const [items, setItems] = useState<Track[]>([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  async function onSearch(query: string) {
+  async function onSearch(query) {
     if (!query) return;
     setLoading(true);
     const data = await searchTracks(query);

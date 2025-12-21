@@ -1,10 +1,4 @@
-import type { Pokemon } from '../../pokedex/api';
-
-type Props = {
-  data: Pokemon;
-};
-
-export function Card({ data }: Props) {
+export function Card({ data }) {
   return (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center', border: '1px solid #e5e7eb', padding: 12, borderRadius: 8 }}>
       {data.sprite && <img src={data.sprite} alt={data.name} width={80} height={80} />}

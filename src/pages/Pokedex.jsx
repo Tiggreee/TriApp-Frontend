@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { fetchPokemon, type Pokemon } from '../features/pokedex/api';
+import { fetchPokemon } from '../features/pokedex/api';
 import { SearchBar } from '../features/pokedex/components/SearchBar';
 import { Card } from '../features/pokedex/components/Card';
 
 export default function Pokedex() {
-  const [data, setData] = useState<Pokemon | null>(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  async function onSearch(q: string) {
+  async function onSearch(q) {
     setLoading(true);
     const p = await fetchPokemon(q);
     setData(p);

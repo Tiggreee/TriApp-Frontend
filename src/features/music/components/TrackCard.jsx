@@ -1,10 +1,4 @@
-import type { Track } from '../../music/api';
-
-type Props = {
-  track: Track;
-};
-
-export function TrackCard({ track }: Props) {
+export function TrackCard({ track }) {
   return (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center', border: '1px solid #e5e7eb', padding: 8, borderRadius: 8 }}>
       <img src={track.artworkUrl100} alt={track.trackName} width={60} height={60} style={{ borderRadius: 6 }} />
