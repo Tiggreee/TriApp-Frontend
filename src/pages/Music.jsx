@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { searchTracks } from '../features/music/api';
 import { SearchBar } from '../features/music/components/SearchBar';
 import { Results } from '../features/music/components/Results';
+import styles from './Music.module.css';
 
 export default function Music() {
   const [items, setItems] = useState([]);
@@ -16,9 +17,11 @@ export default function Music() {
   }
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <SearchBar onSearch={onSearch} />
-      {loading ? <div>Loading…</div> : <Results items={items} />}
+    <div className={styles.container}>
+      <div className={styles.searchSection}>
+        <SearchBar onSearch={onSearch} />
+      </div>
+      {loading ? <div className={styles.loading}>Loading...</div> : <Results items={items} />}
     </div>
   );
 }

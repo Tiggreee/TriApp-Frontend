@@ -3,12 +3,13 @@ import { Header } from './components/Header';
 import Music from './pages/Music';
 import Weather from './pages/Weather';
 import Pokedex from './pages/Pokedex';
+import './App.css';
 
 function App() {
   return (
-    <div>
+    <div className="app-container">
       <Header />
-      <main style={{ padding: '16px' }}>
+      <main className="main-content">
         <Routes>
           <Route path="/music" element={<Music />} />
           <Route path="/weather" element={<Weather />} />

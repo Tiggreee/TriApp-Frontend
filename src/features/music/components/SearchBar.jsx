@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './SearchBar.module.css';
 
 export function SearchBar({ onSearch }) {
   const [value, setValue] = useState('');
@@ -9,15 +10,15 @@ export function SearchBar({ onSearch }) {
   }
 
   return (
-    <form onSubmit={submit} style={{ display: 'flex', gap: 8 }}>
+    <form onSubmit={submit} className={styles.form}>
       <input
         type="text"
-        placeholder="Search songs or artists"
+        placeholder="Search songs or artists..."
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        style={{ flex: 1, padding: '8px 10px', border: '1px solid #d1d5db', borderRadius: 6 }}
+        className={styles.input}
       />
-      <button type="submit" style={{ padding: '8px 12px', borderRadius: 6 }}>Search</button>
+      <button type="submit" className={styles.button}>Search</button>
     </form>
   );
 }

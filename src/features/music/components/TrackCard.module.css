@@ -1,0 +1,71 @@
+.card {
+  background: white;
+  border: 2px solid #f1f3f5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.card:hover {
+  border-color: #4ecdc4;
+  box-shadow: 0 8px 20px rgba(78, 205, 196, 0.2);
+  transform: translateY(-4px);
+}
+
+.artwork {
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.trackName {
+  font-weight: 600;
+  font-size: 16px;
+  color: #2d3436;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artistName {
+  color: #636e72;
+  font-size: 14px;
+}
+
+.audio {
+  height: 32px;
+  max-width: 200px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .audio {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
