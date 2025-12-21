@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# TriApp Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Single React app with three search features using free public APIs. No setup, no auth hassle.
 
-Currently, two official plugins are available:
+## What's Inside
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Music Finder**: Search songs and artists on iTunes. Listen to previews, check out the artwork.
+- **Weather Dashboard**: Look up any city and get the current temp and wind speed via Open-Meteo.
+- **Pokédex**: Find Pokémon by name, see their sprite and types straight from PokeAPI.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18 + TypeScript
+- Vite (fast builds and HMR)
+- React Router v6 (smooth navigation)
+- CSS Modules (clean styling)
+- ESLint + Prettier (code quality)
 
-## Expanding the ESLint configuration
+## Quick Start
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### You'll Need
+- Node.js 18+
+- npm
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Setup
+```bash
+git clone https://github.com/tiggreee/TriApp-Frontend.git
+cd TriApp-Frontend
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Run It
+```bash
+npm run dev
 ```
+Heads to `http://localhost:5173`
+
+### Build & Check It Out
+```bash
+npm run build
+npm run preview
+```
+
+### Keep Code Clean
+```bash
+npm run lint
+npm run format
+```
+
+## Folder Layout
+```
+src/
+├── components/       # Shared stuff (Header)
+├── features/         # Feature folders
+│   ├── music/       # iTunes search
+│   ├── weather/     # City + weather
+│   └── pokedex/     # Pokémon lookup
+├── pages/           # Route components
+├── App.tsx          # Router
+└── main.tsx         # Entry
+```
+
+## Branches & Pull Requests
+
+- [feat/router](TBD) – Header and routes
+- [feat/music](TBD) – iTunes search UI
+- [feat/weather](TBD) – City search + weather
+- [feat/pokedex](TBD) – Pokémon lookup
+- [chore/lint](TBD) – ESLint and Prettier config
+
+## How We Work
+
+- One branch per feature, PR to main
+- Small, clear commits (English)
+- Git Bash for all commands
+- Stage-based development: 3–4 days per cycle
