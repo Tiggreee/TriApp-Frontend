@@ -8,10 +8,12 @@
   flex: 1;
   min-width: 200px;
   padding: 14px 18px;
-  border: 2px solid #e1e8ed;
+  border: 2px solid var(--border);
   border-radius: 12px;
   font-size: 16px;
   transition: all 0.3s ease;
+  color: var(--text-primary);
+  background: var(--card);
 }
 
 .input:focus {
@@ -27,6 +29,16 @@
   font-weight: 600;
   font-size: 16px;
   box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+}
+
+.voice {
+  padding: 0 14px;
+  min-width: 48px;
+  background: #4ecdc4;
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
 }
 
 .button:hover {

@@ -1,6 +1,6 @@
 .card {
-  background: white;
-  border: 2px solid #f1f3f5;
+  background: var(--card);
+  border: 2px solid var(--border);
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -30,7 +30,7 @@
 .trackName {
   font-weight: 600;
   font-size: 16px;
-  color: #2d3436;
+  color: var(--text-primary);
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -38,7 +38,7 @@
 }
 
 .artistName {
-  color: #636e72;
+  color: var(--text-muted);
   font-size: 14px;
 }
 
@@ -52,7 +52,7 @@
     flex-direction: column;
     text-align: center;
   }
-  
+
   .audio {
     width: 100%;
     max-width: 100%;

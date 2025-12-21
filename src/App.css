@@ -1,12 +1,33 @@
 .app-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 16px;
+  color: var(--text-primary);
+}
+
+.help-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+  z-index: 150;
+}
+
+.help-button:hover {
+  box-shadow: var(--shadow-strong);
 }
 
 @media (min-width: 768px) {
