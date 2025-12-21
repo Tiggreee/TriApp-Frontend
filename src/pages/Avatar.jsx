@@ -8,7 +8,7 @@ export default function Avatar({ theme }) {
   const [history, setHistory] = useState([]);
 
   const avatarStyles = [
-    { id: 'lorelei', name: 'Lorelei (Ni√±as)' },
+    { id: 'lorelei', name: 'Lorelei (Ninas)' },
     { id: 'adventurer', name: 'Aventurero' },
     { id: 'big-smile', name: 'Gran Sonrisa' },
     { id: 'bottts', name: 'Robot' },
@@ -36,7 +36,7 @@ export default function Avatar({ theme }) {
 
   return (
     <div className={styles.container}>
-      <h1 style={{ color: 'var(--text-primary)' }}>Ì∂Ñ Crea tu Avatar</h1>
+      <h1 style={{ color: 'var(--text-primary)' }}>Crea tu Avatar</h1>
       
       <form onSubmit={onSubmit} style={{ marginBottom: '2rem' }}>
         <div style={{ marginBottom: '1rem' }}>
@@ -48,7 +48,7 @@ export default function Avatar({ theme }) {
             style={{
               padding: '0.8rem',
               fontSize: '1rem',
-              border: `2px solid var(--border)`,
+              border: '2px solid var(--border)',
               borderRadius: '8px',
               width: '100%',
               maxWidth: '400px',
@@ -68,7 +68,7 @@ export default function Avatar({ theme }) {
             style={{
               padding: '0.8rem',
               fontSize: '1rem',
-              border: `2px solid var(--border)`,
+              border: '2px solid var(--border)',
               borderRadius: '8px',
               backgroundColor: 'var(--card)',
               color: 'var(--text-primary)',
@@ -102,7 +102,7 @@ export default function Avatar({ theme }) {
           backgroundColor: 'var(--card)',
           padding: '2rem',
           borderRadius: '16px',
-          border: `2px solid var(--border)`,
+          border: '2px solid var(--border)',
           marginBottom: '2rem',
           textAlign: 'center'
         }}>
@@ -117,7 +117,7 @@ export default function Avatar({ theme }) {
           }}>
             <img 
               src={currentAvatar.url}
-              alt={`Avatar de ${currentAvatar.name}`}
+              alt={'Avatar de ' + currentAvatar.name}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
@@ -131,7 +131,7 @@ export default function Avatar({ theme }) {
 
           <a 
             href={currentAvatar.url}
-            download={`avatar-${currentAvatar.name}.svg`}
+            download={'avatar-' + currentAvatar.name + '.svg'}
             style={{
               display: 'inline-block',
               marginTop: '1rem',
@@ -143,7 +143,7 @@ export default function Avatar({ theme }) {
               fontSize: '0.9rem'
             }}
           >
-            Ì≤æ Descargar Avatar
+            Descargar Avatar
           </a>
         </div>
       )}
@@ -167,7 +167,7 @@ export default function Avatar({ theme }) {
                 style={{
                   padding: '0.5rem',
                   backgroundColor: 'var(--card)',
-                  border: `2px solid var(--border)`,
+                  border: '2px solid var(--border)',
                   borderRadius: '12px',
                   cursor: 'pointer',
                   display: 'flex',

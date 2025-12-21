@@ -43,18 +43,18 @@ export default function Colors({ theme }) {
 
   return (
     <div className={styles.container}>
-      <h1 style={{ color: 'var(--text-primary)' }}>í¾¨ Colores MÃ¡gicos</h1>
+      <h1 style={{ color: 'var(--text-primary)' }}>Colores Magicos</h1>
       
       <form onSubmit={onSubmit} style={{ marginBottom: '2rem' }}>
         <input 
           type="text"
           value={hexInput}
           onChange={(e) => setHexInput(e.target.value)}
-          placeholder="Escribe cÃ³digo de color (ej: FF69B4)"
+          placeholder="Escribe codigo de color (ej: FF69B4)"
           style={{
             padding: '0.8rem',
             fontSize: '1rem',
-            border: `2px solid var(--border)`,
+            border: '2px solid var(--border)',
             borderRadius: '8px',
             width: '100%',
             maxWidth: '400px',
@@ -89,7 +89,7 @@ export default function Colors({ theme }) {
               onClick={() => { setHexInput(color.hex); fetchColorInfo(color.hex); }}
               style={{
                 padding: '1rem',
-                backgroundColor: `#${color.hex}`,
+                backgroundColor: '#' + color.hex,
                 border: '2px solid var(--border)',
                 borderRadius: '12px',
                 cursor: 'pointer',
@@ -112,7 +112,7 @@ export default function Colors({ theme }) {
           backgroundColor: 'var(--card)',
           padding: '2rem',
           borderRadius: '16px',
-          border: `2px solid var(--border)`,
+          border: '2px solid var(--border)',
           marginBottom: '2rem'
         }}>
           <div style={{
@@ -146,8 +146,8 @@ export default function Colors({ theme }) {
                 onClick={() => { setHexInput(item.hex); fetchColorInfo(item.hex); }}
                 style={{
                   padding: '0.5rem 1rem',
-                  backgroundColor: `#${item.hex}`,
-                  border: `2px solid var(--border)`,
+                  backgroundColor: '#' + item.hex,
+                  border: '2px solid var(--border)',
                   borderRadius: '8px',
                   cursor: 'pointer',
                   color: '#fff',
