@@ -10,11 +10,13 @@ Single React app with three search features using free public APIs. No setup, no
 
 ## Tech Stack
 
-- React 18 + TypeScript
+- React 18 + JavaScript
 - Vite (fast builds and HMR)
 - React Router v6 (smooth navigation)
 - CSS Modules (clean styling)
 - ESLint + Prettier (code quality)
+
+> **Note:** Initially explored TypeScript (common in modern React), but switched to vanilla JavaScript to keep things simpler and more straightforward.
 
 ## Quick Start
 
@@ -56,8 +58,8 @@ src/
 │   ├── weather/     # City + weather
 │   └── pokedex/     # Pokémon lookup
 ├── pages/           # Route components
-├── App.tsx          # Router
-└── main.tsx         # Entry
+├── App.jsx          # Router
+└── main.jsx         # Entry
 ```
 
 ## Branches & Pull Requests
