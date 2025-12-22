@@ -49,6 +49,10 @@ src/
 
 - Visita el frontend en producción: https://tri-app-frontend.vercel.app/music
 
+## 📌 Alcance de la entrega
+
+- Este proyecto fue presentado **solo como frontend**. El backend se implementará en un repositorio separado.
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -90,6 +94,10 @@ npm run build
 - Originally built with TypeScript, converted to JavaScript for simplicity
 - Custom hooks eliminate code duplication (~120 lines saved)
 - Git workflow: Feature branches → PR → main
+- Admin reset button (para pruebas de trials) está oculto por defecto. Para mostrarlo:
+	1) Abre `src/App.jsx`
+	2) Cambia `const SHOW_ADMIN_RESET = false;` a `true`
+	3) Ejecuta `npm run dev` o `npm run build` según corresponda
 
 ## 🗺️ Roadmap (BACKLOG.md)
 

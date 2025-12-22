@@ -26,6 +26,7 @@ function App() {
 
   const TRIAL_MS = 5 * 60 * 1000; // 5 minutes per activation
   const MAX_TRIALS_PER_DAY = 3;
+  const SHOW_ADMIN_RESET = false; // toggle to true if you need the admin reset button visible
 
   function todayKey() {
     const d = new Date();
@@ -65,7 +66,7 @@ function App() {
 
   function showToast(message) {
     setToast(message);
-    setTimeout(() => setToast(null), 3000);
+    setTimeout(() => setToast(null), 5000);
   }
 
   function handleTrialToggle() {
@@ -144,13 +145,15 @@ function App() {
         💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
       </button>
 
-      <button
-        className="admin-reset"
-        onClick={resetTrials}
-        aria-label="Reiniciar contador de pruebas premium"
-      >
-        Reiniciar pruebas (admin)
-      </button>
+      {SHOW_ADMIN_RESET && (
+        <button
+          className="admin-reset"
+          onClick={resetTrials}
+          aria-label="Reiniciar contador de pruebas premium"
+        >
+          Reiniciar pruebas (admin)
+        </button>
+      )}
 
       <button className="help-button" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
         🦄 ¿Necesitas ayuda de Renata?
