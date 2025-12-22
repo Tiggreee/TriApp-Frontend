@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
-import styles from './Music.module.css';
+import styles from './Avatar.module.css';
 
 export default function Avatar() {
   const [name, setName] = useState('');

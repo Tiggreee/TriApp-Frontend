@@ -8,7 +8,7 @@ import styles from './Music.module.css';
 const HISTORY_KEY = 'music-history';
 const FAV_KEY = 'music-favs';
 
-export default function Music() {
+export default function Music({ isRegistered = false }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   
@@ -30,9 +30,9 @@ export default function Music() {
   return (
     <div className={styles.container}>
       <div className={styles.searchSection}>
-        <SearchBar onSearch={onSearch} />
+        <SearchBar onSearch={onSearch} lockedVoice={!isRegistered} />
       </div>
-      {loading ? <div className={styles.loading}>Loading...</div> : <Results items={items} onFav={toggleFav} favorites={favorites} />}
+      {loading ? <div className={styles.loading}>Loading...</div> : <Results items={items} onFav={toggleFav} favorites={favorites} lockedFav={!isRegistered} />}
 
       <div style={{ marginTop: 24, display: 'grid', gap: 12 }}>
         <div>
@@ -56,7 +56,7 @@ export default function Music() {
             ))}
           </div>
         </div>
-        <div>
+        <div className={!isRegistered ? styles.blurLock : ''}>
           <strong>Favorites:</strong>
           <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
             {favorites.length === 0 && <span style={{ color: 'var(--text-muted)' }}>No favorites yet</span>}
@@ -78,7 +78,7 @@ export default function Music() {
                   <div style={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'var(--text-primary)' }}>{t.trackName}</div>
                   <div style={{ color: 'var(--text-muted)', fontSize: 14 }}>{t.artistName}</div>
                 </div>
-                <button onClick={() => toggleFav(t)} style={{ border: 'none', background: 'transparent', fontSize: 18, color: 'var(--text-primary)' }}>★</button>
+                <button onClick={() => toggleFav(t)} style={{ border: 'none', background: 'transparent', fontSize: 18, color: 'var(--text-primary)' }} disabled={!isRegistered}>★</button>
               </div>
             ))}
           </div>

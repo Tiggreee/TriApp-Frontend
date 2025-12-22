@@ -4,8 +4,8 @@
   border-radius: 12px;
   padding: 16px;
   display: flex;
-  gap: 16px;
-  align-items: center;
+  flex-direction: column;
+  gap: 12px;
   transition: all 0.3s ease;
   animation: fadeIn 0.4s ease-out;
 }
@@ -14,6 +14,12 @@
   border-color: #4ecdc4;
   box-shadow: 0 8px 20px rgba(78, 205, 196, 0.2);
   transform: translateY(-4px);
+}
+
+.topSection {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .artwork {
@@ -42,9 +48,32 @@
   font-size: 14px;
 }
 
+.favButton {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.favButton:hover {
+  transform: scale(1.2);
+}
+
 .audio {
-  height: 32px;
-  max-width: 200px;
+  height: 28px;
+  width: 100%;
+  max-width: 100%;
+  opacity: 0.9;
+}
+
+.locked {
+  filter: blur(1.2px);
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: default;
 }
 
 @media (max-width: 640px) {

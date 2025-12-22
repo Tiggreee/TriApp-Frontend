@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useVoiceSearch } from '../../../hooks/useVoiceSearch';
 import styles from './SearchBar.module.css';
 
-export function SearchBar({ onSearch }) {
+export function SearchBar({ onSearch, lockedVoice = false }) {
   const [value, setValue] = useState('');
   
   const { isSupported, startListening } = useVoiceSearch('es-ES', (text) => {
@@ -24,7 +24,17 @@ export function SearchBar({ onSearch }) {
         onChange={(e) => setValue(e.target.value)}
         className={styles.input}
       />
-      {isSupported && <button type="button" className={styles.voice} onClick={startListening} aria-label="Voice search">MIC</button>}
+      {isSupported && (
+        <button
+          type="button"
+          className={`${styles.voice} ${lockedVoice ? styles.locked : ''}`}
+          onClick={startListening}
+          aria-label="Voice search"
+          disabled={lockedVoice}
+        >
+          MIC
+        </button>
+      )}
       <button type="submit" className={styles.button}>Search</button>
     </form>
   );

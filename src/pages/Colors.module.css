@@ -11,7 +11,7 @@
 }
 
 .container::before {
-  content: '🎵';
+  content: '🎨';
   position: absolute;
   font-size: 200px;
   opacity: 0.05;
@@ -20,40 +20,6 @@
   z-index: 0;
   pointer-events: none;
   transform: rotate(-15deg);
-}
-
-.searchSection {
-  margin-bottom: 24px;
-}
-
-.results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-}
-
-.loading {
-  text-align: center;
-  padding: 40px;
-  color: var(--text-muted);
-  font-size: 18px;
-}
-
-.blurLock {
-  filter: blur(2px) saturate(0.9);
-  opacity: 0.75;
-  pointer-events: none;
-  user-select: none;
-}
-
-@media (max-width: 640px) {
-  .container {
-    padding: 16px;
-  }
-
-  .results {
-    grid-template-columns: 1fr;
-  }
 }
 
 @keyframes fadeIn {

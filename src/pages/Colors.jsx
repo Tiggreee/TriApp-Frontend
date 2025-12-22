@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
-import styles from './Music.module.css';
+import styles from './Colors.module.css';
 
 export default function Colors() {
   const [hexInput, setHexInput] = useState('FF69B4');
