@@ -1,27 +1,27 @@
-# Renata's Finder ���
+# Renata's Finder 🎀
 
 A vibrant, kid-friendly web app built for Renata (age 4-6) to discover music, explore magical colors, and create unique avatars. Features voice search, favorites, and a unicorn-themed help system!
 
 ## ✨ Features
 
-- **��� Music**: Search and preview songs using iTunes API
-- **��� Magical Colors**: Discover colors with their names and codes using The Color API
-- **��� Avatar Creator**: Generate personalized avatars with DiceBear API
+- **🎵 Music**: Search and preview songs using iTunes API
+- **🎨 Magical Colors**: Discover colors with their names and codes using The Color API
+- **😊 Avatar Creator**: Generate personalized avatars with DiceBear API
 - **⭐ Favorites**: Save favorite items (music, colors, avatars)
-- **��� History**: Track recent searches (max 10 per feature)
-- **��� Voice Search**: Hands-free music search (Spanish)
-- **��� Theme Toggle**: Switch between light and dark modes (persisted)
+- **🕘 History**: Track recent searches (max 10 per feature)
+- **🎤 Voice Search**: Hands-free music search (Spanish)
+- **🌗 Theme Toggle**: Switch between light and dark modes (persisted)
 - **❓ Help Modal**: Interactive unicorn-themed guide
 
-## ���️ Tech Stack
+## 🛠️ Tech Stack
 
-- **React 18** - UI library
+- **React 19** - UI library
 - **Vite** - Build tool
 - **React Router v6** - Client-side routing
 - **CSS Modules** - Scoped styling
 - **localStorage** - Data persistence
 
-## ��� Project Structure
+## 🗂️ Project Structure
 
 ```
 src/
@@ -45,7 +45,11 @@ src/
 └── main.jsx                 # Entry point
 ```
 
-## ��� Getting Started
+## 🌐 Demo
+
+- Visita el frontend en producción: https://tri-app-frontend.vercel.app/music
+
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js 16+ & npm
@@ -67,13 +71,13 @@ npm run dev
 npm run build
 ```
 
-## ��� APIs Used
+## 🔌 APIs Used
 
 1. **iTunes Search API** - Music search and previews
 2. **The Color API** - Color information and palettes
 3. **DiceBear Avatars API** - SVG avatar generation
 
-## ��� Design Highlights
+## 🎨 Design Highlights
 
 - Vibrant gradients and smooth animations
 - Responsive mobile-first design
@@ -81,13 +85,13 @@ npm run build
 - Theme-aware color palette (CSS variables)
 - Emoji-based navigation
 
-## ��� Development Notes
+## 🧑‍💻 Development Notes
 
 - Originally built with TypeScript, converted to JavaScript for simplicity
 - Custom hooks eliminate code duplication (~120 lines saved)
 - Git workflow: Feature branches → PR → main
 
-## ��� Roadmap (BACKLOG.md)
+## 🗺️ Roadmap (BACKLOG.md)
 
 - Error boundaries
 - Loading skeletons
