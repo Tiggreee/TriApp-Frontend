@@ -1,0 +1,43 @@
+.button {
+  padding: 0.8rem 2rem;
+  fontSize: 1rem;
+  border: none;
+  borderRadius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.secondary {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  color: white;
+}
+
+.small {
+  padding: 0.5rem 1rem;
+  fontSize: 0.9rem;
+  borderRadius: 8px;
+}
+
+.chip {
+  padding: 8px 12px;
+  borderRadius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-primary);
+  fontSize: 0.9rem;
+}

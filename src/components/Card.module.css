@@ -1,0 +1,7 @@
+.card {
+  backgroundColor: var(--card);
+  padding: 2rem;
+  borderRadius: 16px;
+  border: 2px solid var(--border);
+  marginBottom: 2rem;
+}
