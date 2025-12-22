@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export function useVoiceSearch(lang = 'en-US', onResult) {
   const [isSupported, setIsSupported] = useState(false);
   const [recognition, setRecognition] = useState(null);
+  const onResultRef = useRef(onResult);
+
+  useEffect(() => {
+    onResultRef.current = onResult;
+  }, [onResult]);
 
   useEffect(() => {
     const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -18,12 +23,12 @@ export function useVoiceSearch(lang = 'en-US', onResult) {
     
     rec.onresult = (e) => {
       const text = e.results[0][0].transcript;
-      if (onResult) onResult(text);
+      if (onResultRef.current) onResultRef.current(text);
     };
 
     setRecognition(rec);
     setIsSupported(true);
-  }, [lang, onResult]);
+  }, [lang]);
 
   const startListening = () => {
     if (recognition) recognition.start();
