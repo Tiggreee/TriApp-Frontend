@@ -18,7 +18,7 @@ export function Header({ onToggleTheme, theme }) {
           </NavLink>
         </nav>
         <button className={styles.theme} onClick={onToggleTheme} aria-label="Toggle theme">
-          {theme === 'dark' ? 'í¼™' : 'â˜€ï¸'}
+          {theme === 'dark' ? 'ğŸŒ™' : 'â˜€ï¸'}
         </button>
       </div>
     </header>
