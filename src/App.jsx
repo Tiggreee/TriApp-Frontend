@@ -40,9 +40,9 @@ function App() {
       <Header onToggleTheme={toggleTheme} theme={theme} />
       <main className="main-content">
         <Routes>
-          <Route path="/music" element={<Music theme={theme} />} />
-          <Route path="/colors" element={<Colors theme={theme} />} />
-          <Route path="/avatar" element={<Avatar theme={theme} />} />
+          <Route path="/music" element={<Music />} />
+          <Route path="/colors" element={<Colors />} />
+          <Route path="/avatar" element={<Avatar />} />
           <Route path="*" element={<Navigate to="/music" replace />} />
         </Routes>
       </main>

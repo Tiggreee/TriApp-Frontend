@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { Input } from '../components/Input';
+import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 import styles from './Music.module.css';
 
-export default function Avatar({ theme }) {
+export default function Avatar() {
   const [name, setName] = useState('');
   const [currentAvatar, setCurrentAvatar] = useState(null);
   const [style, setStyle] = useState('lorelei');
@@ -40,21 +43,10 @@ export default function Avatar({ theme }) {
       
       <form onSubmit={onSubmit} style={{ marginBottom: '2rem' }}>
         <div style={{ marginBottom: '1rem' }}>
-          <input 
-            type="text"
+          <Input 
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Escribe tu nombre o palabra..."
-            style={{
-              padding: '0.8rem',
-              fontSize: '1rem',
-              border: '2px solid var(--border)',
-              borderRadius: '8px',
-              width: '100%',
-              maxWidth: '400px',
-              backgroundColor: 'var(--card)',
-              color: 'var(--text-primary)'
-            }}
           />
         </div>
 
@@ -81,31 +73,11 @@ export default function Avatar({ theme }) {
           </select>
         </div>
 
-        <button 
-          type="submit"
-          style={{
-            padding: '0.8rem 2rem',
-            fontSize: '1rem',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer'
-          }}
-        >
-          Generar Avatar
-        </button>
+        <Button type="submit">Generar Avatar</Button>
       </form>
 
       {currentAvatar && (
-        <div style={{
-          backgroundColor: 'var(--card)',
-          padding: '2rem',
-          borderRadius: '16px',
-          border: '2px solid var(--border)',
-          marginBottom: '2rem',
-          textAlign: 'center'
-        }}>
+        <Card style={{ textAlign: 'center' }}>
           <div style={{
             width: '200px',
             height: '200px',
@@ -145,7 +117,7 @@ export default function Avatar({ theme }) {
           >
             Descargar Avatar
           </a>
-        </div>
+        </Card>
       )}
 
       {history.length > 0 && (

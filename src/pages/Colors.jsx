@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { Input } from '../components/Input';
+import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 import styles from './Music.module.css';
 
-export default function Colors({ theme }) {
+export default function Colors() {
   const [hexInput, setHexInput] = useState('FF69B4');
   const [colorData, setColorData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,8 +21,6 @@ export default function Colors({ theme }) {
       if (!history.find(h => h.hex === data.hex.clean)) {
         setHistory(prev => [{ hex: data.hex.clean, name: data.name.value }, ...prev].slice(0, 10));
       }
-    } catch (error) {
-      console.error('Color API error:', error);
     } finally {
       setLoading(false);
     }
@@ -45,39 +46,13 @@ export default function Colors({ theme }) {
     <div className={styles.container}>
       <h1 style={{ color: 'var(--text-primary)' }}>Colores Magicos</h1>
       
-      <form onSubmit={onSubmit} style={{ marginBottom: '2rem' }}>
-        <input 
-          type="text"
+      <form onSubmit={onSubmit} style={{ marginBottom: '2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <Input 
           value={hexInput}
           onChange={(e) => setHexInput(e.target.value)}
           placeholder="Escribe codigo de color (ej: FF69B4)"
-          style={{
-            padding: '0.8rem',
-            fontSize: '1rem',
-            border: '2px solid var(--border)',
-            borderRadius: '8px',
-            width: '100%',
-            maxWidth: '400px',
-            backgroundColor: 'var(--card)',
-            color: 'var(--text-primary)',
-            marginRight: '0.5rem'
-          }}
         />
-        <button 
-          type="submit"
-          style={{
-            padding: '0.8rem 2rem',
-            fontSize: '1rem',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            marginTop: '0.5rem'
-          }}
-        >
-          Ver Color
-        </button>
+        <Button type="submit">Ver Color</Button>
       </form>
 
       <div style={{ marginBottom: '2rem' }}>
@@ -108,13 +83,7 @@ export default function Colors({ theme }) {
       {loading && <p style={{ color: 'var(--text-muted)' }}>Cargando...</p>}
 
       {colorData && !loading && (
-        <div style={{
-          backgroundColor: 'var(--card)',
-          padding: '2rem',
-          borderRadius: '16px',
-          border: '2px solid var(--border)',
-          marginBottom: '2rem'
-        }}>
+        <Card>
           <div style={{
             width: '100%',
             height: '200px',
@@ -133,7 +102,7 @@ export default function Colors({ theme }) {
             <p><strong>RGB:</strong> {colorData.rgb.value}</p>
             <p><strong>HSL:</strong> {colorData.hsl.value}</p>
           </div>
-        </div>
+        </Card>
       )}
 
       {history.length > 0 && (
