@@ -1,19 +1,19 @@
-# Renata's Finder í¶„
+# Renata's Finder ï¿½ï¿½ï¿½
 
 A vibrant, kid-friendly web app built for Renata (age 4-6) to discover music, explore magical colors, and create unique avatars. Features voice search, favorites, and a unicorn-themed help system!
 
 ## âœ¨ Features
 
-- **í¾µ Music**: Search and preview songs using iTunes API
-- **í¾¨ Magical Colors**: Discover colors with their names and codes using The Color API
-- **í¶„ Avatar Creator**: Generate personalized avatars with DiceBear API
+- **ï¿½ï¿½ï¿½ Music**: Search and preview songs using iTunes API
+- **ï¿½ï¿½ï¿½ Magical Colors**: Discover colors with their names and codes using The Color API
+- **ï¿½ï¿½ï¿½ Avatar Creator**: Generate personalized avatars with DiceBear API
 - **â­ Favorites**: Save favorite items (music, colors, avatars)
-- **í³œ History**: Track recent searches (max 10 per feature)
-- **í¾¤ Voice Search**: Hands-free music search (Spanish)
-- **í¼™ Theme Toggle**: Switch between light and dark modes (persisted)
+- **ï¿½ï¿½ï¿½ History**: Track recent searches (max 10 per feature)
+- **ï¿½ï¿½ï¿½ Voice Search**: Hands-free music search (Spanish)
+- **ï¿½ï¿½ï¿½ Theme Toggle**: Switch between light and dark modes (persisted)
 - **â“ Help Modal**: Interactive unicorn-themed guide
 
-## í» ï¸ Tech Stack
+## ï¿½ï¿½ï¿½ï¸ Tech Stack
 
 - **React 18** - UI library
 - **Vite** - Build tool
@@ -21,7 +21,7 @@ A vibrant, kid-friendly web app built for Renata (age 4-6) to discover music, ex
 - **CSS Modules** - Scoped styling
 - **localStorage** - Data persistence
 
-## í³ Project Structure
+## ï¿½ï¿½ï¿½ Project Structure
 
 ```
 src/
@@ -45,7 +45,7 @@ src/
 â””â”€â”€ main.jsx                 # Entry point
 ```
 
-## íº€ Getting Started
+## ï¿½ï¿½ï¿½ Getting Started
 
 ### Prerequisites
 - Node.js 16+ & npm
@@ -67,13 +67,13 @@ npm run dev
 npm run build
 ```
 
-## í¾¯ APIs Used
+## ï¿½ï¿½ï¿½ APIs Used
 
 1. **iTunes Search API** - Music search and previews
 2. **The Color API** - Color information and palettes
 3. **DiceBear Avatars API** - SVG avatar generation
 
-## í¾¨ Design Highlights
+## ï¿½ï¿½ï¿½ Design Highlights
 
 - Vibrant gradients and smooth animations
 - Responsive mobile-first design
@@ -81,24 +81,32 @@ npm run build
 - Theme-aware color palette (CSS variables)
 - Emoji-based navigation
 
-## í³ Development Notes
+## ï¿½ï¿½ï¿½ Development Notes
 
 - Originally built with TypeScript, converted to JavaScript for simplicity
 - Custom hooks eliminate code duplication (~120 lines saved)
 - Git workflow: Feature branches â†’ PR â†’ main
 
-## í´® Roadmap (BACKLOG.md)
+## ï¿½ï¿½ï¿½ Roadmap (BACKLOG.md)
 
 - Error boundaries
 - Loading skeletons
 - Search debouncing
 - Performance optimization (memoization)
-- Backend integration (Node.js + MongoDB)
+- â³ Backend integration (Node.js + MongoDB) - *Pending*
 
-## í³„ License
+## âš ï¸ Nota Importante
 
-MIT
+Este proyecto estÃ¡ **en construcciÃ³n** y prÃ³ximamente contarÃ¡ con un backend en un repositorio separado. Se aÃ±adirÃ¡n las siguientes funcionalidades:
+
+- ğŸ” **AutenticaciÃ³n y Registro**: Sistema de login con JWT + OAuth (Google/Microsoft)
+- ğŸ’ **CaracterÃ­sticas Premium**: Desbloqueo completo del tema oscuro, micrÃ³fono y favoritos
+- ğŸ“š **Nuevas PÃ¡ginas Premium**: Consejos (Affirmations) y Maquillaje (Makeup)
+- â˜ï¸ **API REST**: Endpoints para usuarios, favoritos y historial persistente
+- ğŸš€ **Despliegue**: Servidor en Google Cloud con dominio personalizado y certificado HTTPS
+
+**URL del Backend**: *PrÃ³ximamente...*
 
 ---
 
-Made with í²– for Renata
+Made with ğŸ’– for Renata by Victor âœ¨
