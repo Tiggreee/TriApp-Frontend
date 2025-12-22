@@ -11,7 +11,7 @@ export function Header({ onToggleTheme, theme }) {
             Music
           </NavLink>
           <NavLink to="/colors" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-            Colores
+            Paletas
           </NavLink>
           <NavLink to="/avatar" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
             Avatar
