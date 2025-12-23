@@ -1,5 +1,7 @@
 # Renata's Finder
 
+<sub>**Full-Stack Project** | Frontend: [github.com/Tiggreee/TriApp-Frontend](https://github.com/Tiggreee/TriApp-Frontend) | Backend: [github.com/Tiggreee/Triapp-Backend](https://github.com/Tiggreee/Triapp-Backend)</sub>
+
 Full-stack web application for discovering music, exploring colors, generating avatars, and accessing beauty tutorials. Built with React 19, Vite, Node.js, and MongoDB.
 
 ## Features
@@ -144,3 +146,7 @@ npm run build
 ## Built By
 
 Victor - TripleTen Web Development Bootcamp Final Project
+
+---
+
+<sub>**Full-Stack Repositories** | Frontend: [github.com/Tiggreee/TriApp-Frontend](https://github.com/Tiggreee/TriApp-Frontend) | Backend: [github.com/Tiggreee/Triapp-Backend](https://github.com/Tiggreee/Triapp-Backend)</sub>
