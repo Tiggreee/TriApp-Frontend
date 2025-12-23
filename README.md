@@ -1,5 +1,7 @@
 # Renata's Finder
 
+## 🚀 **[VER PROYECTO EN VIVO →](https://tri-app-frontend.vercel.app/music)**
+
 <sub>**Full-Stack Project** | Frontend: [github.com/Tiggreee/TriApp-Frontend](https://github.com/Tiggreee/TriApp-Frontend) | Backend: [github.com/Tiggreee/Triapp-Backend](https://github.com/Tiggreee/Triapp-Backend)</sub>
 
 Full-stack web application for discovering music, exploring colors, generating avatars, and accessing beauty tutorials. Built with React 19, Vite, Node.js, and MongoDB.
