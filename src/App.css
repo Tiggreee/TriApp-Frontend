@@ -172,6 +172,29 @@
   color: var(--text-primary);
 }
 
+.app-footer.discrete {
+  padding: 12px 16px;
+  border-top: none;
+  background: transparent;
+}
+
+.signature {
+  font-family: 'Righteous', 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+  opacity: 0.15;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-align: center;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.signature:hover {
+  opacity: 0.35;
+}
+
 .footer-buttons {
   display: flex;
   flex-wrap: wrap;
