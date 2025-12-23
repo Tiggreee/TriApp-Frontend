@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import styles from './HelpModal.module.css';
 
-export function HelpModal({ onClose }) {
+export function HelpModal({ onClose, user = null }) {
   useEffect(() => {
     const modal = document.querySelector(`.${styles.content}`);
     if (modal) modal.scrollTop = 0;
@@ -39,24 +39,32 @@ export function HelpModal({ onClose }) {
             </div>
           </div>
 
-          <div className={styles.section}>
-            <span className={styles.emoji}>💄</span>
-            <div>
-              <strong className={styles.sectionTitle}>Maquillaje</strong>
-              <p>Explora tutoriales de maquillaje mágico y encuentra productos que te encantarán. 💅</p>
-            </div>
-          </div>
+          {user && (
+            <>
+              <div className={styles.section}>
+                <span className={styles.emoji}>💄</span>
+                <div>
+                  <strong className={styles.sectionTitle}>Maquillaje</strong>
+                  <p>Explora tutoriales de maquillaje mágico y encuentra productos que te encantarán. 💅</p>
+                </div>
+              </div>
 
-          <div className={styles.section}>
-            <span className={styles.emoji}>💡</span>
-            <div>
-              <strong className={styles.sectionTitle}>Consejos</strong>
-              <p>Descubre consejos diarios de belleza, vida y bienestar. ¡Cada día una nueva magia! ✨</p>
-            </div>
-          </div>
+              <div className={styles.section}>
+                <span className={styles.emoji}>💡</span>
+                <div>
+                  <strong className={styles.sectionTitle}>Consejos</strong>
+                  <p>Descubre consejos diarios de belleza, vida y bienestar. ¡Cada día una nueva magia! ✨</p>
+                </div>
+              </div>
+            </>
+          )}
           
           <div className={styles.promo}>
-            <strong>🦄 ¡Ya tienes la magia de unicornio!</strong>
+            {user ? (
+              <strong>🦄 ¡Ya tienes la magia de unicornio!</strong>
+            ) : (
+              <strong>✨ Usuario básico - Inicia sesión para desbloquear todas las páginas</strong>
+            )}
           </div>
 
           <div className={styles.divider}></div>

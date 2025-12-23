@@ -209,7 +209,7 @@ function App() {
 
       {toast && <div className="toast">{toast}</div>}
 
-      {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
+      {showHelp && <HelpModal onClose={() => setShowHelp(false)} user={user} />}
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={handleAuthSuccess} />}
     </div>
   );
