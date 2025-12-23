@@ -178,19 +178,19 @@ function App() {
       <footer className="app-footer">
         <div className="footer-buttons">
           <button
-            className={`trial-button ${isRegistered ? 'active' : ''}`}
+            className={`trial-button ${isRegistered ? 'active' : ''} ${!user ? 'fixed' : ''}`}
             onClick={handleTrialToggle}
             aria-label={isRegistered ? 'Desactivar Premium de prueba' : 'Probar Premium'}
           >
             💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
           </button>
 
-          <button className="help-button" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
+          <button className={`help-button ${!user ? 'fixed' : ''}`} onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
             🦄 ¿Necesitas ayuda de Renata?
           </button>
 
           {!user && (
-            <button className="auth-button" onClick={() => setShowAuth(true)} aria-label="Registrarse o iniciar sesión">
+            <button className="auth-button fixed" onClick={() => setShowAuth(true)} aria-label="Registrarse o iniciar sesión">
               🌟 Inicia sesión o Regístrate aquí
             </button>
           )}
