@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { TutorialModal } from '../components/TutorialModal';
 import { useVoiceSearch } from '../hooks/useVoiceSearch';
+import { getFavorites, addFavorite, removeFavorite } from '../services/favoritesService';
 import styles from './Makeup.module.css';
 
-export default function Makeup() {
+export default function Makeup({ user = null }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [favorites, setFavorites] = useState([]);
@@ -16,6 +17,36 @@ export default function Makeup() {
   const { isSupported: voiceSupported, startListening } = useVoiceSearch('es-ES', (text) => {
     setSearchTerm(text);
   });
+
+  useEffect(() => {
+    if (user) {
+      loadBackendFavorites();
+    }
+  }, [user]);
+
+  async function loadBackendFavorites() {
+    const backendFavs = await getFavorites();
+    const makeupFavs = backendFavs.filter(fav => fav.type === 'makeup');
+    setFavorites(makeupFavs.map(f => f.data.id));
+  }
+
+  async function toggleFavorite(id, tutorial) {
+    if (favorites.includes(id)) {
+      if (user) {
+        const backendFavs = await getFavorites();
+        const toDelete = backendFavs.find(fav => fav.type === 'makeup' && fav.data.id === id);
+        if (toDelete) {
+          await removeFavorite(toDelete._id);
+        }
+      }
+      setFavorites(prev => prev.filter(fid => fid !== id));
+    } else {
+      if (user) {
+        await addFavorite('makeup', tutorial);
+      }
+      setFavorites(prev => [...prev, id]);
+    }
+  }
 
   const categories = [
     { id: 'all', name: 'Todos', emoji: '💄' },

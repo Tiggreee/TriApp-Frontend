@@ -1,14 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
+import { getFavorites, addFavorite, removeFavorite } from '../services/favoritesService';
 import styles from './Avatar.module.css';
 
-export default function Avatar() {
+export default function Avatar({ user = null }) {
   const [name, setName] = useState('');
   const [currentAvatar, setCurrentAvatar] = useState(null);
   const [style, setStyle] = useState('lorelei');
   const [history, setHistory] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      loadBackendFavorites();
+    }
+  }, [user]);
+
+  async function loadBackendFavorites() {
+    const backendFavs = await getFavorites();
+    const avatarFavs = backendFavs.filter(fav => fav.type === 'avatar');
+    setFavorites(avatarFavs.map(f => `${f.data.name}-${f.data.style}`));
+  }
+
+  function isFavorite(n, s) {
+    return favorites.includes(`${n}-${s}`);
+  }
+
+  async function toggleFavorite(n, s) {
+    const key = `${n}-${s}`;
+    if (isFavorite(n, s)) {
+      if (user) {
+        const backendFavs = await getFavorites();
+        const toDelete = backendFavs.find(fav => fav.type === 'avatar' && fav.data.name === n && fav.data.style === s);
+        if (toDelete) {
+          await removeFavorite(toDelete._id);
+        }
+      }
+      setFavorites(prev => prev.filter(k => k !== key));
+    } else {
+      if (user) {
+        await addFavorite('avatar', { name: n, style: s });
+      }
+      setFavorites(prev => [...prev, key]);
+    }
+  }
 
   const avatarStyles = [
     { id: 'lorelei', name: 'Lorelei (Ninas)' },

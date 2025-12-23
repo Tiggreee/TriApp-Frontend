@@ -1,15 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
+import { getFavorites, addFavorite, removeFavorite } from '../services/favoritesService';
 import styles from './Colors.module.css';
 
-export default function Colors() {
+export default function Colors({ user = null }) {
   const [hexInput, setHexInput] = useState('FF69B4');
   const [palette, setPalette] = useState(null);
   const [mode, setMode] = useState('monochrome');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      loadBackendFavorites();
+    }
+  }, [user]);
+
+  async function loadBackendFavorites() {
+    const backendFavs = await getFavorites();
+    const colorFavs = backendFavs.filter(fav => fav.type === 'color');
+    setFavorites(colorFavs.map(f => f.data.hex));
+  }
+
+  function isFavorite(hex) {
+    return favorites.includes(hex);
+  }
+
+  async function toggleFavorite(hex) {
+    if (isFavorite(hex)) {
+      if (user) {
+        const backendFavs = await getFavorites();
+        const toDelete = backendFavs.find(fav => fav.type === 'color' && fav.data.hex === hex);
+        if (toDelete) {
+          await removeFavorite(toDelete._id);
+        }
+      }
+      setFavorites(prev => prev.filter(h => h !== hex));
+    } else {
+      if (user) {
+        await addFavorite('color', { hex, name: 'Favorite Color' });
+      }
+      setFavorites(prev => [...prev, hex]);
+    }
+  }
 
   const modes = [
     { id: 'monochrome', name: 'Monocromático', emoji: '🎨' },
