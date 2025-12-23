@@ -1,22 +1,22 @@
-# Renata's Finder 🎀
+# Renata's Finder
 
-A vibrant, kid-friendly web app built for Renata (age 4-6) to discover music, explore magical colors, and create unique avatars. Features voice search, favorites, and a unicorn-themed help system!
+Full-stack web application for discovering music, exploring colors, generating avatars, and accessing beauty tutorials. Built with React 19, Vite, Node.js, and MongoDB.
 
-## ✨ Features
+## Features
 
-- **🎵 Música**: Search and preview songs using iTunes API
-- **🎨 Colores**: Discover colors with their names and codes using The Color API
-- **😊 Avatares**: Generate personalized avatars with DiceBear API
-- **💄 Maquillaje**: 6 makeup tutorials with step-by-step guides and YouTube links
-- **💡 Consejos**: 8 daily beauty and wellness tips with resource links
-- **⭐ Favoritos**: Save favorite items (music, colors, avatars, tutorials, tips)
-- **🕘 Historial**: Track recent searches (max 10 per feature)
-- **🎤 Búsqueda por Voz**: Hands-free music search (Spanish)
-- **🌗 Tema**: Switch between light and dark modes (persisted)
-- **👤 Autenticación**: User registration and login with JWT
-- **❓ Ayuda**: Interactive unicorn-themed guide for all features
+- **Música**: Search and preview songs via iTunes API
+- **Colores**: Discover color palettes and codes via The Color API
+- **Avatares**: Generate personalized SVG avatars via DiceBear API
+- **Maquillaje**: 6 makeup tutorials with step-by-step guides
+- **Consejos**: 8 daily beauty and wellness tips
+- **Favoritos**: Save favorites synced to backend (MongoDB)
+- **Historial**: Recent search tracking (max 10 per feature)
+- **Búsqueda por Voz**: Spanish voice search (SpeechRecognition API)
+- **Tema**: Light/dark mode toggle with persistence
+- **Autenticación**: JWT-based user registration and login
+- **Logout**: Session management with username display
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **React 19** - UI library
 - **Vite** - Build tool
@@ -58,15 +58,17 @@ src/
 └── main.jsx                      # Entry point
 ```
 
-## 🌐 Demo
+## Live Demo
 
-- Visita el frontend en producción: https://tri-app-frontend.vercel.app/music
+Frontend: https://tri-app-frontend.vercel.app/music
+Backend API: https://triapp-backend.onrender.com
 
-## 📌 Alcance de la entrega
+## Repositories
 
-- Este proyecto fue presentado **solo como frontend**. El backend se implementará en un repositorio separado.
+- Frontend: https://github.com/Tiggreee/TriApp-Frontend
+- Backend: https://github.com/Tiggreee/Triapp-Backend
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 16+ & npm
@@ -86,13 +88,13 @@ npm run dev
 
 # Build for production
 npm run build
-```
+```External APIs
 
-## 🔌 External APIs
+- iTunes Search API: Music search and previews
+- The Color API: Color information and harmonies
+- DiceBear Avatars API: SVG avatar generation
 
-1. **iTunes Search API** - Music search and previews
-2. **The Color API** - Color information and harmonies
-3. **DiceBear Avatars API** - SVG avatar generation
+##DiceBear Avatars API** - SVG avatar generation
 
 ## 🎨 Design System
 
@@ -103,18 +105,18 @@ npm run build
 - Smooth animations (pop, fade, scale)
 - Theme-aware palette (light/dark modes)
 
-## 🚀 Deployment
+## Deployment
 
-**Frontend**: [Vercel](https://tri-app-frontend.vercel.app/music)
-- Auto-deploys from `main` branch
-- Live at: https://tri-app-frontend.vercel.app/music
+**Frontend (Vercel)**
+- Auto-deploys from main branch
+- URL: https://tri-app-frontend.vercel.app/music
 
-**Backend**: [Render.com](https://triapp-backend.onrender.com)
+**Backend (Render)**
 - Node.js + Express + MongoDB Atlas
-- API documentation: [Triapp-Backend](https://github.com/Tiggreee/Triapp-Backend)
-- Live at: https://triapp-backend.onrender.com
+- URL: https://triapp-backend.onrender.com
+- Repository: https://github.com/Tiggreee/Triapp-Backend
 
-## 🧑‍💻 Development
+## Development
 
 ```bash
 # Clone and install
@@ -131,22 +133,14 @@ npm run build
 # Output in dist/
 ```
 
-## 📝 Code Quality
+## Code Quality
 
 - No development comments in source code
 - Semantic git commits (feat, fix, docs, chore, style)
-- CSS Modules eliminate style conflicts
-- Clean codebase following React best practices
-- Spanish text for UI; clear English for code
+- CSS Modules for component scoping
+- React 19 best practices
+- Spanish UI text, English code
 
-## 🗺️ Next Steps (Stage 4)
+## Built By
 
-- [ ] Logout button in Header
-- [ ] Display username when logged in
-- [ ] Sync favorites with backend API
-- [ ] OAuth integration (Microsoft/Google)
-- [ ] Admin dashboard for user analytics
-
-## 👨‍💻 Built By
-
-Victor for Renata 🦄
+Victor - TripleTen Web Development Bootcamp Final Project
