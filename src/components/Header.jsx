@@ -21,12 +21,16 @@ export function Header({ onToggleTheme, theme, locked = false, user = null, onLo
           <NavLink to="/avatar" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
             🦄 Avatares
           </NavLink>
-          <NavLink to="/makeup" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-            💄 Maquillaje
-          </NavLink>
-          <NavLink to="/consejos" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-            💡 Consejos
-          </NavLink>
+          {user && (
+            <>
+              <NavLink to="/makeup" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+                💄 Maquillaje
+              </NavLink>
+              <NavLink to="/consejos" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+                💡 Consejos
+              </NavLink>
+            </>
+          )}
         </nav>
         
         <div className={styles.right}>
