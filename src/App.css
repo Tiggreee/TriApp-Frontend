@@ -195,10 +195,6 @@
   color: var(--text-primary);
 }
 
-.app-footer.hidden {
-  display: none;
-}
-
 .footer-buttons {
   display: flex;
   flex-wrap: wrap;

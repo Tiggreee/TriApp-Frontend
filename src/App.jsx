@@ -176,42 +176,56 @@ function App() {
       </main>
 
       {!user && (
-        <footer className="signature-footer">
-          <span className="signature">Tigre Dev</span>
-        </footer>
-      )}
-
-      <footer className={`app-footer ${!user ? 'hidden' : ''}`}>
-        <div className="footer-buttons">
+        <>
           <button
-            className={`trial-button ${isRegistered ? 'active' : ''} ${!user ? 'fixed' : ''}`}
+            className={`trial-button ${isRegistered ? 'active' : ''} fixed`}
             onClick={handleTrialToggle}
             aria-label={isRegistered ? 'Desactivar Premium de prueba' : 'Probar Premium'}
           >
             💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
           </button>
 
-          <button className={`help-button ${!user ? 'fixed' : ''}`} onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
+          <button className="help-button fixed" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
             🦄 ¿Necesitas ayuda de Renata?
           </button>
 
-          {!user && (
-            <button className="auth-button fixed" onClick={() => setShowAuth(true)} aria-label="Registrarse o iniciar sesión">
-              🌟 Inicia sesión o Regístrate aquí
+          <button className="auth-button fixed" onClick={() => setShowAuth(true)} aria-label="Registrarse o iniciar sesión">
+            🌟 Inicia sesión o Regístrate aquí
+          </button>
+
+          <footer className="signature-footer">
+            <span className="signature">Tigre Dev</span>
+          </footer>
+        </>
+      )}
+
+      {user && (
+        <footer className="app-footer">
+          <div className="footer-buttons">
+            <button
+              className={`trial-button ${isRegistered ? 'active' : ''}`}
+              onClick={handleTrialToggle}
+              aria-label={isRegistered ? 'Desactivar Premium de prueba' : 'Probar Premium'}
+            >
+              💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
+            </button>
+
+            <button className="help-button" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
+              🦄 ¿Necesitas ayuda de Renata?
+            </button>
+          </div>
+
+          {SHOW_ADMIN_RESET && (
+            <button
+              className="admin-reset"
+              onClick={resetTrials}
+              aria-label="Reiniciar contador de pruebas premium"
+            >
+              Reiniciar pruebas (admin)
             </button>
           )}
-        </div>
-
-        {SHOW_ADMIN_RESET && (
-          <button
-            className="admin-reset"
-            onClick={resetTrials}
-            aria-label="Reiniciar contador de pruebas premium"
-          >
-            Reiniciar pruebas (admin)
-          </button>
-        )}
-      </footer>
+        </footer>
+      )}
 
       {toast && <div className="toast">{toast}</div>}
 
