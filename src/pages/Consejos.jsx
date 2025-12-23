@@ -3,6 +3,7 @@ import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { TipsModal } from '../components/TipsModal';
+import { useVoiceSearch } from '../hooks/useVoiceSearch';
 import styles from './Consejos.module.css';
 
 export default function Consejos() {
@@ -11,6 +12,10 @@ export default function Consejos() {
   const [favorites, setFavorites] = useState([]);
   const [history, setHistory] = useState([]);
   const [selectedTip, setSelectedTip] = useState(null);
+
+  const { isSupported: voiceSupported, startListening } = useVoiceSearch('es-ES', (text) => {
+    setSearchTerm(text);
+  });
 
   const categories = [
     { id: 'all', name: 'Todos', emoji: '💡' },
@@ -121,12 +126,33 @@ export default function Consejos() {
     <div className={styles.container}>
       <h1 style={{ color: 'var(--text-primary)' }}>💡 Consejos Mágicos Diarios</h1>
       
-      <form onSubmit={handleSearch} style={{ marginBottom: '2rem' }}>
-        <Input 
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Busca consejos de belleza y vida..."
-        />
+      <form onSubmit={handleSearch} style={{ marginBottom: '2rem', display: 'flex', gap: '8px' }}>
+        <div style={{ flex: 1 }}>
+          <Input 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Busca consejos de belleza y vida..."
+          />
+        </div>
+        {voiceSupported && (
+          <button
+            type="button"
+            onClick={startListening}
+            style={{
+              padding: '10px 16px',
+              background: 'linear-gradient(135deg, #ff6b9d, #4ecdc4)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '14px'
+            }}
+            aria-label="Voice search"
+          >
+            🎤 MIC
+          </button>
+        )}
         <Button text="🔍 Buscar" />
       </form>
 
