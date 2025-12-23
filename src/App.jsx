@@ -122,6 +122,14 @@ function App() {
     showToast(`¡Bienvenida, ${currentUser?.name || 'Renata'}! 🦄`);
   }
 
+  function handleLogout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    setUser(null);
+    setIsRegistered(false);
+    showToast('¡Hasta luego! 👋');
+  }
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     try {
@@ -143,7 +151,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header onToggleTheme={toggleTheme} theme={theme} locked={!isRegistered} />
+      <Header onToggleTheme={toggleTheme} theme={theme} locked={!isRegistered} user={user} onLogout={handleLogout} />
       <main className="main-content">
         <Routes>
           <Route path="/music" element={<Music isRegistered={isRegistered} />} />

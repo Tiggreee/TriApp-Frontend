@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
 
-export function Header({ onToggleTheme, theme, locked = false }) {
+export function Header({ onToggleTheme, theme, locked = false, user = null, onLogout = null }) {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -28,9 +28,27 @@ export function Header({ onToggleTheme, theme, locked = false }) {
             💡 Consejos
           </NavLink>
         </nav>
-        <button className={`${styles.theme} ${locked ? styles.locked : ''}`} onClick={onToggleTheme} aria-label="Toggle theme" disabled={locked}>
-          {theme === 'dark' ? '🌙' : '☀️'}
-        </button>
+        
+        <div className={styles.right}>
+          {user && (
+            <div className={styles.userSection}>
+              <span className={styles.username}>{user.name}</span>
+              {onLogout && (
+                <button 
+                  className={styles.logoutBtn}
+                  onClick={onLogout}
+                  aria-label="Logout"
+                >
+                  Salir
+                </button>
+              )}
+            </div>
+          )}
+          
+          <button className={`${styles.theme} ${locked ? styles.locked : ''}`} onClick={onToggleTheme} aria-label="Toggle theme" disabled={locked}>
+            {theme === 'dark' ? '🌙' : '☀️'}
+          </button>
+        </div>
       </div>
     </header>
   );
