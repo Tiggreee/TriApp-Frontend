@@ -166,7 +166,7 @@ function App() {
       <Header onToggleTheme={toggleTheme} theme={theme} locked={!isRegistered} user={user} onLogout={handleLogout} />
       <main className="main-content">
         <Routes>
-          <Route path="/music" element={<Music isRegistered={isRegistered} />} />
+          <Route path="/music" element={<Music isRegistered={isRegistered} user={user} />} />
           <Route path="/colors" element={<Colors />} />
           <Route path="/avatar" element={<Avatar />} />
           <Route path="/makeup" element={<Makeup />} />

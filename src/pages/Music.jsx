@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { searchTracks } from '../features/music/api';
 import { SearchBar } from '../features/music/components/SearchBar';
 import { Results } from '../features/music/components/Results';
 import { useFeatureHistory } from '../hooks/useFeatureHistory';
+import { getFavorites, addFavorite, removeFavorite } from '../services/favoritesService';
 import styles from './Music.module.css';
 
 const HISTORY_KEY = 'music-history';
 const FAV_KEY = 'music-favs';
 
-export default function Music({ isRegistered = false }) {
+export default function Music({ isRegistered = false, user = null }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   
@@ -17,6 +18,21 @@ export default function Music({ isRegistered = false }) {
     FAV_KEY,
     (t) => t.trackId
   );
+
+  useEffect(() => {
+    if (user) {
+      loadBackendFavorites();
+    }
+  }, [user]);
+
+  async function loadBackendFavorites() {
+    const backendFavs = await getFavorites();
+    const musicFavs = backendFavs.filter(fav => fav.type === 'music');
+    if (musicFavs.length > 0) {
+      const ids = musicFavs.map(fav => fav.data.trackId);
+      localStorage.setItem(FAV_KEY, JSON.stringify(ids));
+    }
+  }
 
   async function onSearch(query) {
     if (!query) return;
@@ -27,12 +43,32 @@ export default function Music({ isRegistered = false }) {
     addToHistory(query);
   }
 
+  async function handleFavToggle(track) {
+    const isFav = isFavorite(track.trackId);
+    
+    if (isFav) {
+      if (user) {
+        const backendFavs = await getFavorites();
+        const toDelete = backendFavs.find(fav => fav.type === 'music' && fav.data.trackId === track.trackId);
+        if (toDelete) {
+          await removeFavorite(toDelete._id);
+        }
+      }
+    } else {
+      if (user) {
+        await addFavorite('music', track);
+      }
+    }
+    
+    toggleFav(track.trackId);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.searchSection}>
         <SearchBar onSearch={onSearch} lockedVoice={!isRegistered} />
       </div>
-      {loading ? <div className={styles.loading}>Loading...</div> : <Results items={items} onFav={toggleFav} favorites={favorites} lockedFav={!isRegistered} />}
+      {loading ? <div className={styles.loading}>Loading...</div> : <Results items={items} onFav={handleFavToggle} favorites={favorites} lockedFav={!isRegistered} />}
 
       <div style={{ marginTop: 24, display: 'grid', gap: 12 }}>
         <div>
