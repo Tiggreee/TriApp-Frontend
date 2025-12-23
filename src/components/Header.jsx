@@ -11,25 +11,23 @@ export function Header({ onToggleTheme, theme, locked = false, user = null, onLo
             <span className={styles.titleBig}>¡Finder!</span>
           </div>
         </div>
-        {user && (
-          <nav className={styles.nav}>
-            <NavLink to="/music" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-              🎵 Música
-            </NavLink>
-            <NavLink to="/colors" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-              🎨 Colores
-            </NavLink>
-            <NavLink to="/avatar" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-              🦄 Avatares
-            </NavLink>
-            <NavLink to="/makeup" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-              💄 Maquillaje
-            </NavLink>
-            <NavLink to="/consejos" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-              💡 Consejos
-            </NavLink>
-          </nav>
-        )}
+        <nav className={styles.nav}>
+          <NavLink to="/music" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            🎵 Música
+          </NavLink>
+          <NavLink to="/colors" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            🎨 Colores
+          </NavLink>
+          <NavLink to="/avatar" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            🦄 Avatares
+          </NavLink>
+          <NavLink to="/makeup" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            💄 Maquillaje
+          </NavLink>
+          <NavLink to="/consejos" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            💡 Consejos
+          </NavLink>
+        </nav>
         
         <div className={styles.right}>
           {user && (
