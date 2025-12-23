@@ -20,13 +20,13 @@ function getInitialTheme() {
 
 function App() {
   const [theme, setTheme] = useState(getInitialTheme);
-  const [isRegistered, setIsRegistered] = useState(false); // simulate registration
+  const [isRegistered, setIsRegistered] = useState(false);
   const [toast, setToast] = useState(null);
   const trialTimeoutRef = useRef();
 
-  const TRIAL_MS = 5 * 60 * 1000; // 5 minutes per activation
+  const TRIAL_MS = 5 * 60 * 1000;
   const MAX_TRIALS_PER_DAY = 3;
-  const SHOW_ADMIN_RESET = false; // toggle to true if you need the admin reset button visible
+  const SHOW_ADMIN_RESET = false;
 
   function todayKey() {
     const d = new Date();
@@ -110,15 +110,14 @@ function App() {
     try {
       window.localStorage.setItem('theme', theme);
     } catch (e) {
-      // ignore write failures
     }
   }, [theme]);
 
   useEffect(() => {
-    if (import.meta.env.DEV) {
-      resetTrials();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!import.meta.env.DEV) return;
+    if (trialTimeoutRef.current) clearTimeout(trialTimeoutRef.current);
+    saveTrial({ date: todayKey(), count: 0, activeUntil: 0 });
+    setIsRegistered(false);
   }, []);
 
   function toggleTheme() {

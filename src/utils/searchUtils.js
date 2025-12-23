@@ -15,7 +15,6 @@ export function saveList(key, list) {
   try {
     storage.setItem(key, JSON.stringify(list.slice(0, 10)));
   } catch (e) {
-    // ignore
   }
 }
 

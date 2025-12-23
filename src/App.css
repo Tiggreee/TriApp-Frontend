@@ -50,7 +50,7 @@
 .trial-button {
   position: fixed;
   right: 18px;
-  bottom: 76px; /* sits above help-button */
+  bottom: 76px;
   padding: 10px 16px;
   border-radius: 16px;
   background: var(--surface);
@@ -79,7 +79,7 @@
 .admin-reset {
   position: fixed;
   right: 18px;
-  bottom: 124px; /* above trial-button */
+  bottom: 124px;
   padding: 8px 14px;
   border-radius: 14px;
   background: rgba(0,0,0,0.55);
