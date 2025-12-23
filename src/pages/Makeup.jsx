@@ -7,7 +7,7 @@ import { useVoiceSearch } from '../hooks/useVoiceSearch';
 import { getFavorites, addFavorite, removeFavorite } from '../services/favoritesService';
 import styles from './Makeup.module.css';
 
-export default function Makeup({ user = null }) {
+export default function Makeup({ isRegistered = false, user = null }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [favorites, setFavorites] = useState([]);

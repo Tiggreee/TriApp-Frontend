@@ -167,10 +167,10 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/music" element={<Music isRegistered={isRegistered} user={user} />} />
-          <Route path="/colors" element={<Colors user={user} />} />
-          <Route path="/avatar" element={<Avatar user={user} />} />
-          <Route path="/makeup" element={<Makeup user={user} />} />
-          <Route path="/consejos" element={<Consejos user={user} />} />
+          <Route path="/colors" element={<Colors isRegistered={isRegistered} user={user} />} />
+          <Route path="/avatar" element={<Avatar isRegistered={isRegistered} user={user} />} />
+          <Route path="/makeup" element={<Makeup isRegistered={isRegistered} user={user} />} />
+          <Route path="/consejos" element={<Consejos isRegistered={isRegistered} user={user} />} />
           <Route path="*" element={<Navigate to="/music" replace />} />
         </Routes>
       </main>
