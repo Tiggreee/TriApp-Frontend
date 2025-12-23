@@ -175,11 +175,13 @@ function App() {
         </Routes>
       </main>
 
-      <footer className={`app-footer ${!user ? 'discrete' : ''}`}>
-        {!user && (
-          <div className="signature">Tigre Dev</div>
-        )}
-        
+      {!user && (
+        <footer className="signature-footer">
+          <span className="signature">Tigre Dev</span>
+        </footer>
+      )}
+
+      <footer className={`app-footer ${!user ? 'hidden' : ''}`}>
         <div className="footer-buttons">
           <button
             className={`trial-button ${isRegistered ? 'active' : ''} ${!user ? 'fixed' : ''}`}
