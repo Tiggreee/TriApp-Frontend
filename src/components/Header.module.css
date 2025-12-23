@@ -355,28 +355,119 @@
   transform: translateY(0);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .header {
     padding: 12px 16px;
   }
 
   .container {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .titleWrap {
+    width: 100%;
+    max-width: 280px;
+    justify-self: center;
+    padding: 12px 20px;
   }
 
   .title {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .titleBig {
+    font-size: 22px;
+  }
+
+  .titleSmall {
+    font-size: 12px;
   }
 
   .nav {
     justify-content: center;
+    width: 100%;
+    gap: 8px;
   }
 
   .link {
-    flex: 1;
-    text-align: center;
-    min-width: 80px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 16px;
+  }
+
+  .right {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .userSection {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .username {
+    font-size: 12px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .logoutBtn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 12px;
+  }
+
+  .titleWrap {
+    max-width: 240px;
+    padding: 10px 16px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .titleBig {
+    font-size: 18px;
+  }
+
+  .titleSmall {
+    font-size: 11px;
+  }
+
+  .nav {
+    gap: 6px;
+  }
+
+  .link {
+    padding: 6px 10px;
+    font-size: 12px;
+    min-width: 70px;
+  }
+
+  .theme {
+    padding: 8px 10px;
+  }
+
+  .userSection {
+    padding: 5px 8px;
+  }
+
+  .username {
+    display: none;
+  }
+
+  .logoutBtn {
+    padding: 4px 8px;
+    font-size: 10px;
   }
 }
