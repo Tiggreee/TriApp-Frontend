@@ -81,7 +81,24 @@ TriApp – Renata's Finder full-stack development tasks.
 - [ ] Fix any reviewer feedback
 - [ ] Merge PR to main once approved
 
-## Stage 3: Premium Features (Pending Backend Integration)
+## Stage 3: Frontend-Backend Integration (Pending)
+
+### Connect Frontend to Backend
+- [ ] Update `.env` with `VITE_API_BASE_URL` (backend domain)
+- [ ] Create auth context/provider in frontend
+- [ ] Implement login/signup forms
+- [ ] Store JWT in localStorage/sessionStorage
+- [ ] Add Authorization header to API requests
+- [ ] Sync favorites with backend (replace localStorage)
+- [ ] Handle auth errors (401/403) with redirects
+
+### UI Enhancements
+- [ ] Fix HelpModal max-height to 70vh with scroll
+- [ ] Add loading states during API calls
+- [ ] Error boundaries for network failures
+- [ ] Toast notifications for success/error
+
+## Stage 4: Premium Features (Pending Backend Integration)
 
 ### Planned Premium Pages
 - [ ] Consejos (Affirmations): curated positive messages
