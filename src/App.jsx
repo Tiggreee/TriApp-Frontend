@@ -175,7 +175,7 @@ function App() {
         </Routes>
       </main>
 
-      <footer className="app-footer">
+      <footer className={`app-footer ${!user ? 'sticky' : ''}`}>
         <div className="footer-buttons">
           <button
             className={`trial-button ${isRegistered ? 'active' : ''}`}
