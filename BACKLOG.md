@@ -19,106 +19,120 @@ TriApp – Renata's Finder full-stack development tasks.
 - [x] No code comments; clean codebase
 - [x] Semantic git commits
 
-## Stage 2: Backend (In Progress – 1 week)
+## Stage 2: Backend (✅ Completed)
 
 ### Setup & Infrastructure
-- [ ] Create `TriApp-Frontend_backend` repo
-- [ ] Init Node.js/Express + npm
-- [ ] Git: create `stage-back-end` branch
-- [ ] Add `.gitignore`, `.editorconfig`, `.eslintrc`
-- [ ] Create `package.json` with `dev` and `start` scripts
-- [ ] Setup `.env.example` (NODE_ENV, JWT_SECRET, MONGODB_URI, PORT)
+- [x] Create `Triapp-Backend` repo
+- [x] Init Node.js/Express + npm
+- [x] Add `.gitignore`, `.editorconfig`, `.eslintrc`
+- [x] Create `package.json` with `dev` and `start` scripts
+- [x] Setup `.env.example` (NODE_ENV, JWT_SECRET, MONGODB_URI, PORT)
 
 ### Database Schemas & Models
-- [ ] User model:
+- [x] User model:
   - `email` (string, required, unique, validated)
-  - `password` (string, hashed, required, excluded from responses)
+  - `password` (string, hashed with bcryptjs, required)
   - `name` (string, 2–30 chars, required)
   - `createdAt` (date)
-- [ ] Favorite model (for Music, Colors, Avatars):
+- [x] Favorite model (for Music, Colors, Avatars):
   - `type` (string: "music" | "color" | "avatar")
   - `data` (object with API response details)
-  - `owner` (reference to User, required, excluded from responses)
+  - `owner` (reference to User, required)
   - `createdAt` (date)
 
 ### Authentication & Authorization
-- [ ] POST `/signup`: create user + return JWT
-- [ ] POST `/signin`: validate credentials + return JWT
-- [ ] JWT middleware: verify token on protected routes
-- [ ] Protect all `/users/*` and `/favorites/*` routes
+- [x] POST `/signup`: create user + return JWT (7-day expiry)
+- [x] POST `/signin`: validate credentials + return JWT
+- [x] JWT middleware: verify token on protected routes
+- [x] Protected all `/favorites/*` routes
 
 ### API Routes
-- [ ] GET `/users/me`: return current user (email, name)
-- [ ] GET `/favorites`: return all favorites for authenticated user
-- [ ] POST `/favorites`: create favorite (music/color/avatar)
-- [ ] DELETE `/favorites/:id`: remove favorite (only by owner)
-- [ ] Error handling: centralized middleware, proper HTTP status codes (200, 201, 400, 401, 403, 404, 409, 500)
+- [x] GET `/favorites`: return all favorites for authenticated user
+- [x] POST `/favorites`: create favorite (music/color/avatar)
+- [x] DELETE `/favorites/:id`: remove favorite (only by owner)
+- [x] Error handling: centralized middleware, proper HTTP status codes
 
 ### Logging & Monitoring
-- [ ] Setup `request.log` (JSON format, all API requests)
-- [ ] Setup `error.log` (JSON format, all errors)
-- [ ] Logs excluded from git (`.gitignore`)
+- [x] Setup `request.log` (JSON format, all API requests)
+- [x] Setup `error.log` (JSON format, all errors)
+- [x] Winston logger configured with request/error tracking
 
 ### Validation & Security
-- [ ] Validate email, password strength, name length
-- [ ] Prevent users from deleting others' favorites
-- [ ] Hash passwords (bcrypt)
-- [ ] Sanitize inputs
+- [x] Validate email, password strength, name length with celebrate + Joi
+- [x] Prevent users from deleting others' favorites
+- [x] Hash passwords with bcryptjs (10 rounds)
+- [x] helmet: HTTP headers security
+- [x] CORS: restrict cross-origin requests
+- [x] Rate limiting: 100 requests per 15 minutes
 
-### Deployment (Google Cloud VM)
-- [ ] Create GCP VM instance
-- [ ] Install Node.js, MongoDB (or use Atlas)
-- [ ] Setup domain (free domain or custom)
-- [ ] Point domain to VM public IP
-- [ ] Install SSL certificate (HTTPS)
-- [ ] Create `.env` on server (NODE_ENV=production, JWT_SECRET)
-- [ ] Start app with `npm start` (production mode)
-- [ ] Document API domain in README
+### Deployment
+- [x] Deploy to Render.com (free tier)
+- [x] MongoDB Atlas cluster "tigerDev" configured
+- [x] Production API live: https://triapp-backend.onrender.com
+- [x] README updated with API documentation
 
-### Deliverable
-- [ ] Open PR from `stage-back-end` → `main` on GitHub
-- [ ] Submit PR link to TripleTen for review
-- [ ] Fix any reviewer feedback
-- [ ] Merge PR to main once approved
+### Backend Repository
+- [x] github.com/Tiggreee/Triapp-Backend
+- [x] Clean codebase without development comments
+- [x] Semantic git commits
 
-## Stage 3: Frontend-Backend Integration (Pending)
+## Stage 3: Frontend-Backend Integration (✅ Completed)
 
 ### Connect Frontend to Backend
-- [ ] Update `.env` with `VITE_API_BASE_URL` (backend domain)
-- [ ] Create auth context/provider in frontend
-- [ ] Implement login/signup forms
-- [ ] Store JWT in localStorage/sessionStorage
-- [ ] Add Authorization header to API requests
-- [ ] Sync favorites with backend (replace localStorage)
-- [ ] Handle auth errors (401/403) with redirects
+- [x] Update `.env` with `VITE_API_BASE_URL` (backend domain)
+- [x] Create authService.js with signup/signin/logout/getCurrentUser
+- [x] Implement AuthModal.jsx with registration/login forms
+- [x] Store JWT + user object in localStorage
+- [x] Add Authorization header to API requests
+- [x] Auth state management in App.jsx
+- [x] User registration flow integrated
+
+### Content Pages (New Features)
+- [x] Makeup.jsx: 6 makeup tutorials with categories + search
+- [x] Consejos.jsx: 8 daily beauty/wellness tips with categories + search
+- [x] TutorialModal.jsx: detailed steps + external YouTube links
+- [x] TipsModal.jsx: full advice + category-specific action lists + resource links
+- [x] Card.jsx: enhanced with onClick prop support
 
 ### UI Enhancements
-- [ ] Fix HelpModal max-height to 70vh with scroll
-- [ ] Add loading states during API calls
-- [ ] Error boundaries for network failures
-- [ ] Toast notifications for success/error
+- [x] HelpModal max-height 70vh with scroll
+- [x] Updated HelpModal sections for all 5 features
+- [x] Discrete scrollbars on all modals (6px, diffuse pink, 0.3 opacity)
+- [x] Footer reorganization: moved buttons to bottom with centered flex layout
+- [x] Header updated: 5 navigation links (Música, Colores, Avatares, Maquillaje, Consejos)
+- [x] Gradient text styling consistent across all pages
+- [x] Responsive grid layouts for Makeup/Consejos pages
+- [x] Modal animations: pop effect (cubic-bezier 0.3s)
 
-## Stage 4: Premium Features (Pending Backend Integration)
+### Code Quality
+- [x] Clean codebase: no development comments or emojis in code
+- [x] Semantic git commits for all changes
+- [x] CSS Modules for component-scoped styling
+- [x] localStorage fallback for guest users
 
-### Planned Premium Pages
-- [ ] Consejos (Affirmations): curated positive messages
-- [ ] Makeup: style/color recommendations
+### Current Deployment
+- [x] Frontend: Vercel (https://tri-app-frontend.vercel.app/music)
+- [x] Backend: Render (https://triapp-backend.onrender.com)
+- [x] Dev environment: Vite local server (http://localhost:5173)
 
-### Frontend Enhancements
-- [ ] Connect to backend APIs (auth, favorites persistence)
-- [ ] Update `VITE_API_BASE_URL` env variable to backend domain
-- [ ] Unlock premium features after successful login/trial
-- [ ] Sync favorites with backend (GET/POST/DELETE)
+## Stage 4: Pending Features
 
-### Optional: Admin Dashboard
-- [ ] User management
-- [ ] Logging visualization
-- [ ] Trial usage analytics
+### User Experience
+- [ ] Logout button in Header (clear user state)
+- [ ] Show username in Header when logged in
+- [ ] Premium unlock confirmation on signup
+- [ ] Synchronize favorites with backend API
+
+### Future Enhancement
+- [ ] OAuth integration (Microsoft/Google)
+- [ ] Advanced favorites filtering
+- [ ] User preferences/settings page
+- [ ] Mobile app version
 
 ## General Rules
 
 - **No code comments** in source files
-- **English** everywhere (code, commits, README, docs)
+- **Spanish** for UI text and Spanish-language features
 - **Semantic commits**: feat, fix, docs, chore, style, test, refactor
 - **Clear naming**: functions/variables describe their purpose
 - **Error messages** clear for debugging (in logs + responses)
@@ -126,9 +140,10 @@ TriApp – Renata's Finder full-stack development tasks.
 
 ## Timeline
 
-- **Week 1** (Backend): Stage 2 (setup, auth, routes, deployment)
-- **Week 2+** (Integration): Stage 3 (connect frontend → backend, premium pages)
+- **Week 1** (Backend): Stage 2 (✅ Complete)
+- **Week 2+** (Integration): Stage 3 (✅ Complete)
+- **Week 2+** (Polish): Stage 4 (In Progress)
 
 ---
 
-Last updated: 2025-12-22
+Last updated: 2025-12-23

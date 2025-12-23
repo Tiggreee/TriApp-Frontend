@@ -18,10 +18,9 @@
   border-radius: 20px;
   padding: 2.5rem;
   width: 90%;
-  max-width: 620px;
-  max-height: 70vh;
+  max-width: 460px;
+  max-height: 90vh;
   overflow-y: auto;
-  min-width: 320px;
   box-shadow: 
     0 8px 24px rgba(255, 107, 157, 0.2),
     0 12px 32px rgba(78, 205, 196, 0.15),
@@ -84,106 +83,140 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
   text-align: center;
   font-weight: 700;
 }
 
-.content {
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
-.section {
+.tabs {
   display: flex;
-  gap: 16px;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
-  padding: 16px;
   background: rgba(255, 107, 157, 0.05);
+  padding: 0.25rem;
   border-radius: 12px;
-  border-left: 4px solid;
-  transition: all 0.3s ease;
 }
 
-.section:nth-child(1) {
-  border-left-color: #ff6b9d;
+.tab {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
 }
 
-.section:nth-child(2) {
-  border-left-color: #4ecdc4;
+.tab.active {
+  background: linear-gradient(135deg, #ff6b9d, #667eea);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
 }
 
-.section:nth-child(3) {
-  border-left-color: #667eea;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.section:hover {
-  background: rgba(255, 107, 157, 0.08);
-  transform: translateX(4px);
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.emoji {
-  font-size: 2rem;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.sectionTitle {
+.field label {
+  font-weight: 600;
   color: var(--text-primary);
-  font-size: 1.1rem;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.section p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #ff6b9d, #4ecdc4, #667eea, transparent);
-  margin: 1.5rem 0;
-  border-radius: 2px;
-}
-
-.tips {
-  background: rgba(78, 205, 196, 0.05);
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-}
-
-.tips p {
-  margin-bottom: 0.6rem;
-  font-size: 0.95rem;
-}
-
-.tips p:last-child {
-  margin-bottom: 0;
-}
-
-.footer {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
   font-size: 0.9rem;
+}
+
+.field input {
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 107, 157, 0.2);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #ff6b9d;
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+}
+
+.field input::placeholder {
   color: var(--text-muted);
-  font-style: italic;
+  opacity: 0.6;
 }
 
-.promo {
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.08), rgba(78, 205, 196, 0.08));
-  border: 1px dashed rgba(255, 107, 157, 0.4);
-  padding: 14px 16px;
+.error {
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  color: #ff3b30;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.submit {
+  padding: 1rem;
+  border: none;
   border-radius: 12px;
-  margin: 8px 0 16px;
+  background: linear-gradient(135deg, #ff6b9d, #667eea);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+  margin-top: 0.5rem;
 }
 
-.promo p {
-  margin: 6px 0 0;
+.submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 157, 0.4);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.benefits {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(255, 107, 157, 0.1);
+}
+
+.benefitsTitle {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.benefitsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.benefitsList span {
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
   color: var(--text-primary);
 }
 

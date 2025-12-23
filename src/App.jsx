@@ -2,9 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { HelpModal } from './components/HelpModal';
+import { AuthModal } from './components/AuthModal';
+import { getCurrentUser } from './services/authService';
 import Music from './pages/Music';
 import Colors from './pages/Colors';
 import Avatar from './pages/Avatar';
+import Makeup from './pages/Makeup';
+import Consejos from './pages/Consejos';
 import './App.css';
 
 function getInitialTheme() {
@@ -22,6 +26,9 @@ function App() {
   const [theme, setTheme] = useState(getInitialTheme);
   const [isRegistered, setIsRegistered] = useState(false);
   const [toast, setToast] = useState(null);
+  const [showHelp, setShowHelp] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const [user, setUser] = useState(null);
   const trialTimeoutRef = useRef();
 
   const TRIAL_MS = 5 * 60 * 1000;
@@ -62,6 +69,10 @@ function App() {
     const active = Date.now() < data.activeUntil;
     setIsRegistered(active);
     if (active) scheduleExpiry(data.activeUntil);
+    
+    const currentUser = getCurrentUser();
+    setUser(currentUser);
+    if (currentUser) setIsRegistered(true);
   }, []);
 
   function showToast(message) {
@@ -103,7 +114,13 @@ function App() {
     setIsRegistered(false);
     showToast('Contador de pruebas premium reiniciado');
   }
-  const [showHelp, setShowHelp] = useState(false);
+
+  function handleAuthSuccess() {
+    const currentUser = getCurrentUser();
+    setUser(currentUser);
+    setIsRegistered(true);
+    showToast(`¡Bienvenida, ${currentUser?.name || 'Renata'}! 🦄`);
+  }
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -132,35 +149,48 @@ function App() {
           <Route path="/music" element={<Music isRegistered={isRegistered} />} />
           <Route path="/colors" element={<Colors />} />
           <Route path="/avatar" element={<Avatar />} />
+          <Route path="/makeup" element={<Makeup />} />
+          <Route path="/consejos" element={<Consejos />} />
           <Route path="*" element={<Navigate to="/music" replace />} />
         </Routes>
       </main>
 
-      <button
-        className={`trial-button ${isRegistered ? 'active' : ''}`}
-        onClick={handleTrialToggle}
-        aria-label={isRegistered ? 'Desactivar Premium de prueba' : 'Probar Premium'}
-      >
-        💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
-      </button>
+      <footer className="app-footer">
+        <div className="footer-buttons">
+          <button
+            className={`trial-button ${isRegistered ? 'active' : ''}`}
+            onClick={handleTrialToggle}
+            aria-label={isRegistered ? 'Desactivar Premium de prueba' : 'Probar Premium'}
+          >
+            💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
+          </button>
 
-      {SHOW_ADMIN_RESET && (
-        <button
-          className="admin-reset"
-          onClick={resetTrials}
-          aria-label="Reiniciar contador de pruebas premium"
-        >
-          Reiniciar pruebas (admin)
-        </button>
-      )}
+          <button className="help-button" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
+            🦄 ¿Necesitas ayuda de Renata?
+          </button>
 
-      <button className="help-button" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
-        🦄 ¿Necesitas ayuda de Renata?
-      </button>
+          {!user && (
+            <button className="auth-button" onClick={() => setShowAuth(true)} aria-label="Registrarse o iniciar sesión">
+              🌟 Inicia sesión o Regístrate aquí
+            </button>
+          )}
+        </div>
+
+        {SHOW_ADMIN_RESET && (
+          <button
+            className="admin-reset"
+            onClick={resetTrials}
+            aria-label="Reiniciar contador de pruebas premium"
+          >
+            Reiniciar pruebas (admin)
+          </button>
+        )}
+      </footer>
 
       {toast && <div className="toast">{toast}</div>}
 
       {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={handleAuthSuccess} />}
     </div>
   );
 }

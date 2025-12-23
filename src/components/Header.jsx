@@ -13,13 +13,19 @@ export function Header({ onToggleTheme, theme, locked = false }) {
         </div>
         <nav className={styles.nav}>
           <NavLink to="/music" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-            🎵 Music
+            🎵 Música
           </NavLink>
           <NavLink to="/colors" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-            🎨 Paletas
+            🎨 Colores
           </NavLink>
           <NavLink to="/avatar" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
-            😊 Avatar
+            🦄 Avatares
+          </NavLink>
+          <NavLink to="/makeup" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            💄 Maquillaje
+          </NavLink>
+          <NavLink to="/consejos" className={({ isActive }) => (isActive ? `${styles.link} ${styles.active}` : styles.link)}>
+            💡 Consejos
           </NavLink>
         </nav>
         <button className={`${styles.theme} ${locked ? styles.locked : ''}`} onClick={onToggleTheme} aria-label="Toggle theme" disabled={locked}>
