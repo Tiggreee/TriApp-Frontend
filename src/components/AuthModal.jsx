@@ -18,6 +18,9 @@ export function AuthModal({ onClose, onSuccess }) {
     try {
       if (isSignup) {
         await signup(email, password, name);
+        setTimeout(() => {
+          alert('🎉 ¡Premium Desbloqueado! Ahora tienes acceso a todas las features mágicas.');
+        }, 300);
       } else {
         await signin(email, password);
       }
