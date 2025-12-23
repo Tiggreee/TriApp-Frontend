@@ -138,12 +138,6 @@ export default function Consejos({ user = null }) {
     return matchesSearch && matchesCategory;
   });
 
-  const toggleFavorite = (id) => {
-    setFavorites(prev => 
-      prev.includes(id) ? prev.filter(fid => fid !== id) : [...prev, id]
-    );
-  };
-
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
