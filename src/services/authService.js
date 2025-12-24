@@ -10,8 +10,11 @@ export const signup = async (email, password, name) => {
   if (!response.ok) {
     try {
       const error = await response.json();
-      throw new Error(error.message || 'Signup failed');
-    } catch {
+      throw new Error(error.message || 'Error al crear cuenta');
+    } catch (err) {
+      if (err.message && !err.message.includes('JSON')) {
+        throw err;
+      }
       throw new Error('Error de conexión con el servidor');
     }
   }
@@ -33,7 +36,10 @@ export const signin = async (email, password) => {
     try {
       const error = await response.json();
       throw new Error(error.message || 'Credenciales incorrectas');
-    } catch {
+    } catch (err) {
+      if (err.message && !err.message.includes('JSON')) {
+        throw err;
+      }
       throw new Error('Error de conexión con el servidor');
     }
   }
