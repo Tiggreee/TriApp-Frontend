@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { HelpModal } from './components/HelpModal';
 import { AuthModal } from './components/AuthModal';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import { getCurrentUser } from './services/authService';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import Music from './pages/Music';
@@ -171,8 +172,22 @@ function App() {
             <Route path="/music" element={<Music isRegistered={isRegistered} user={user} />} />
             <Route path="/colors" element={<Colors isRegistered={isRegistered} user={user} />} />
             <Route path="/avatar" element={<Avatar isRegistered={isRegistered} user={user} />} />
-            <Route path="/makeup" element={<Makeup isRegistered={isRegistered} user={user} />} />
-            <Route path="/consejos" element={<Consejos isRegistered={isRegistered} user={user} />} />
+            <Route 
+              path="/makeup" 
+              element={
+                <ProtectedRoute isLoggedIn={!!user}>
+                  <Makeup isRegistered={isRegistered} user={user} />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/consejos" 
+              element={
+                <ProtectedRoute isLoggedIn={!!user}>
+                  <Consejos isRegistered={isRegistered} user={user} />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="*" element={<Navigate to="/music" replace />} />
           </Routes>
         </main>
