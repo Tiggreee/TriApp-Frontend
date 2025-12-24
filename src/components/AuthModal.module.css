@@ -156,6 +156,12 @@
   opacity: 0.6;
 }
 
+.fieldError {
+  color: #ff3b30;
+  font-size: 0.85rem;
+  margin-top: -0.25rem;
+}
+
 .error {
   background: rgba(255, 59, 48, 0.1);
   border: 1px solid rgba(255, 59, 48, 0.3);

@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './AuthModal.module.css';
 import { signup, signin } from '../services/authService';
+import { useFormValidation } from '../hooks/useFormValidation';
 
 export function AuthModal({ onClose, onSuccess }) {
   const [isSignup, setIsSignup] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
+
+  useEffect(() => {
+    resetForm();
+  }, [isSignup, resetForm]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,12 +20,12 @@ export function AuthModal({ onClose, onSuccess }) {
 
     try {
       if (isSignup) {
-        await signup(email, password, name);
+        await signup(values.email, values.password, values.name);
         setTimeout(() => {
           alert('🎉 ¡Premium Desbloqueado! Ahora tienes acceso a todas las features mágicas.');
         }, 300);
       } else {
-        await signin(email, password);
+        await signin(values.email, values.password);
       }
       onSuccess();
       onClose();
@@ -65,14 +68,16 @@ export function AuthModal({ onClose, onSuccess }) {
               <label htmlFor="name">Nombre</label>
               <input
                 id="name"
+                name="name"
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={values.name || ''}
+                onChange={handleChange}
                 placeholder="Renata"
                 minLength={2}
                 maxLength={30}
                 required
               />
+              {errors.name && <span className={styles.fieldError}>{errors.name}</span>}
             </div>
           )}
 
@@ -80,30 +85,34 @@ export function AuthModal({ onClose, onSuccess }) {
             <label htmlFor="email">Email</label>
             <input
               id="email"
+              name="email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={values.email || ''}
+              onChange={handleChange}
               placeholder="renata@unicornio.com"
               required
             />
+            {errors.email && <span className={styles.fieldError}>{errors.email}</span>}
           </div>
 
           <div className={styles.field}>
             <label htmlFor="password">Contraseña</label>
             <input
               id="password"
+              name="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={values.password || ''}
+              onChange={handleChange}
               placeholder="••••••••"
               minLength={6}
               required
             />
+            {errors.password && <span className={styles.fieldError}>{errors.password}</span>}
           </div>
 
           {error && <div className={styles.error}>{error}</div>}
 
-          <button type="submit" className={styles.submit} disabled={loading}>
+          <button type="submit" className={styles.submit} disabled={loading || !isValid}>
             {loading ? '⏳ Procesando...' : isSignup ? '🌟 Registrarse' : '🚀 Entrar'}
           </button>
         </form>
