@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { HelpModal } from './components/HelpModal';
 import { AuthModal } from './components/AuthModal';
 import { getCurrentUser } from './services/authService';
+import { CurrentUserContext } from './contexts/CurrentUserContext';
 import Music from './pages/Music';
 import Colors from './pages/Colors';
 import Avatar from './pages/Avatar';
@@ -162,18 +163,19 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-      <Header onToggleTheme={toggleTheme} theme={theme} locked={!isRegistered} user={user} onLogout={handleLogout} />
-      <main className="main-content">
-        <Routes>
-          <Route path="/music" element={<Music isRegistered={isRegistered} user={user} />} />
-          <Route path="/colors" element={<Colors isRegistered={isRegistered} user={user} />} />
-          <Route path="/avatar" element={<Avatar isRegistered={isRegistered} user={user} />} />
-          <Route path="/makeup" element={<Makeup isRegistered={isRegistered} user={user} />} />
-          <Route path="/consejos" element={<Consejos isRegistered={isRegistered} user={user} />} />
-          <Route path="*" element={<Navigate to="/music" replace />} />
-        </Routes>
-      </main>
+    <CurrentUserContext.Provider value={user}>
+      <div className="app-container">
+        <Header onToggleTheme={toggleTheme} theme={theme} locked={!isRegistered} user={user} onLogout={handleLogout} />
+        <main className="main-content">
+          <Routes>
+            <Route path="/music" element={<Music isRegistered={isRegistered} user={user} />} />
+            <Route path="/colors" element={<Colors isRegistered={isRegistered} user={user} />} />
+            <Route path="/avatar" element={<Avatar isRegistered={isRegistered} user={user} />} />
+            <Route path="/makeup" element={<Makeup isRegistered={isRegistered} user={user} />} />
+            <Route path="/consejos" element={<Consejos isRegistered={isRegistered} user={user} />} />
+            <Route path="*" element={<Navigate to="/music" replace />} />
+          </Routes>
+        </main>
 
       {!user && (
         <>
@@ -231,7 +233,8 @@ function App() {
 
       {showHelp && <HelpModal onClose={() => setShowHelp(false)} user={user} />}
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={handleAuthSuccess} />}
-    </div>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
