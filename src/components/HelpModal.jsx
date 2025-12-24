@@ -77,7 +77,7 @@ export function HelpModal({ onClose, user = null }) {
           </div>
           
           <div className={styles.footer}>
-            🌈 Creado para ti con ayuda de Renata 🦄
+            🌈 Creado con magia de unicornio y ayuda de Renata 🦄
           </div>
         </div>
       </div>
