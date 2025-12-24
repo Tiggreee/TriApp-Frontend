@@ -1,7 +1,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 function getAuthHeader() {
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem('token');
   if (!token) return {};
   return { Authorization: `Bearer ${token}` };
 }
@@ -17,7 +17,7 @@ export async function getFavorites() {
     });
 
     if (response.status === 401) {
-      localStorage.removeItem('authToken');
+      localStorage.removeItem('token');
       localStorage.removeItem('user');
       return [];
     }
@@ -42,7 +42,7 @@ export async function addFavorite(type, data) {
     });
 
     if (response.status === 401) {
-      localStorage.removeItem('authToken');
+      localStorage.removeItem('token');
       localStorage.removeItem('user');
       return null;
     }
@@ -66,7 +66,7 @@ export async function removeFavorite(id) {
     });
 
     if (response.status === 401) {
-      localStorage.removeItem('authToken');
+      localStorage.removeItem('token');
       localStorage.removeItem('user');
       return false;
     }

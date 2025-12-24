@@ -125,7 +125,7 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
     setIsRegistered(false);

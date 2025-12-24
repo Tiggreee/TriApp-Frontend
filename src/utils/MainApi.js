@@ -14,22 +14,6 @@ async function handleResponse(res) {
   throw new Error(error.message || 'Request failed');
 }
 
-export const signup = (email, password, name) => {
-  return fetch(`${API_URL}/signup`, {
-    method: 'POST',
-    headers: getHeaders(),
-    body: JSON.stringify({ email, password, name }),
-  }).then(handleResponse);
-};
-
-export const signin = (email, password) => {
-  return fetch(`${API_URL}/signin`, {
-    method: 'POST',
-    headers: getHeaders(),
-    body: JSON.stringify({ email, password }),
-  }).then(handleResponse);
-};
-
 export const getCurrentUser = () => {
   return fetch(`${API_URL}/users/me`, {
     method: 'GET',
