@@ -63,7 +63,7 @@ export function HelpModal({ onClose, user = null }) {
             {user ? (
               <strong>🦄 ¡Ya tienes la magia de unicornio!</strong>
             ) : (
-              <strong>✨ Usuario básico - Inicia sesión para desbloquear todas las páginas</strong>
+              <strong>✨ Usuario básico - Inicia sesión para desbloquear todas las funciones</strong>
             )}
           </div>
 
