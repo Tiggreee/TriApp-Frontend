@@ -220,11 +220,11 @@ function App() {
         <footer className="app-footer">
           <div className="footer-buttons">
             <button
-              className={`trial-button ${isRegistered ? 'active' : ''}`}
-              onClick={handleTrialToggle}
-              aria-label={isRegistered ? 'Desactivar Premium de prueba' : 'Probar Premium'}
+              className="trial-button active"
+              disabled
+              aria-label="Cuenta premium activa"
             >
-              💎 {isRegistered ? 'Premium activo' : 'Probar Premium'}
+              🦄 {user.name}: Unicornio Activo ✨
             </button>
 
             <button className="help-button" onClick={() => setShowHelp(true)} aria-label="Need help from Renata?">
