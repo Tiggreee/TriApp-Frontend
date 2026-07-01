@@ -10,6 +10,17 @@ Backend: [github.com/Tiggreee/Triapp-Backend](https://github.com/Tiggreee/Triapp
 
 Full-stack web application for discovering music, exploring colors, generating avatars, and accessing beauty tutorials. Built with React 19, Vite, Node.js, and MongoDB.
 
+## Para Recruiters / Hiring Managers
+
+- Caso real de producto full stack con frontend desacoplado y backend dedicado.
+- Pruebas claras de implementacion: autenticacion JWT, integracion de APIs externas y persistencia en MongoDB.
+- Enfoque de entrega: UX usable, features iterables y despliegue continuo.
+- Stack: React, Vite, Node.js, Express, MongoDB.
+
+Contacto directo: WhatsApp +524341696576 (+52 434 169 6576)  
+Portfolio: https://www.vmdev.lat  
+GitHub: https://github.com/Tiggreee
+
 ## Features
 
 - **Música**: Search and preview songs via iTunes API
