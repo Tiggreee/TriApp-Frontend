@@ -61,3 +61,11 @@ Production build (web): `npm run build`
 ## Recruiter notes
 
 This project demonstrates practical full-stack delivery under real product constraints: UX continuity, API integration, authentication, and iterative feature expansion — maintained over time, not abandoned after submission.
+
+## Roadmap
+
+- Kid-focused redesign (ages 3–5): bigger touch targets, simpler navigation, louder visual feedback.
+- New content sections: nursery rhymes/chants and K-pop, alongside the existing music/colors/avatar features.
+- At least 3 mini-games.
+- Stack modernization across web and server (dependencies, removing dead code).
+- Native Android app, once the web experience is solid.
