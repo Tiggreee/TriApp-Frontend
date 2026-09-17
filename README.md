@@ -61,3 +61,11 @@ Production build (web): `npm run build`
 ## Recruiter notes
 
 This project demonstrates practical full-stack delivery under real product constraints: UX continuity, API integration, authentication, and iterative feature expansion — maintained over time, not abandoned after submission.
+
+## Maintained with Claude
+
+Unlike the rest of my public repos, this one is maintained openly with
+Claude (Anthropic) as a collaborator — reviewing dependencies, merging the
+frontend and backend into this monolith, and helping ship new features. It's
+a real product I keep polishing for my daughter, not a one-time submission,
+and I'd rather show the actual process than pretend it's solo work.
