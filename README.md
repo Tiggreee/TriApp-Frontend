@@ -1,18 +1,19 @@
-# TriApp Frontend
+# TriApp — Renata's Finder
 
-Frontend application for a multi-feature consumer experience: music discovery, color exploration, avatar generation, and content modules.
+A multi-feature consumer app: music discovery, color exploration, avatar generation, makeup tutorials, and daily tips. Originally a full-stack capstone project, now maintained as a real product.
 
 Live demo: https://tri-app-frontend.vercel.app/music
 
 ## Product summary
 
-TriApp is a full-stack portfolio project focused on modular frontend architecture, API integration patterns, and user-facing feature delivery.
+Renata's Finder is a full-stack app focused on modular frontend architecture, API integration patterns, and user-facing feature delivery — built and maintained as a real, evolving product, not a one-time submission.
 
 ## Key features
 
 - Music search and previews
 - Color exploration and palette utilities
 - Avatar generation
+- Makeup tutorials and daily tips
 - Favorites and recent history persistence
 - JWT-based authentication flow
 - Light/dark theme support
@@ -20,31 +21,30 @@ TriApp is a full-stack portfolio project focused on modular frontend architectur
 
 ## Tech stack
 
-- React 19
-- Vite
-- React Router
-- CSS Modules
-- Node.js/Express backend integration (separate repo)
+- **Web:** React 19, Vite, React Router, CSS Modules
+- **Server:** Node.js, Express, MongoDB (Mongoose), JWT auth, Helmet, rate limiting, Winston logging
 
-## Repositories
+## Structure
 
-- Frontend: https://github.com/Tiggreee/TriApp-Frontend
-- Backend: https://github.com/Tiggreee/Triapp-Backend
+This is a monolith: both apps live in this repository and deploy from it.
+
+```
+web/     → frontend (React + Vite)
+server/  → backend API (Express + MongoDB)
+```
 
 ## Run locally
 
 ```bash
 git clone https://github.com/Tiggreee/TriApp-Frontend.git
 cd TriApp-Frontend
-npm install
+npm run install:all
 npm run dev
 ```
 
-Production build:
+This runs `web` and `server` together. Individually: `npm run dev:web` / `npm run dev:server`.
 
-```bash
-npm run build
-```
+Production build (web): `npm run build`
 
 ## Deployment
 
@@ -60,4 +60,4 @@ npm run build
 
 ## Recruiter notes
 
-This project demonstrates practical frontend delivery under real product constraints: UX continuity, API integration, authentication, and iterative feature expansion.
+This project demonstrates practical full-stack delivery under real product constraints: UX continuity, API integration, authentication, and iterative feature expansion — maintained over time, not abandoned after submission.
