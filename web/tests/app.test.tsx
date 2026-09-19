@@ -41,15 +41,8 @@ describe('Renatown', () => {
   it('greets and lists every place in town', () => {
     renderApp();
     expect(screen.getByRole('heading', { name: /hola/i })).toBeInTheDocument();
-    for (const name of [
-      'Sala de Conciertos',
-      'Arcade Renatown',
-      'Taller de Colores',
-      'Foto Mágica',
-      'Salón Brillos',
-      'Casita de Consejos',
-    ]) {
-      expect(screen.getByText(name)).toBeInTheDocument();
+    for (const name of ['Música', 'Juegos', 'Colores', 'Mi personaje', 'Brillos', 'Consejos']) {
+      expect(screen.getAllByText(name).length).toBeGreaterThan(0);
     }
   });
 
@@ -57,7 +50,7 @@ describe('Renatown', () => {
     const user = userEvent.setup();
     renderApp();
 
-    await user.click(screen.getByRole('button', { name: /salón brillos/i }));
+    await user.click(screen.getByRole('button', { name: /brillos/i }));
     expect(await screen.findByRole('dialog', { name: /solo para papás/i })).toBeInTheDocument();
 
     await solveGate(user);
@@ -67,7 +60,7 @@ describe('Renatown', () => {
   it('rejects a wrong answer and asks a new question', async () => {
     const user = userEvent.setup();
     renderApp();
-    await user.click(screen.getByRole('button', { name: /zona de papás/i }));
+    await user.click(screen.getByRole('button', { name: /papás/i }));
     const dialog = await screen.findByRole('dialog', { name: /solo para papás/i });
     await user.type(within(dialog).getByRole('textbox'), '1');
     await user.click(within(dialog).getByRole('button', { name: /soy un adulto/i }));

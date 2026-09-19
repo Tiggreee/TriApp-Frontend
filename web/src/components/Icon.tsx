@@ -109,6 +109,7 @@ const PATHS = {
     </>
   ),
   out: <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />,
+  bolt: <path d="M13.5 2.5L4.5 14h6.4l-1.2 7.5 9.3-12h-6.5z" />,
   crown: <path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" />,
   help: (
     <>
@@ -120,7 +121,15 @@ const PATHS = {
 
 export type IconName = keyof typeof PATHS;
 
-const FILLED: ReadonlySet<IconName> = new Set(['star', 'play', 'pause', 'heart', 'moon', 'crown']);
+const FILLED: ReadonlySet<IconName> = new Set([
+  'star',
+  'play',
+  'pause',
+  'heart',
+  'moon',
+  'crown',
+  'bolt',
+]);
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name'> {
   name: IconName;

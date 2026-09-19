@@ -50,7 +50,7 @@ export default function Music() {
       <PageTitle
         icon="note"
         tone="pink"
-        title="Sala de Conciertos"
+        title="Música"
         subtitle="Escucha un pedacito de tus canciones"
       />
 

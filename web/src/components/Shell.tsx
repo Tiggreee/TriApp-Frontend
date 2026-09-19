@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
-import { useUnlock } from '../hooks/useUnlock';
 import { speak } from '../lib/speech';
 import { useSession } from '../state/session';
 import { AuthDialog } from './AuthDialog';
@@ -10,11 +9,11 @@ import { Icon, type IconName } from './Icon';
 import { ParentGate } from './ParentGate';
 
 const DOCK: { to: string; label: string; icon: IconName; end?: boolean }[] = [
-  { to: '/', label: 'Pueblo', icon: 'home', end: true },
+  { to: '/', label: 'Inicio', icon: 'home', end: true },
   { to: '/music', label: 'Música', icon: 'note' },
   { to: '/games', label: 'Juegos', icon: 'gamepad' },
   { to: '/colors', label: 'Colores', icon: 'palette' },
-  { to: '/avatar', label: 'Avatares', icon: 'face' },
+  { to: '/avatar', label: 'Personaje', icon: 'face' },
 ];
 
 function formatRemaining(ms: number) {
@@ -25,7 +24,6 @@ function formatRemaining(ms: number) {
 export function Shell() {
   const session = useSession();
   const { pathname } = useLocation();
-  const unlock = useUnlock();
   const navigate = useNavigate();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: scroll to top on every route change
@@ -67,32 +65,10 @@ export function Shell() {
           </button>
           <button
             type="button"
-            className="btn btn--ghost btn--icon"
-            onClick={session.isRegistered ? session.toggleTheme : unlock}
-            aria-label={session.theme === 'dark' ? 'Cambiar a día' : 'Cambiar a noche'}
-          >
-            <Icon name={session.theme === 'dark' ? 'sun' : 'moon'} />
-            {!session.isRegistered && (
-              <span className="lock-dot" aria-hidden="true">
-                <Icon name="lock" />
-              </span>
-            )}
-          </button>
-          <button
-            type="button"
-            className="btn btn--ghost btn--icon"
-            onClick={session.openHelp}
-            aria-label="Ayuda de Renata"
-          >
-            <Icon name="help" />
-          </button>
-          <button
-            type="button"
-            className="btn btn--purple btn--icon"
-            aria-label="Zona de papás"
+            className="btn btn--purple btn--small"
             onClick={() => session.askParent(() => navigate('/premium'))}
           >
-            <Icon name="shield" />
+            <Icon name="shield" /> Papás
           </button>
         </div>
       </header>

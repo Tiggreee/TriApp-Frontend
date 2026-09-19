@@ -82,7 +82,7 @@ export default function Colors() {
       <PageTitle
         icon="palette"
         tone="orange"
-        title="Taller de Colores"
+        title="Colores"
         subtitle="Toca un color y mira qué amigos tiene"
       />
 

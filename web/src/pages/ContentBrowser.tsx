@@ -22,7 +22,7 @@ interface Props {
 
 type Saved = { id: number };
 
-// Shared by "Salón Brillos" and "Casita de Consejos": search, filter, save, read.
+// Shared by "Brillos" and "Consejos": search, filter, save, read.
 export default function ContentBrowser({
   icon,
   tone,

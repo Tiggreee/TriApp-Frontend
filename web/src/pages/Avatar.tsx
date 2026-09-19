@@ -64,7 +64,7 @@ export default function Avatar() {
       <PageTitle
         icon="face"
         tone="green"
-        title="Foto Mágica"
+        title="Mi personaje"
         subtitle="Escribe un nombre y crea tu personaje"
       />
 
