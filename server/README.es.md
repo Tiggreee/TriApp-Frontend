@@ -1,6 +1,6 @@
 # TriApp Backend (Español)
 
-API para Renata's Finder / Pueblo Tehee. Vive en este monorepo junto con el frontend (`web/`).
+API para Renata's Finder / Renatown. Vive en este monorepo junto con el frontend (`web/`).
 
 - App en vivo: https://tri-app-frontend.vercel.app/
 - API en Render: https://triapp-backend.onrender.com

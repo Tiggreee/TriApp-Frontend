@@ -1,4 +1,4 @@
-# Pueblo Tehee · Renata's Finder
+# Renatown
 
 A kid-friendly web app built for my daughter Renata: music, colours, avatars and pop-group mini-games in a little illustrated town. No ads, no tracking, no in-game purchases.
 
@@ -9,7 +9,7 @@ Live: https://tri-app-frontend.vercel.app/
 | Place | What it does |
 |---|---|
 | Sala de Conciertos | Search songs and hear 30-second previews (explicit content filtered out). Voice search, favourites. |
-| Arcade Tehee | Three mini-games with three original pop groups: **Ritmo** (rhythm), **Parejas** (memory) and **Baile** (repeat-the-dance). Nobody loses, everybody earns stars. |
+| Arcade Renatown | Three mini-games with three original pop groups: **Ritmo** (rhythm), **Parejas** (memory) and **Baile** (repeat-the-dance). Nobody loses, everybody earns stars. |
 | Taller de Colores | Pick a colour, pick a harmony, tap the bubbles to hear the colour name in Spanish. |
 | Foto Mágica | Draw an avatar from a name, drawn locally so the name never leaves the device. |
 | Salón Brillos / Casita de Consejos | Makeup tutorials and daily tips, behind a grown-up account. |

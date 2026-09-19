@@ -40,11 +40,11 @@ export function Shell() {
       <Backdrop />
 
       <header className="topbar">
-        <NavLink to="/" className="brand" aria-label="Pueblo Tehee, ir al inicio">
+        <NavLink to="/" className="brand" aria-label="Renatown, ir al inicio">
           <img src="/unicorn.svg" alt="" width="46" height="46" />
           <span className="brand__text">
-            <small>Renata's</small>
-            <b>Pueblo Tehee</b>
+            <small>Bienvenida a</small>
+            <b>Renatown</b>
           </span>
         </NavLink>
 

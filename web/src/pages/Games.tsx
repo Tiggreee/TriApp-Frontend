@@ -52,7 +52,7 @@ export default function Games() {
       <PageTitle
         icon="gamepad"
         tone="purple"
-        title="Arcade Tehee"
+        title="Arcade Renatown"
         subtitle="Aquí nadie pierde: todos ganan estrellas"
       />
 

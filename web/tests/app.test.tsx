@@ -37,13 +37,13 @@ async function solveGate(user: ReturnType<typeof userEvent.setup>) {
   await user.click(within(dialog).getByRole('button', { name: /soy un adulto/i }));
 }
 
-describe('Pueblo Tehee', () => {
+describe('Renatown', () => {
   it('greets and lists every place in town', () => {
     renderApp();
     expect(screen.getByRole('heading', { name: /hola/i })).toBeInTheDocument();
     for (const name of [
       'Sala de Conciertos',
-      'Arcade Tehee',
+      'Arcade Renatown',
       'Taller de Colores',
       'Foto Mágica',
       'Salón Brillos',
