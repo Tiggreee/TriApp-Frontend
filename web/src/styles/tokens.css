@@ -1,0 +1,51 @@
+:root {
+  --font: "Fredoka Variable", "Fredoka", ui-rounded, "Nunito", system-ui, sans-serif;
+
+  --ink: #2b2350;
+  --ink-soft: #62598f;
+  --paper: #ffffff;
+  --paper-2: #fff7e8;
+  --line: rgba(43, 35, 80, 0.1);
+
+  --pink: #ff5fa2;
+  --pink-d: #d33a80;
+  --orange: #ff9f43;
+  --orange-d: #d67a1c;
+  --yellow: #ffd23f;
+  --yellow-d: #d4a50c;
+  --green: #3ed598;
+  --green-d: #1ea571;
+  --blue: #3aa7ff;
+  --blue-d: #1a7dd1;
+  --purple: #8f6bff;
+  --purple-d: #6844d8;
+
+  --sky-1: #7fd6ff;
+  --sky-2: #e4f8ff;
+  --hill-1: #93e59d;
+  --hill-2: #62d17c;
+  --sun: #ffd23f;
+  --star-opacity: 0;
+
+  --radius: 28px;
+  --radius-sm: 18px;
+  --lift: 0 8px 0 rgba(43, 35, 80, 0.1), 0 18px 30px rgba(43, 35, 80, 0.1);
+  --tap: 64px;
+  --dock-h: 96px;
+}
+
+[data-theme="dark"] {
+  --ink: #fff4dc;
+  --ink-soft: #cdc6f7;
+  --paper: #2f2a6b;
+  --paper-2: #3a3480;
+  --line: rgba(255, 244, 220, 0.14);
+
+  --sky-1: #17153d;
+  --sky-2: #3b2d85;
+  --hill-1: #3c419e;
+  --hill-2: #2b2f80;
+  --sun: #fff1b8;
+  --star-opacity: 1;
+  --lift: 0 8px 0 rgba(0, 0, 0, 0.25), 0 18px 30px rgba(0, 0, 0, 0.25);
+}

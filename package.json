@@ -1,18 +1,21 @@
 {
   "name": "triapp",
   "private": true,
-  "version": "1.0.0",
-  "description": "Renata's Finder — monolith (web + server)",
+  "version": "2.0.0",
+  "description": "Renata's Finder — kid-friendly monolith (web + server)",
+  "type": "module",
+  "packageManager": "pnpm@11.15.1",
+  "engines": { "node": ">=22" },
   "scripts": {
-    "install:all": "npm install --prefix web && npm install --prefix server",
-    "dev": "concurrently -n web,server -c blue,green \"npm run dev --prefix web\" \"npm run dev --prefix server\"",
-    "dev:web": "npm run dev --prefix web",
-    "dev:server": "npm run dev --prefix server",
-    "build": "npm run build --prefix web",
-    "lint": "npm run lint --prefix web && npm run lint --prefix server",
-    "start": "npm run start --prefix server"
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "pnpm -r test",
+    "start": "pnpm --filter @triapp/server start"
   },
   "devDependencies": {
-    "concurrently": "^9.0.0"
+    "@biomejs/biome": "^2.5.14"
   }
 }

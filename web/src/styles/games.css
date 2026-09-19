@@ -1,0 +1,448 @@
+/* ---------- Arcade hub ---------- */
+.group-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.group-pick {
+  --g: var(--pink);
+  --soft: #ffe3f0;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 10px 10px 14px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  border: 4px solid var(--line);
+  box-shadow: 0 6px 0 var(--line);
+  font-weight: 700;
+  font-size: 1.15rem;
+  transition: transform 0.1s;
+}
+
+.group-pick svg:first-child {
+  width: 74px;
+}
+
+.group-pick:active {
+  transform: translateY(4px);
+}
+
+.group-pick[aria-checked="true"] {
+  border-color: var(--g);
+  background: color-mix(in srgb, var(--g) 16%, var(--paper));
+  box-shadow: 0 6px 0 var(--g);
+}
+
+.group-pick__lock {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #fff;
+}
+
+.group-pick__lock svg {
+  width: 18px;
+  height: 18px;
+}
+
+.game-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 18px;
+}
+
+.game-card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.3rem;
+  padding: 1.1rem 1rem 1.3rem;
+  border-radius: 34px;
+  background: var(--c);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  box-shadow:
+    0 10px 0 var(--cd),
+    0 20px 30px rgba(43, 35, 80, 0.2);
+  transition: transform 0.12s cubic-bezier(0.3, 1.6, 0.5, 1);
+  overflow: hidden;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+}
+
+.game-card:active {
+  transform: translateY(6px);
+  box-shadow: 0 3px 0 var(--cd);
+}
+
+.game-card strong {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.game-card > span:last-child {
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.game-card__icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.game-card__icon svg {
+  width: 26px;
+}
+
+.game-card__idols {
+  display: flex;
+  justify-content: center;
+  margin: 0.6rem 0 0.2rem;
+}
+
+.game-card__idols svg {
+  width: 88px;
+  margin-inline: -12px;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.14));
+}
+
+.game-card:hover .game-card__idols svg {
+  animation: hop 0.5s ease-in-out;
+}
+
+.game-card:hover .game-card__idols svg:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.game-card:hover .game-card__idols svg:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+/* ---------- Rhythm ---------- */
+.rhythm {
+  --lane-h: clamp(220px, calc(100dvh - 560px), 460px);
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 36px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--g) 30%, #1d1748), #1d1748);
+  box-shadow: var(--lift);
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.rhythm__stage {
+  display: flex;
+  justify-content: center;
+  height: 84px;
+  overflow: hidden;
+}
+
+.rhythm__stage svg {
+  width: 84px;
+  flex: none;
+  margin-inline: -6px;
+  transform-origin: bottom center;
+}
+
+.rhythm.is-playing .rhythm__stage svg {
+  animation: beat var(--beat) ease-in-out infinite;
+}
+
+.rhythm.is-playing .rhythm__stage svg:nth-child(even) {
+  animation-delay: calc(var(--beat) / 2);
+}
+
+@keyframes beat {
+  50% {
+    transform: translateY(-10px) scale(1.04, 0.97);
+  }
+}
+
+.rhythm__board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.lane {
+  position: relative;
+  height: var(--lane-h);
+  border-radius: 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    color-mix(in srgb, var(--lane) 22%, transparent)
+  );
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.lane__line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 8px;
+  margin-top: 26px;
+  border-radius: 999px;
+  background: var(--lane);
+  opacity: 0.85;
+  box-shadow: 0 0 18px var(--lane);
+}
+
+.note {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(78%, 86px);
+  aspect-ratio: 1;
+  margin: -6px 0 0 calc(min(78%, 86px) / -2);
+  border-radius: 50%;
+  background: var(--lane);
+  border: 5px solid #fff;
+  box-shadow:
+    0 6px 0 rgba(0, 0, 0, 0.25),
+    0 0 20px var(--lane);
+  opacity: 0;
+  will-change: transform;
+}
+
+.note[data-hit="true"] {
+  visibility: hidden;
+}
+
+.lane__feedback {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.5),
+    0 0 12px var(--lane);
+  animation: float-up 0.7s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes float-up {
+  from {
+    opacity: 1;
+    margin-top: 0;
+  }
+  to {
+    opacity: 0;
+    margin-top: -60px;
+  }
+}
+
+.rhythm__pads {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.pad {
+  height: 92px;
+  border-radius: 26px;
+  background: var(--lane);
+  border: 5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.06s,
+    box-shadow 0.06s;
+}
+
+.pad:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.3),
+    0 0 26px var(--lane);
+}
+
+.rhythm__start {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(29, 23, 72, 0.74);
+  backdrop-filter: blur(3px);
+}
+
+/* ---------- Memory ---------- */
+.memory {
+  --cols: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 18px);
+  width: min(100%, 760px);
+  margin-inline: auto;
+}
+
+.mcard {
+  aspect-ratio: 4 / 5;
+  perspective: 900px;
+  border-radius: 28px;
+}
+
+.mcard__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.3, 1.3, 0.5, 1);
+}
+
+.mcard.is-up .mcard__inner {
+  transform: rotateY(180deg);
+}
+
+.mcard__back,
+.mcard__front {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 28px;
+  backface-visibility: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 8px 0 rgba(43, 35, 80, 0.18);
+}
+
+.mcard__back {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35) 0 12%, transparent 13%),
+    radial-gradient(circle at 80% 78%, rgba(255, 255, 255, 0.25) 0 10%, transparent 11%), var(--g);
+  color: #fff;
+}
+
+.mcard__back svg {
+  width: 46%;
+  fill: currentColor;
+}
+
+.mcard__front {
+  background: var(--paper);
+  transform: rotateY(180deg);
+  padding: 8%;
+}
+
+.mcard__front svg {
+  width: 100%;
+  height: 100%;
+}
+
+.mcard.is-matched .mcard__front {
+  border-color: var(--yellow);
+  animation: matched 0.6s ease;
+}
+
+@keyframes matched {
+  40% {
+    transform: rotateY(180deg) scale(1.08);
+  }
+}
+
+/* ---------- Dance ---------- */
+.dance__message {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  min-height: 2em;
+}
+
+.dance {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  gap: clamp(10px, 2vw, 20px);
+  width: min(100%, 860px);
+  margin-inline: auto;
+}
+
+.dancer {
+  --pad: var(--pink);
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 8px 12px;
+  border-radius: 34px;
+  background: var(--paper);
+  border: 6px solid var(--pad);
+  box-shadow: 0 8px 0 color-mix(in srgb, var(--pad) 70%, #000);
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition:
+    transform 0.1s,
+    background 0.15s;
+}
+
+.dancer:disabled {
+  cursor: default;
+  color: inherit;
+}
+
+.dancer.is-ready:active {
+  transform: translateY(6px);
+}
+
+.dancer.is-dancing {
+  background: color-mix(in srgb, var(--pad) 40%, var(--paper));
+  animation: dance 0.6s ease-in-out;
+}
+
+.dancer.is-dancing svg {
+  animation: wiggle 0.3s ease-in-out 2;
+}
+
+@keyframes dance {
+  30% {
+    transform: translateY(-16px) scale(1.06) rotate(-3deg);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.04) rotate(3deg);
+  }
+}
+
+@keyframes wiggle {
+  50% {
+    transform: rotate(6deg) scale(1.05);
+  }
+}
+
+@media (max-width: 560px) {
+  .rhythm {
+    padding: 8px;
+    border-radius: 28px;
+  }
+
+  .pad {
+    height: 78px;
+  }
+}
