@@ -1,79 +1,69 @@
-# TriApp — Renata's Finder
+# Pueblo Tehee · Renata's Finder
 
-A multi-feature consumer app: music discovery, color exploration, avatar generation, makeup tutorials, and daily tips. Originally a full-stack capstone project, now maintained as a real product.
+A kid-friendly web app built for my daughter Renata: music, colours, avatars and pop-group mini-games in a little illustrated town. No ads, no tracking, no in-game purchases.
 
-Live demo: https://tri-app-frontend.vercel.app/music
+Live: https://tri-app-frontend.vercel.app/
 
-## Product summary
+## What's inside
 
-Renata's Finder is a full-stack app focused on modular frontend architecture, API integration patterns, and user-facing feature delivery — built and maintained as a real, evolving product, not a one-time submission.
+| Place | What it does |
+|---|---|
+| Sala de Conciertos | Search songs and hear 30-second previews (explicit content filtered out). Voice search, favourites. |
+| Arcade Tehee | Three mini-games with three original pop groups: **Ritmo** (rhythm), **Parejas** (memory) and **Baile** (repeat-the-dance). Nobody loses, everybody earns stars. |
+| Taller de Colores | Pick a colour, pick a harmony, tap the bubbles to hear the colour name in Spanish. |
+| Foto Mágica | Draw an avatar from a name, drawn locally so the name never leaves the device. |
+| Salón Brillos / Casita de Consejos | Makeup tutorials and daily tips, behind a grown-up account. |
+| Zona de papás | Premium, privacy promises, account. Everything here sits behind a grown-up gate. |
 
-## Key features
+### Designed for small hands
 
-- Music search and previews
-- Color exploration and palette utilities
-- Avatar generation
-- Makeup tutorials and daily tips
-- Favorites and recent history persistence
-- JWT-based authentication flow
-- Light/dark theme support
-- Voice-assisted search (browser support dependent)
+- Big, chunky touch targets, and labels are read aloud when tapped.
+- Outside links and anything about money or accounts require solving a grown-up puzzle first.
+- Premium is paid through Stripe Checkout by an adult; the app never sees card data and never collects anything about the child.
+- The pop groups (Chispa Club, Luna Gomita, Turbo Panditas), their looks and the music are original creations. The songs are synthesised in the browser with the Web Audio API.
 
-## Tech stack
+## Stack
 
-- **Web:** React 19, Vite, React Router, CSS Modules
-- **Server:** Node.js, Express, MongoDB (Mongoose), JWT auth, Helmet, rate limiting, Winston logging
+- **Monorepo:** pnpm workspaces (`web/`, `server/`)
+- **Web:** React 19, TypeScript, Vite 8, React Router, TanStack Query, Web Audio, hand-written CSS design system
+- **Server:** Node 22, Express 5, TypeScript, Mongoose 9, Zod, Helmet, pino, Stripe Checkout
+- **Quality:** Vitest (unit, component, API with an in-memory MongoDB), Biome, GitHub Actions
+
+## Run it locally
+
+```bash
+corepack enable
+pnpm install
+cp server/.env.example server/.env   # set JWT_SECRET and MONGODB_URI
+cp web/.env.example web/.env
+pnpm dev                              # web on :5173, API on :3000
+```
+
+Other scripts: `pnpm build`, `pnpm typecheck`, `pnpm test`, `pnpm lint`.
+
+Payments are optional. Without `STRIPE_*` variables the billing endpoints answer `503` and everything else works.
 
 ## Structure
 
-This is a monolith: both apps live in this repository and deploy from it.
-
 ```
-web/     → frontend (React + Vite)
-server/  → backend API (Express + MongoDB)
+web/
+  src/components   shared UI (Icon, Idol, Building, Dialog, ParentGate...)
+  src/pages        one file per place in town
+  src/games        pure game logic (chart, memory, simon) + tests
+  src/lib          audio synth, API client, trial, gate, speech
+  src/state        session (account, trial, theme, sound)
+server/
+  src/routes       auth, users, favourites, billing
+  tests            API tests against an in-memory MongoDB
 ```
-
-## Run locally
-
-```bash
-git clone https://github.com/Tiggreee/TriApp-Frontend.git
-cd TriApp-Frontend
-npm run install:all
-npm run dev
-```
-
-This runs `web` and `server` together. Individually: `npm run dev:web` / `npm run dev:server`.
-
-Production build (web): `npm run build`
 
 ## Deployment
 
-- Frontend: Vercel
-- Backend API: Render
-
-## Engineering focus
-
-- Clear component boundaries
-- Feature modularization
-- Reusable UI and hooks
-- Maintainable state and persistence flows
-
-## Recruiter notes
-
-This project demonstrates practical full-stack delivery under real product constraints: UX continuity, API integration, authentication, and iterative feature expansion — maintained over time, not abandoned after submission.
+- Web: Vercel (`web/`)
+- API: Render (`server/`, start with `pnpm --filter @triapp/server start`)
 
 ## Roadmap
 
-- Kid-focused redesign (ages 3–5): bigger touch targets, simpler navigation, louder visual feedback.
-- New content sections: nursery rhymes/chants and K-pop, alongside the existing music/colors/avatar features.
-- At least 3 mini-games.
-- Stack modernization across web and server (dependencies, removing dead code).
-- Native Android app, once the web experience is solid.
-
-## Maintained with Claude
-
-Unlike the rest of my public repos, this one is maintained openly with
-Claude (Anthropic) as a collaborator — reviewing dependencies, merging the
-frontend and backend into this monolith, and helping ship new features. It's
-a real product I keep polishing for my daughter, not a one-time submission,
-and I'd rather show the actual process than pretend it's solo work.
+- Native Android app once the web experience is solid.
+- More songs and groups.
+- Accessibility pass with a screen-reader user.

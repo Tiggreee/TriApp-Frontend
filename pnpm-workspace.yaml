@@ -1,0 +1,8 @@
+packages:
+  - web
+  - server
+allowBuilds:
+  esbuild: true
+  mongodb-memory-server: true
+overrides:
+  '@types/node': ^24.0.0
