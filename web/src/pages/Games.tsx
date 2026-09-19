@@ -16,7 +16,17 @@ const GAMES: {
   icon: IconName;
   tone: string;
   toneDark: string;
+  featured?: boolean;
 }[] = [
+  {
+    path: 'run',
+    name: 'Corre',
+    hint: 'Junta estrellas y salta los pastelitos',
+    icon: 'bolt',
+    tone: 'var(--orange)',
+    toneDark: 'var(--orange-d)',
+    featured: true,
+  },
   {
     path: 'rhythm',
     name: 'Ritmo',
@@ -52,12 +62,35 @@ export default function Games() {
       <PageTitle
         icon="gamepad"
         tone="purple"
-        title="Arcade Renatown"
+        title="Juegos"
         subtitle="Aquí nadie pierde: todos ganan estrellas"
       />
 
+      <div className="game-cards">
+        {GAMES.map((game) => (
+          <Link
+            key={game.path}
+            to={`/games/${game.path}?group=${group.id}`}
+            className={`game-card${game.featured ? ' game-card--featured' : ''}`}
+            style={{ '--c': game.tone, '--cd': game.toneDark } as CSSProperties}
+            onClick={() => speak(game.name)}
+          >
+            <span className="game-card__icon">
+              <Icon name={game.icon} />
+            </span>
+            <span className="game-card__idols">
+              {group.members.slice(0, 3).map((m) => (
+                <Idol key={m.id} member={m} label="" />
+              ))}
+            </span>
+            <strong>{game.name}</strong>
+            <span>{game.hint}</span>
+          </Link>
+        ))}
+      </div>
+
       <section className="stack" aria-labelledby="group-title">
-        <h2 id="group-title">1. ¿Con qué grupo juegas?</h2>
+        <h2 id="group-title">Tu grupo</h2>
         <div className="group-picker" role="radiogroup" aria-label="Grupo">
           {GROUPS.map((g) => {
             const usable = canUse(g);
@@ -88,33 +121,6 @@ export default function Games() {
               </button>
             );
           })}
-        </div>
-        <p className="muted">{group.tagline}</p>
-      </section>
-
-      <section className="stack" aria-labelledby="game-title">
-        <h2 id="game-title">2. ¡Elige un juego!</h2>
-        <div className="game-cards">
-          {GAMES.map((game) => (
-            <Link
-              key={game.path}
-              to={`/games/${game.path}?group=${group.id}`}
-              className="game-card"
-              style={{ '--c': game.tone, '--cd': game.toneDark } as CSSProperties}
-              onClick={() => speak(game.name)}
-            >
-              <span className="game-card__icon">
-                <Icon name={game.icon} />
-              </span>
-              <span className="game-card__idols">
-                {group.members.slice(0, 3).map((m) => (
-                  <Idol key={m.id} member={m} label="" />
-                ))}
-              </span>
-              <strong>{game.name}</strong>
-              <span>{game.hint}</span>
-            </Link>
-          ))}
         </div>
       </section>
     </>

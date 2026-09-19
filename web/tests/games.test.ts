@@ -10,6 +10,14 @@ import {
 } from '../src/games/chart';
 import { createMemory, isMemoryDone, memoryReducer, memoryStars } from '../src/games/memory';
 import {
+  createRunner,
+  jump,
+  moveLane,
+  type RunnerState,
+  runnerStars,
+  stepRunner,
+} from '../src/games/runner';
+import {
   finishShowing,
   MAX_ROUND,
   pressPad,
@@ -128,5 +136,70 @@ describe('parent gate', () => {
     expect(checkGateAnswer(challenge, ` ${challenge.answer} `)).toBe(true);
     expect(checkGateAnswer(challenge, String(challenge.answer + 1))).toBe(false);
     expect(checkGateAnswer(challenge, '')).toBe(false);
+  });
+});
+
+describe('runner', () => {
+  const play = (steer: (s: RunnerState) => void, seed = 11) => {
+    const rng = seeded(seed);
+    const s = createRunner();
+    for (let i = 0; i < 70 * 60 + 200 && !s.done; i++) {
+      steer(s);
+      stepRunner(s, 1 / 60, rng);
+    }
+    return s;
+  };
+
+  it('always leaves a free lane and ends after the run', () => {
+    const rng = seeded(3);
+    const s = createRunner();
+    let rows = 0;
+    while (!s.done) {
+      stepRunner(s, 1 / 30, rng);
+      for (const z of new Set(s.objs.filter((o) => o.z > 0.98).map((o) => o.z))) {
+        const blocking = s.objs.filter((o) => o.z === z && o.kind !== 'star').length;
+        expect(blocking).toBeLessThan(3);
+        rows++;
+      }
+    }
+    expect(rows).toBeGreaterThan(20);
+    expect(s.t).toBeGreaterThanOrEqual(70);
+  });
+
+  it('collects stars in the chased lane and never ends early after a bump', () => {
+    const chaser = play((s) => {
+      const next = s.objs
+        .filter((o) => o.kind === 'star' && !o.checked && o.z > 0)
+        .sort((a, b) => a.z - b.z)[0];
+      if (next) s.lane = next.lane;
+    });
+    const idle = play(() => {});
+    expect(chaser.stars).toBeGreaterThan(idle.stars);
+    expect(runnerStars(chaser.stars, chaser.starsSpawned)).toBeGreaterThanOrEqual(2);
+    expect(runnerStars(0, 50)).toBe(1);
+    expect(idle.done).toBe(true);
+  });
+
+  it('lets a jump clear the cupcakes but not the gift boxes', () => {
+    const rng = seeded(1);
+    const s = createRunner();
+    s.objs.push({ id: 1, lane: 1, z: 0.005, kind: 'bump', checked: false });
+    jump(s);
+    s.jumpT = 0.36;
+    expect(stepRunner(s, 0.02, rng).map((e) => e.type)).toContain('hop');
+    s.jumpT = -1;
+    s.objs.push({ id: 2, lane: 1, z: 0.005, kind: 'block', checked: false });
+    expect(stepRunner(s, 0.02, rng).map((e) => e.type)).toContain('stumble');
+    expect(s.bumps).toBe(1);
+  });
+
+  it('keeps the runner inside the three lanes', () => {
+    const s = createRunner();
+    moveLane(s, -1);
+    moveLane(s, -1);
+    moveLane(s, -1);
+    expect(s.lane).toBe(0);
+    for (let i = 0; i < 5; i++) moveLane(s, 1);
+    expect(s.lane).toBe(2);
   });
 });

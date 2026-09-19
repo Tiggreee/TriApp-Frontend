@@ -8,7 +8,7 @@ import { useSession } from '../state/session';
 const BENEFITS = [
   'Los 3 grupos completos en todos los juegos',
   'Búsqueda por voz, favoritos y modo día/noche',
-  'Salón Brillos y Casita de Consejos',
+  'Brillos y Consejos',
   'Cero anuncios y cero compras dentro de los juegos, para siempre',
 ];
 
@@ -21,7 +21,17 @@ const PROMISES = [
 ];
 
 export default function Premium() {
-  const { user, trial, toggleTrial, openAuth, signOut, showToast } = useSession();
+  const {
+    user,
+    trial,
+    toggleTrial,
+    openAuth,
+    signOut,
+    showToast,
+    theme,
+    toggleTheme,
+    isRegistered,
+  } = useSession();
   const [params] = useSearchParams();
   const status = params.get('status');
   const [busy, setBusy] = useState(false);
@@ -120,6 +130,23 @@ export default function Premium() {
           Sabemos que los peques merecen un lugar seguro. Si algo no te convence, escríbenos a
           tiggreee@vmdev.lat.
         </p>
+      </section>
+
+      <section className="card stack">
+        <h2>Apariencia</h2>
+        <button
+          type="button"
+          className="btn btn--ghost"
+          onClick={
+            isRegistered
+              ? toggleTheme
+              : () => showToast('El modo noche es parte de Premium o de la prueba')
+          }
+        >
+          <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
+          {theme === 'dark' ? 'Cambiar a modo día' : 'Cambiar a modo noche'}
+          {!isRegistered && <Icon name="lock" />}
+        </button>
       </section>
 
       {user && (

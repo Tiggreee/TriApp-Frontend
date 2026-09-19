@@ -10,13 +10,14 @@ const Music = lazy(() => import('./pages/Music'));
 const Colors = lazy(() => import('./pages/Colors'));
 const Avatar = lazy(() => import('./pages/Avatar'));
 const Games = lazy(() => import('./pages/Games'));
+const RunnerGame = lazy(() => import('./pages/RunnerGame'));
 const RhythmGame = lazy(() => import('./pages/RhythmGame'));
 const MemoryGame = lazy(() => import('./pages/MemoryGame'));
 const DanceGame = lazy(() => import('./pages/DanceGame'));
 const Premium = lazy(() => import('./pages/Premium'));
 const ContentBrowser = lazy(() => import('./pages/ContentBrowser'));
 
-// Salón Brillos and Casita de Consejos stay behind a grown-up account, as before.
+// Brillos and Consejos stay behind a grown-up account, as before.
 function RequireAccount({ children }: { children: ReactNode }) {
   const { user } = useSession();
   return user ? children : <Navigate to="/" replace />;
@@ -32,6 +33,7 @@ export function App() {
           <Route path="colors" element={<Colors />} />
           <Route path="avatar" element={<Avatar />} />
           <Route path="games" element={<Games />} />
+          <Route path="games/run" element={<RunnerGame />} />
           <Route path="games/rhythm" element={<RhythmGame />} />
           <Route path="games/memory" element={<MemoryGame />} />
           <Route path="games/dance" element={<DanceGame />} />
@@ -43,7 +45,7 @@ export function App() {
                 <ContentBrowser
                   icon="sparkle"
                   tone="pink"
-                  title="Salón Brillos"
+                  title="Brillos"
                   subtitle="Tutoriales de maquillaje mágico"
                   placeholder="Busca tutoriales…"
                   type="makeup"
@@ -60,7 +62,7 @@ export function App() {
                 <ContentBrowser
                   icon="bulb"
                   tone="blue"
-                  title="Casita de Consejos"
+                  title="Consejos"
                   subtitle="Ideas para brillar cada día"
                   placeholder="Busca consejos…"
                   type="consejos"

@@ -19,8 +19,8 @@ interface Place {
 const PLACES: Place[] = [
   {
     to: '/music',
-    name: 'Sala de Conciertos',
-    hint: 'Canciones para cantar',
+    name: 'Música',
+    hint: 'Escucha y canta',
     art: {
       wall: '#ffd6e8',
       roof: '#ff5fa2',
@@ -32,8 +32,8 @@ const PLACES: Place[] = [
   },
   {
     to: '/games',
-    name: 'Arcade Renatown',
-    hint: 'Juega con las estrellas',
+    name: 'Juegos',
+    hint: '¡Corre y baila!',
     art: {
       wall: '#e3dcff',
       roof: '#8f6bff',
@@ -45,7 +45,7 @@ const PLACES: Place[] = [
   },
   {
     to: '/colors',
-    name: 'Taller de Colores',
+    name: 'Colores',
     hint: 'Mezcla y descubre',
     art: {
       wall: '#fff1c2',
@@ -58,8 +58,8 @@ const PLACES: Place[] = [
   },
   {
     to: '/avatar',
-    name: 'Foto Mágica',
-    hint: 'Crea tu personaje',
+    name: 'Mi personaje',
+    hint: 'Créalo con tu nombre',
     art: {
       wall: '#d8f5e8',
       roof: '#3ed598',
@@ -71,8 +71,8 @@ const PLACES: Place[] = [
   },
   {
     to: '/makeup',
-    name: 'Salón Brillos',
-    hint: 'Looks con brillo',
+    name: 'Brillos',
+    hint: 'Maquillaje mágico',
     needsAccount: true,
     art: {
       wall: '#ffe3ea',
@@ -85,7 +85,7 @@ const PLACES: Place[] = [
   },
   {
     to: '/consejos',
-    name: 'Casita de Consejos',
+    name: 'Consejos',
     hint: 'Ideas para brillar',
     needsAccount: true,
     art: {
@@ -100,7 +100,7 @@ const PLACES: Place[] = [
 ];
 
 export default function Home() {
-  const { user, hasPro } = useSession();
+  const { user, hasPro, openHelp } = useSession();
   const unlock = useUnlock();
   const navigate = useNavigate();
 
@@ -110,7 +110,15 @@ export default function Home() {
         <Mascot className="hero__mascot" />
         <div className="hero__bubble">
           <h1>{user ? `¡Hola, ${user.name}!` : '¡Hola, bienvenida!'}</h1>
-          <p>Toca un edificio para entrar a jugar.</p>
+          <p>Toca un lugar para entrar.</p>
+          <div className="hero__actions">
+            <Link to="/games/run" className="btn btn--orange" onClick={() => speak('¡Corre!')}>
+              <Icon name="bolt" /> ¡Jugar a Corre!
+            </Link>
+            <button type="button" className="btn btn--ghost btn--small" onClick={openHelp}>
+              <Icon name="help" /> ¿Cómo se juega?
+            </button>
+          </div>
         </div>
       </section>
 
