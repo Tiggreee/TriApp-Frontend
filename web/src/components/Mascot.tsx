@@ -1,4 +1,4 @@
-// Renata's unicorn: the guide of Pueblo Tehee.
+// Renata's unicorn: the guide of Renatown.
 export function Mascot({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 160 170" role="img" aria-label="Un unicornio sonriente">

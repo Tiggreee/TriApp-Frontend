@@ -3,7 +3,7 @@
 ## Done
 
 - Full-stack MERN app: music, colours, avatars, makeup tutorials, tips, favourites, JWT auth.
-- Kid-first redesign ("Pueblo Tehee") and stack modernisation (2.0.0).
+- Kid-first redesign ("Renatown") and stack modernisation (2.0.0).
 - Three original pop groups and three mini-games.
 - Grown-up gate, Premium flag and Stripe Checkout (needs keys to go live).
 

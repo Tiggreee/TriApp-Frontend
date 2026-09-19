@@ -7,8 +7,8 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 ## [2.0.0] - 2026-09-19
 
 ### Added
-- Pueblo Tehee: a new illustrated, kid-first interface with day/night sky, sound and read-aloud labels.
-- Arcade Tehee with three mini-games (rhythm, memory, dance) and three original pop groups.
+- Renatown: a new illustrated, kid-first interface with day/night sky, sound and read-aloud labels.
+- Arcade Renatown with three mini-games (rhythm, memory, dance) and three original pop groups.
 - Grown-up gate before outside links, accounts and Premium.
 - Premium checkout through Stripe (optional, off until configured) and a paid `premium` flag on accounts.
 - Local avatar generation: names no longer go to a third-party API.

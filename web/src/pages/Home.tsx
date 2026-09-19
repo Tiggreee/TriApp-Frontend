@@ -32,7 +32,7 @@ const PLACES: Place[] = [
   },
   {
     to: '/games',
-    name: 'Arcade Tehee',
+    name: 'Arcade Renatown',
     hint: 'Juega con las estrellas',
     art: {
       wall: '#e3dcff',
@@ -114,7 +114,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ul className="town" aria-label="Lugares de Pueblo Tehee">
+      <ul className="town" aria-label="Lugares de Renatown">
         {PLACES.map((place) => {
           const locked = place.needsAccount && !user;
           const inner = (

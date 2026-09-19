@@ -1,6 +1,6 @@
 import type { Song } from '../lib/sound';
 
-// Original, fictional pop groups created for Pueblo Tehee.
+// Original, fictional pop groups created for Renatown.
 // Names, characters, looks and music are our own and do not depict any real artist.
 
 export type HairStyle = 'bob' | 'buns' | 'long' | 'spiky';

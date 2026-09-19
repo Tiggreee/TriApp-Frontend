@@ -11,7 +11,7 @@ export interface BuildingArt {
 
 const INK = '#2b2350';
 
-// A little storefront for Pueblo Tehee, drawn with flat shapes so it stays crisp at any size.
+// A little storefront for Renatown, drawn with flat shapes so it stays crisp at any size.
 export function Building({ art }: { art: BuildingArt }) {
   const { wall, roof, door, sign, roofStyle, icon } = art;
   return (

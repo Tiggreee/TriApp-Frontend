@@ -33,7 +33,7 @@ export function HelpDialog({ onClose }: { onClose: () => void }) {
     <Dialog title="¡Hola! Soy Renata" onClose={onClose}>
       <div className="help__hero">
         <Mascot className="help__mascot" />
-        <p>Te enseño cómo se juega en Pueblo Tehee.</p>
+        <p>Te enseño cómo se juega en Renatown.</p>
       </div>
       <ul className="help__list">
         {TIPS.map((tip) => (
