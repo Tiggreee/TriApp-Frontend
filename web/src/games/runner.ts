@@ -38,8 +38,8 @@ export interface RunnerState {
 export const RUN_SECONDS = 70;
 export const JUMP_SECONDS = 0.72;
 const STUMBLE_SECONDS = 0.7;
-const BASE_SPEED = 0.42; // depth units per second: about 2.4 s from horizon to runner
-const MAX_SPEED = 0.62;
+const BASE_SPEED = 0.55; // depth units per second: about 1.8 s from horizon to runner
+const MAX_SPEED = 0.95;
 
 export const speedAt = (t: number) =>
   BASE_SPEED + (MAX_SPEED - BASE_SPEED) * Math.min(1, t / RUN_SECONDS);
@@ -84,11 +84,11 @@ function add(s: RunnerState, lane: Lane, kind: Kind) {
 // Every row is friendly: there is always a free lane, and there is nearly always a star to chase.
 function spawnRow(s: RunnerState, rng: Rng) {
   const roll = rng();
-  if (roll < 0.58) {
+  if (roll < 0.36) {
     if (rng() < 0.3)
       s.trailLane = Math.max(0, Math.min(2, s.trailLane + (rng() < 0.5 ? -1 : 1))) as Lane;
     add(s, s.trailLane, 'star');
-  } else if (roll < 0.8) {
+  } else if (roll < 0.66) {
     const lane = lanes[Math.floor(rng() * 3)] as Lane;
     add(s, lane, 'bump');
     const other = lanes.filter((l) => l !== lane);
@@ -118,7 +118,7 @@ export function stepRunner(s: RunnerState, dt: number, rng: Rng): RunEvent[] {
   const finishing = s.t > RUN_SECONDS - 2.6;
   while (!finishing && s.distance >= s.nextRow) {
     spawnRow(s, rng);
-    s.nextRow += 0.3 - 0.06 * Math.min(1, s.t / RUN_SECONDS);
+    s.nextRow += 0.26 - 0.07 * Math.min(1, s.t / RUN_SECONDS);
   }
 
   for (const o of s.objs) {

@@ -17,7 +17,7 @@ import { useGroup } from '../hooks/useGroup';
 import { playNote, sfx } from '../lib/sound';
 import { speak } from '../lib/speech';
 
-const STEP_MS = 750;
+const STEP_MS = 600;
 const PAD_COLORS = ['var(--pink)', 'var(--yellow)', 'var(--green)', 'var(--blue)'];
 
 export default function DanceGame() {

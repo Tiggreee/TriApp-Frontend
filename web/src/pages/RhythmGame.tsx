@@ -41,7 +41,7 @@ interface Feedback {
 
 export default function RhythmGame() {
   const { group } = useGroup();
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy');
+  const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   const [phase, setPhase] = useState<'ready' | 'playing' | 'done'>('ready');
   const [hits, setHits] = useState(0);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
