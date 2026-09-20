@@ -1,3 +1,4 @@
+import { PATTERN_ROUNDS, createPatternRound } from '../src/games/pattern';
 import { describe, expect, it } from 'vitest';
 import { GROUPS } from '../src/data/groups';
 import {
@@ -15,6 +16,7 @@ import {
   moveLane,
   type RunnerState,
   runnerStars,
+  slide,
   stepRunner,
 } from '../src/games/runner';
 import {
@@ -201,5 +203,35 @@ describe('runner', () => {
     expect(s.lane).toBe(0);
     for (let i = 0; i < 5; i++) moveLane(s, 1);
     expect(s.lane).toBe(2);
+  });
+});
+
+describe('runner slide', () => {
+  it('lets a slide pass under the arches but a standing runner stumbles', () => {
+    const rng = seeded(1);
+    const s = createRunner();
+    s.objs.push({ id: 1, lane: 1, z: 0.005, kind: 'arch', checked: false });
+    slide(s);
+    expect(stepRunner(s, 0.02, rng).map((e) => e.type)).toContain('hop');
+    s.slideT = 0;
+    s.objs.push({ id: 2, lane: 1, z: 0.005, kind: 'arch', checked: false });
+    expect(stepRunner(s, 0.02, rng).map((e) => e.type)).toContain('stumble');
+  });
+});
+
+describe('pattern puzzle', () => {
+  it('builds solvable rounds that get longer', () => {
+    for (let round = 0; round < PATTERN_ROUNDS; round++) {
+      const p = createPatternRound(round, seeded(round + 3));
+      expect(p.blanks.length).toBeGreaterThan(0);
+      expect(p.tray.length).toBeGreaterThanOrEqual(p.blanks.length);
+      const needed = p.blanks.map((b) => p.sequence[b]).sort();
+      const offered = [...p.tray].sort();
+      for (const c of needed) expect(offered).toContain(c);
+      expect(Math.min(...p.blanks)).toBeGreaterThanOrEqual(2);
+    }
+    expect(createPatternRound(7, seeded(1)).sequence.length).toBeGreaterThan(
+      createPatternRound(0, seeded(1)).sequence.length,
+    );
   });
 });

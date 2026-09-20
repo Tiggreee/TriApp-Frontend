@@ -21,7 +21,7 @@ const GAMES: {
   {
     path: 'run',
     name: 'Corre',
-    hint: 'Junta estrellas y salta los pastelitos',
+    hint: 'Salta, deslízate y junta estrellas',
     icon: 'bolt',
     tone: 'var(--orange)',
     toneDark: 'var(--orange-d)',
@@ -42,6 +42,14 @@ const GAMES: {
     icon: 'heart',
     tone: 'var(--blue)',
     toneDark: 'var(--blue-d)',
+  },
+  {
+    path: 'pattern',
+    name: 'Colores en fila',
+    hint: 'Arrastra las piezas y completa el patrón',
+    icon: 'palette',
+    tone: 'var(--purple)',
+    toneDark: 'var(--purple-d)',
   },
   {
     path: 'dance',
