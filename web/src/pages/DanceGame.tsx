@@ -1,6 +1,7 @@
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { GameResults } from '../components/GameResults';
+import { HowToPlay } from '../components/HowToPlay';
 import { Icon } from '../components/Icon';
 import { Idol } from '../components/Idol';
 import { PageTitle } from '../components/PageTitle';
@@ -104,6 +105,27 @@ export default function DanceGame() {
         <Link to={`/games?group=${group.id}`} className="btn btn--ghost btn--small">
           <Icon name="back" /> Juegos
         </Link>
+        <HowToPlay
+          game="dance"
+          title="¡Cómo se juega Baile!"
+          steps={[
+            {
+              icon: 'star',
+              title: 'Mira con atención',
+              text: 'Las estrellas bailan en un orden. Míralas bien.',
+            },
+            {
+              icon: 'play',
+              title: 'Repite el baile',
+              text: 'Cuando te toque, toca a cada estrella en el mismo orden.',
+            },
+            {
+              icon: 'sparkle',
+              title: 'Cada vez es más largo',
+              text: 'El baile crece ronda tras ronda, hasta 10 pasos. Si te equivocas, se repite y lo intentas de nuevo.',
+            },
+          ]}
+        />
         {playing && (
           <span className="badge">
             Baile {round} de {MAX_ROUND}

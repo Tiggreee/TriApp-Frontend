@@ -1,6 +1,7 @@
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { GameResults } from '../components/GameResults';
+import { HowToPlay } from '../components/HowToPlay';
 import { Icon } from '../components/Icon';
 import { Idol } from '../components/Idol';
 import { PageTitle } from '../components/PageTitle';
@@ -423,6 +424,32 @@ export default function RunnerGame() {
         <Link to={`/games?group=${group.id}`} className="btn btn--ghost btn--small">
           <Icon name="back" /> Juegos
         </Link>
+        <HowToPlay
+          game="run"
+          title="¡Cómo se juega Corre!"
+          steps={[
+            {
+              icon: 'bolt',
+              title: 'Corres sola',
+              text: 'Tu personaje corre sin parar. Tú decides por dónde va.',
+            },
+            {
+              icon: 'back',
+              title: 'Muévete a los lados',
+              text: 'Desliza el dedo a la izquierda o a la derecha, o toca los lados de la pantalla.',
+            },
+            {
+              icon: 'sparkle',
+              title: 'Salta y deslízate',
+              text: 'Desliza hacia arriba para saltar los pastelitos. Desliza hacia abajo para pasar debajo del arcoíris.',
+            },
+            {
+              icon: 'star',
+              title: 'Junta estrellas',
+              text: 'Cada estrella suma. Si juntas muchas seguidas, ¡haces una racha!',
+            },
+          ]}
+        />
         <span className="badge">
           <Icon name="star" /> {stats.total} en total
         </span>

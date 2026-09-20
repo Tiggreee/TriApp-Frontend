@@ -1,6 +1,7 @@
 import { type CSSProperties, useEffect, useReducer, useState } from 'react';
 import { Link } from 'react-router';
 import { GameResults } from '../components/GameResults';
+import { HowToPlay } from '../components/HowToPlay';
 import { Icon } from '../components/Icon';
 import { Idol } from '../components/Idol';
 import { PageTitle } from '../components/PageTitle';
@@ -77,6 +78,27 @@ export default function MemoryGame() {
         <Link to={`/games?group=${group.id}`} className="btn btn--ghost btn--small">
           <Icon name="back" /> Juegos
         </Link>
+        <HowToPlay
+          game="memory"
+          title="¡Cómo se juega Parejas!"
+          steps={[
+            {
+              icon: 'heart',
+              title: 'Voltea dos cartas',
+              text: 'Toca una carita y luego otra para ver quiénes son.',
+            },
+            {
+              icon: 'face',
+              title: 'Busca las iguales',
+              text: 'Si son iguales, se quedan. Si no, se esconden otra vez: ¡acuérdate dónde estaban!',
+            },
+            {
+              icon: 'sparkle',
+              title: 'Elige el nivel',
+              text: 'Fácil tiene 4 parejas. Experta tiene 12, con caritas de todos los grupos.',
+            },
+          ]}
+        />
         <div className="chips" role="group" aria-label="Dificultad">
           {LEVELS.map((l) => (
             <button
