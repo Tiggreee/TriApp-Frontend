@@ -54,6 +54,9 @@ interface SessionValue {
   closeOverlay: () => void;
 }
 
+// Family build: everything is unlocked for Renata. Set VITE_LOCK_PREMIUM=true to bring the gates back.
+const UNLOCK_ALL = import.meta.env.VITE_LOCK_PREMIUM !== 'true';
+
 const SessionContext = createContext<SessionValue | null>(null);
 
 export function useSession(): SessionValue {
@@ -136,8 +139,8 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     const remainingMs = Math.max(0, trial.activeUntil - now);
     return {
       user,
-      isRegistered: Boolean(user) || trialActive,
-      hasPro: Boolean(user?.premium) || trialActive,
+      isRegistered: UNLOCK_ALL || Boolean(user) || trialActive,
+      hasPro: UNLOCK_ALL || Boolean(user?.premium) || trialActive,
       trial: { active: trialActive, remainingMs, usedToday: trial.count, max: MAX_TRIALS_PER_DAY },
       theme,
       sound,
