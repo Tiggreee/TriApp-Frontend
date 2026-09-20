@@ -9,6 +9,7 @@ import {
   createRunner,
   jump,
   jumpHeight,
+  slide,
   moveLane,
   RUN_SECONDS,
   type RunnerState,
@@ -78,6 +79,22 @@ function drawObject(
     ctx.fill();
     ctx.stroke();
     ctx.restore();
+  } else if (o.kind === 'arch') {
+    const aw = unit * 1.15;
+    const ah = unit * 1.25;
+    ctx.lineCap = 'round';
+    const bands = ['#ff5fa2', '#ffd23f', '#3ed598', '#3aa7ff'];
+    bands.forEach((c, i) => {
+      ctx.strokeStyle = c;
+      ctx.lineWidth = Math.max(2, unit * 0.09);
+      const r = aw * 0.5 - i * unit * 0.085;
+      ctx.beginPath();
+      ctx.moveTo(x - r, y);
+      ctx.lineTo(x - r, y - ah * 0.55);
+      ctx.arc(x, y - ah * 0.55, r, Math.PI, 0);
+      ctx.lineTo(x + r, y);
+      ctx.stroke();
+    });
   } else if (o.kind === 'bump') {
     const bw = unit * 0.95;
     ctx.fillStyle = '#ff9f43';
@@ -322,9 +339,11 @@ export default function RunnerGame() {
         const x = laneX(s.lane, k, width);
         const lift = jumpHeight(s) * height * 0.17;
         const wobble = s.stumbleT > 0 ? Math.sin(s.t * 40) * 6 : 0;
+        const squash = s.slideT > 0 ? ' scale(1.1, 0.5)' : '';
         runner.style.transform = `translate(${x - runner.offsetWidth / 2 + wobble}px, ${
           height * GROUND - runner.offsetHeight * 0.96 - lift
-        }px)`;
+        }px)${squash}`;
+        runner.dataset.sliding = String(s.slideT > 0);
         runner.dataset.jumping = String(jumpHeight(s) > 0);
         runner.dataset.stumble = String(s.stumbleT > 0);
       }
@@ -352,11 +371,14 @@ export default function RunnerGame() {
     };
   }, [phase, group.song, group.colors, finish]);
 
-  const steer = useCallback((action: 'left' | 'right' | 'jump') => {
+  const steer = useCallback((action: 'left' | 'right' | 'jump' | 'slide') => {
     const state = run.current;
     if (!state) return;
     if (action === 'jump') {
       jump(state.s);
+      sfx.tap();
+    } else if (action === 'slide') {
+      slide(state.s);
       sfx.tap();
     } else {
       moveLane(state.s, action === 'left' ? -1 : 1);
@@ -366,11 +388,13 @@ export default function RunnerGame() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const map: Record<string, 'left' | 'right' | 'jump'> = {
+      const map: Record<string, 'left' | 'right' | 'jump' | 'slide'> = {
         ArrowLeft: 'left',
         a: 'left',
         ArrowRight: 'right',
         d: 'right',
+        ArrowDown: 'slide',
+        s: 'slide',
         ArrowUp: 'jump',
         w: 'jump',
         ' ': 'jump',
@@ -392,7 +416,7 @@ export default function RunnerGame() {
         icon="bolt"
         tone="orange"
         title="¡Corre!"
-        subtitle={`Con ${group.name}. Junta estrellas y salta los pastelitos.`}
+        subtitle={`Con ${group.name}. Salta los pastelitos y deslízate bajo los arcoíris.`}
       />
 
       <div className="row">
@@ -420,7 +444,7 @@ export default function RunnerGame() {
           const dy = e.clientY - start.y;
           if (Math.abs(dx) > 28 || Math.abs(dy) > 28) {
             if (Math.abs(dx) > Math.abs(dy)) steer(dx < 0 ? 'left' : 'right');
-            else if (dy < 0) steer('jump');
+            else steer(dy < 0 ? 'jump' : 'slide');
           } else {
             const rect = e.currentTarget.getBoundingClientRect();
             const fraction = (e.clientX - rect.left) / rect.width;
@@ -502,7 +526,7 @@ export default function RunnerGame() {
             <button type="button" className="btn btn--green" onClick={() => setPhase('count')}>
               <Icon name="play" /> ¡Vamos!
             </button>
-            <p className="small">Desliza, toca los lados o usa los botones.</p>
+            <p className="small">Desliza en cualquier dirección: arriba salta, abajo se desliza.</p>
           </div>
         )}
       </div>
@@ -523,6 +547,14 @@ export default function RunnerGame() {
           aria-label="Saltar"
         >
           <Icon name="back" style={{ transform: 'rotate(90deg)' }} />
+        </button>
+        <button
+          type="button"
+          className="btn btn--green runner__btn"
+          onPointerDown={() => steer('slide')}
+          aria-label="Deslizarse"
+        >
+          <Icon name="back" style={{ transform: 'rotate(-90deg)' }} />
         </button>
         <button
           type="button"

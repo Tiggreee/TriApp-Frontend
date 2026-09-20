@@ -11,6 +11,7 @@ const Colors = lazy(() => import('./pages/Colors'));
 const Avatar = lazy(() => import('./pages/Avatar'));
 const Games = lazy(() => import('./pages/Games'));
 const RunnerGame = lazy(() => import('./pages/RunnerGame'));
+const PatternGame = lazy(() => import('./pages/PatternGame'));
 const RhythmGame = lazy(() => import('./pages/RhythmGame'));
 const MemoryGame = lazy(() => import('./pages/MemoryGame'));
 const DanceGame = lazy(() => import('./pages/DanceGame'));
@@ -37,6 +38,7 @@ export function App() {
           <Route path="games/rhythm" element={<RhythmGame />} />
           <Route path="games/memory" element={<MemoryGame />} />
           <Route path="games/dance" element={<DanceGame />} />
+          <Route path="games/pattern" element={<PatternGame />} />
           <Route path="premium" element={<Premium />} />
           <Route
             path="makeup"

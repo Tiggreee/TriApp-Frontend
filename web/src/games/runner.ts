@@ -1,7 +1,7 @@
 import type { Rng } from '../lib/rng';
 
 export type Lane = 0 | 1 | 2;
-export type Kind = 'star' | 'bump' | 'block';
+export type Kind = 'star' | 'bump' | 'block' | 'arch';
 
 export interface RunObject {
   id: number;
@@ -22,6 +22,7 @@ export interface RunnerState {
   lane: Lane;
   jumpT: number; // -1 when on the ground, otherwise seconds since take-off
   stumbleT: number; // seconds left of the wobble after bumping into something
+  slideT: number; // seconds left of the slide, 0 when standing
   objs: RunObject[];
   stars: number;
   starsSpawned: number;
@@ -37,6 +38,7 @@ export interface RunnerState {
 
 export const RUN_SECONDS = 70;
 export const JUMP_SECONDS = 0.72;
+export const SLIDE_SECONDS = 0.7;
 const STUMBLE_SECONDS = 0.7;
 const BASE_SPEED = 0.55; // depth units per second: about 1.8 s from horizon to runner
 const MAX_SPEED = 0.95;
@@ -52,6 +54,7 @@ export function createRunner(): RunnerState {
     lane: 1,
     jumpT: -1,
     stumbleT: 0,
+    slideT: 0,
     objs: [],
     stars: 0,
     starsSpawned: 0,
@@ -71,7 +74,13 @@ export function moveLane(s: RunnerState, dir: -1 | 1): void {
 }
 
 export function jump(s: RunnerState): void {
+  s.slideT = 0;
   if (s.jumpT < 0 || s.jumpT >= JUMP_SECONDS) s.jumpT = 0;
+}
+
+// Sliding is only possible on the ground; it lets the runner pass under the rainbow arches.
+export function slide(s: RunnerState): void {
+  if (s.jumpT < 0 || s.jumpT >= JUMP_SECONDS) s.slideT = SLIDE_SECONDS;
 }
 
 const lanes: Lane[] = [0, 1, 2];
@@ -84,13 +93,13 @@ function add(s: RunnerState, lane: Lane, kind: Kind) {
 // Every row is friendly: there is always a free lane, and there is nearly always a star to chase.
 function spawnRow(s: RunnerState, rng: Rng) {
   const roll = rng();
-  if (roll < 0.36) {
+  if (roll < 0.34) {
     if (rng() < 0.3)
       s.trailLane = Math.max(0, Math.min(2, s.trailLane + (rng() < 0.5 ? -1 : 1))) as Lane;
     add(s, s.trailLane, 'star');
-  } else if (roll < 0.66) {
+  } else if (roll < 0.86) {
     const lane = lanes[Math.floor(rng() * 3)] as Lane;
-    add(s, lane, 'bump');
+    add(s, lane, rng() < 0.5 ? 'bump' : 'arch');
     const other = lanes.filter((l) => l !== lane);
     add(s, other[Math.floor(rng() * other.length)] as Lane, 'star');
   } else {
@@ -112,6 +121,7 @@ export function stepRunner(s: RunnerState, dt: number, rng: Rng): RunEvent[] {
     if (s.jumpT >= JUMP_SECONDS) s.jumpT = -1;
   }
   s.stumbleT = Math.max(0, s.stumbleT - dt);
+  s.slideT = Math.max(0, s.slideT - dt);
 
   const speed = speedAt(s.t) * (s.stumbleT > 0 ? 0.6 : 1);
   s.distance += speed * dt;
@@ -132,7 +142,10 @@ export function stepRunner(s: RunnerState, dt: number, rng: Rng): RunEvent[] {
       s.combo++;
       s.bestCombo = Math.max(s.bestCombo, s.combo);
       events.push({ type: 'star', combo: s.combo });
-    } else if (o.kind === 'bump' && jumpHeight(s) > 0.35) {
+    } else if (
+      (o.kind === 'bump' && jumpHeight(s) > 0.35) ||
+      (o.kind === 'arch' && s.slideT > 0)
+    ) {
       s.stars++;
       events.push({ type: 'hop' });
     } else if (s.stumbleT <= 0) {
