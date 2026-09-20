@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { speak } from '../lib/speech';
 import { useSession } from '../state/session';
@@ -21,7 +21,23 @@ function formatRemaining(ms: number) {
   return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
 }
 
+function useFullscreen() {
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const sync = () => setOn(Boolean(document.fullscreenElement));
+    document.addEventListener('fullscreenchange', sync);
+    return () => document.removeEventListener('fullscreenchange', sync);
+  }, []);
+  const supported = typeof document !== 'undefined' && document.fullscreenEnabled;
+  const toggle = () => {
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void document.documentElement.requestFullscreen({ navigationUI: 'hide' });
+  };
+  return { on, supported, toggle };
+}
+
 export function Shell() {
+  const full = useFullscreen();
   const session = useSession();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -51,6 +67,17 @@ export function Shell() {
             <span className="badge" title="Premium de prueba">
               <Icon name="crown" /> {formatRemaining(session.trial.remainingMs)}
             </span>
+          )}
+          {full.supported && (
+            <button
+              type="button"
+              className="btn btn--ghost btn--icon"
+              onClick={full.toggle}
+              aria-label={full.on ? 'Salir de pantalla completa' : 'Pantalla completa'}
+              aria-pressed={full.on}
+            >
+              <Icon name="expand" />
+            </button>
           )}
           <button
             type="button"

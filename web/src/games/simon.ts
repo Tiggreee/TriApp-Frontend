@@ -1,7 +1,7 @@
 import type { Rng } from '../lib/rng';
 
 export const PADS = 4;
-export const MAX_ROUND = 5;
+export const MAX_ROUND = 10;
 
 export interface SimonState {
   phase: 'idle' | 'showing' | 'input' | 'won';

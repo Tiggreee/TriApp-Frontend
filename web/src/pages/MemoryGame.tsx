@@ -5,20 +5,26 @@ import { Icon } from '../components/Icon';
 import { Idol } from '../components/Idol';
 import { PageTitle } from '../components/PageTitle';
 import { createMemory, isMemoryDone, memoryReducer, memoryStars } from '../games/memory';
+import { GROUPS } from '../data/groups';
 import { useGroup } from '../hooks/useGroup';
 import { sfx } from '../lib/sound';
 import { speak } from '../lib/speech';
 
 const LEVELS = [
-  { pairs: 3, name: 'Fácil' },
-  { pairs: 4, name: 'Normal' },
+  { pairs: 4, name: 'Fácil' },
+  { pairs: 6, name: 'Normal' },
+  { pairs: 8, name: 'Difícil' },
+  { pairs: 12, name: 'Experta' },
 ];
+
+// Every face from every group, so harder levels can deal many more pairs.
+const ALL_MEMBERS = GROUPS.flatMap((g) => g.members);
 
 export default function MemoryGame() {
   const { group } = useGroup();
-  const [pairs, setPairs] = useState(3);
+  const [pairs, setPairs] = useState(6);
   const [round, setRound] = useState(0);
-  const ids = group.members.map((m) => m.id);
+  const ids = ALL_MEMBERS.map((m) => m.id);
   const [state, dispatch] = useReducer(memoryReducer, undefined, () => createMemory(ids, pairs));
   const [showResults, setShowResults] = useState(false);
 
@@ -37,14 +43,14 @@ export default function MemoryGame() {
         dispatch({ type: 'resolve' });
         if (match) {
           sfx.match();
-          const member = group.members.find((m) => m.id === state.deck[a]);
+          const member = ALL_MEMBERS.find((m) => m.id === state.deck[a]);
           if (member) speak(member.name);
         }
       },
-      match ? 500 : 950,
+      match ? 450 : 700,
     );
     return () => window.clearTimeout(timer);
-  }, [state.flipped, state.deck, group.members]);
+  }, [state.flipped, state.deck]);
 
   const done = isMemoryDone(state);
   useEffect(() => {
@@ -56,7 +62,7 @@ export default function MemoryGame() {
     return () => window.clearTimeout(timer);
   }, [done]);
 
-  const cols = state.deck.length <= 6 ? 3 : 4;
+  const cols = state.deck.length <= 16 ? 4 : 6;
 
   return (
     <>
@@ -89,7 +95,7 @@ export default function MemoryGame() {
 
       <div className="memory" style={{ '--cols': cols, '--g': group.colors.main } as CSSProperties}>
         {state.deck.map((id, index) => {
-          const member = group.members.find((m) => m.id === id);
+          const member = ALL_MEMBERS.find((m) => m.id === id);
           const faceUp = state.flipped.includes(index) || state.matched.includes(id);
           return (
             <button

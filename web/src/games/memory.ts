@@ -47,7 +47,7 @@ export const isMemoryDone = (state: MemoryState) =>
 
 // No penalty for mistakes; stars only reward tidy play.
 export function memoryStars(moves: number, pairs: number): 1 | 2 | 3 {
-  if (moves <= pairs + 2) return 3;
-  if (moves <= pairs * 2 + 2) return 2;
+  if (moves <= Math.ceil(pairs * 1.6)) return 3;
+  if (moves <= pairs * 2.6) return 2;
   return 1;
 }

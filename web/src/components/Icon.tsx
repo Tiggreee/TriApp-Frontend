@@ -73,6 +73,11 @@ const PATHS = {
       <path d="M16.5 9.5l5 5M21.5 9.5l-5 5" />
     </>
   ),
+  expand: (
+    <>
+      <path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" />
+    </>
+  ),
   home: (
     <>
       <path d="M3 11.2L12 3.5l9 7.7" />
