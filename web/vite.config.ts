@@ -8,5 +8,6 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./tests/setup.ts'],
     css: false,
+    env: { VITE_LOCK_PREMIUM: 'true' },
   },
 });
