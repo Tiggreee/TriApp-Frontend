@@ -20,8 +20,8 @@ const ContentBrowser = lazy(() => import('./pages/ContentBrowser'));
 
 // Brillos and Consejos stay behind a grown-up account, as before.
 function RequireAccount({ children }: { children: ReactNode }) {
-  const { user } = useSession();
-  return user ? children : <Navigate to="/" replace />;
+  const { isRegistered } = useSession();
+  return isRegistered ? children : <Navigate to="/" replace />;
 }
 
 export function App() {

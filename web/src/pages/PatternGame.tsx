@@ -1,14 +1,10 @@
 import { type CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { GameResults } from '../components/GameResults';
+import { HowToPlay } from '../components/HowToPlay';
 import { Icon } from '../components/Icon';
 import { PageTitle } from '../components/PageTitle';
-import {
-  PATTERN_ROUNDS,
-  PIECE_COLORS,
-  createPatternRound,
-  patternStars,
-} from '../games/pattern';
+import { PATTERN_ROUNDS, PIECE_COLORS, createPatternRound, patternStars } from '../games/pattern';
 import { useGroup } from '../hooks/useGroup';
 import { playNote, sfx } from '../lib/sound';
 import { speak } from '../lib/speech';
@@ -102,6 +98,32 @@ export default function PatternGame() {
         <Link to={`/games?group=${group.id}`} className="btn btn--ghost btn--small">
           <Icon name="back" /> Juegos
         </Link>
+        <HowToPlay
+          game="pattern"
+          title="¡Cómo se juega Colores en fila!"
+          steps={[
+            {
+              icon: 'palette',
+              title: 'Mira el patrón',
+              text: 'Las bolitas se repiten en un orden. Por ejemplo: azul, morada, azul, morada…',
+            },
+            {
+              icon: 'help',
+              title: 'Encuentra el hueco',
+              text: 'Al final falta una o más bolitas. ¿Cuál sigue?',
+            },
+            {
+              icon: 'play',
+              title: 'Arrastra la pieza',
+              text: 'Toca una pieza, arrástrala hasta el hueco y suéltala. Si es la correcta, ¡suena una nota!',
+            },
+            {
+              icon: 'star',
+              title: 'Cada ronda es más difícil',
+              text: 'Son 8 rondas: los patrones se hacen más largos y con más colores.',
+            },
+          ]}
+        />
         <span className="badge">
           Ronda {Math.min(round + 1, PATTERN_ROUNDS)} de {PATTERN_ROUNDS}
         </span>

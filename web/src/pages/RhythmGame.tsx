@@ -1,6 +1,7 @@
 import { type CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { GameResults } from '../components/GameResults';
+import { HowToPlay } from '../components/HowToPlay';
 import { Icon } from '../components/Icon';
 import { Idol } from '../components/Idol';
 import { PageTitle } from '../components/PageTitle';
@@ -174,6 +175,32 @@ export default function RhythmGame() {
         <Link to={`/games?group=${group.id}`} className="btn btn--ghost btn--small">
           <Icon name="back" /> Juegos
         </Link>
+        <HowToPlay
+          game="rhythm"
+          title="¡Cómo se juega Ritmo!"
+          steps={[
+            {
+              icon: 'note',
+              title: 'Caen notas de colores',
+              text: 'Cada nota baja por su carril siguiendo la música.',
+            },
+            {
+              icon: 'play',
+              title: 'Toca justo a tiempo',
+              text: 'Toca el carril cuando la nota llegue a la línea de abajo. Entre más justo, más puntos.',
+            },
+            {
+              icon: 'sparkle',
+              title: 'Suave o Normal',
+              text: 'Suave tiene menos notas y más tiempo. Normal va más rápido: ¡un reto!',
+            },
+            {
+              icon: 'star',
+              title: 'Todos ganan',
+              text: 'Nadie pierde: siempre te llevas estrellas.',
+            },
+          ]}
+        />
         <div className="chips" role="group" aria-label="Dificultad">
           <button
             type="button"

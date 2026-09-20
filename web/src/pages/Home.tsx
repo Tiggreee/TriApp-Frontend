@@ -100,7 +100,7 @@ const PLACES: Place[] = [
 ];
 
 export default function Home() {
-  const { user, hasPro, openHelp } = useSession();
+  const { user, isRegistered, hasPro, openHelp } = useSession();
   const unlock = useUnlock();
   const navigate = useNavigate();
 
@@ -124,7 +124,7 @@ export default function Home() {
 
       <ul className="town" aria-label="Lugares de Renatown">
         {PLACES.map((place) => {
-          const locked = place.needsAccount && !user;
+          const locked = place.needsAccount && !isRegistered;
           const inner = (
             <>
               <Building art={place.art} />
