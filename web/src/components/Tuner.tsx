@@ -1,5 +1,5 @@
 import { type CSSProperties, useState } from 'react';
-import type { Instrument } from '../data/instruments';
+import type { Tuning } from '../data/instruments';
 import { useTuner } from '../hooks/useTuner';
 import { centsOff, tuneState } from '../lib/pitch';
 import { getAudio } from '../lib/sound';
@@ -29,8 +29,8 @@ const MESSAGES = {
   ok: '¡Afinada! 🎉',
 } as const;
 
-export function Tuner({ instrument }: { instrument: Instrument }) {
-  const { strings } = instrument;
+export function Tuner({ name, tuning }: { name: string; tuning: Tuning }) {
+  const { strings } = tuning;
   const [index, setIndex] = useState(0);
   const { status, hz, start, stop } = useTuner();
   const target = strings[index] ?? strings[0];
@@ -47,7 +47,7 @@ export function Tuner({ instrument }: { instrument: Instrument }) {
   const go = (next: number) => setIndex((next + strings.length) % strings.length);
 
   return (
-    <section className="card tuner" aria-label={`Afinador de ${instrument.name}`}>
+    <section className="card tuner" aria-label={`Afinador de ${name}`}>
       <div
         className="tuner__bar"
         role="group"

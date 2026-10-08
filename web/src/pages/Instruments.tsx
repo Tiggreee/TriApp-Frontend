@@ -6,6 +6,8 @@ import { INSTRUMENTS } from '../data/instruments';
 export default function Instruments() {
   const [id, setId] = useState(INSTRUMENTS[0].id);
   const instrument = INSTRUMENTS.find((i) => i.id === id) ?? INSTRUMENTS[0];
+  const [tuningId, setTuningId] = useState(instrument.tunings[0].id);
+  const tuning = instrument.tunings.find((t) => t.id === tuningId) ?? instrument.tunings[0];
 
   return (
     <>
@@ -31,8 +33,22 @@ export default function Instruments() {
           ))}
         </div>
         <p className="muted small">{instrument.tagline}</p>
+        <h2 id="tuning-title">Afinación</h2>
+        <div className="chips" role="group" aria-labelledby="tuning-title">
+          {instrument.tunings.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              className="chip"
+              aria-pressed={t.id === tuning.id}
+              onClick={() => setTuningId(t.id)}
+            >
+              {t.name}
+            </button>
+          ))}
+        </div>
       </section>
-      <Tuner key={instrument.id} instrument={instrument} />
+      <Tuner key={`${instrument.id}-${tuning.id}`} name={instrument.name} tuning={tuning} />
     </>
   );
 }

@@ -16,7 +16,7 @@ function tone(hz: number, size = 4096, amplitude = 0.5, harmonics = false) {
 
 describe('pitch detection', () => {
   it('finds every sopranino string within 1 Hz', () => {
-    for (const string of INSTRUMENTS[0].strings) {
+    for (const string of INSTRUMENTS[0].tunings.flatMap((t) => t.strings)) {
       const hz = detectPitch(tone(string.hz), SAMPLE_RATE);
       expect(hz).not.toBeNull();
       expect(Math.abs((hz ?? 0) - string.hz)).toBeLessThan(1);
@@ -44,6 +44,6 @@ describe('tuning state', () => {
   });
 
   it('lists the thinnest string first', () => {
-    expect(INSTRUMENTS[0].strings[0].number).toBe(1);
+    expect(INSTRUMENTS[0].tunings[0].strings[0].number).toBe(1);
   });
 });

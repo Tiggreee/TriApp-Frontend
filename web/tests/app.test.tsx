@@ -81,9 +81,11 @@ describe('Instrumentos', () => {
     const user = userEvent.setup();
     renderApp('/instruments');
     expect(await screen.findByRole('heading', { name: /instrumentos/i })).toBeInTheDocument();
-    expect(screen.getByTestId('target-hz')).toHaveTextContent('587.33');
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('659.26');
     await user.click(screen.getByRole('button', { name: /cuerda siguiente/i }));
-    expect(screen.getByTestId('target-hz')).toHaveTextContent('440.00');
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('493.88');
+    await user.click(screen.getByRole('button', { name: 'C F A D' }));
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('587.33');
   });
 });
 
