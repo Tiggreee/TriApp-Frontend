@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [Unreleased]
+
+### Added
+- Instrumentos: a real-time ukulele sopranino tuner (microphone pitch detection in Hz, string bar with arrows, reference tone).
+
 ## [2.0.0] - 2026-09-19
 
 ### Added

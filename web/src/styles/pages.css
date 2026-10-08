@@ -436,3 +436,148 @@
   color: var(--green-d);
   margin-top: 1px;
 }
+
+/* Instrumentos: tuner */
+.tuner {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  text-align: center;
+}
+
+.tuner__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.tuner__strings {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tuner__string {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  min-height: var(--tap);
+  padding: 8px 4px;
+  border: 3px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tuner__string b {
+  font-size: 1.4rem;
+}
+
+.tuner__string[aria-pressed="true"] {
+  border-color: var(--orange-d);
+  background: var(--orange);
+  color: #fff;
+}
+
+.tuner__hz {
+  margin: 0;
+  font-size: clamp(2.6rem, 12vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tuner__hz small,
+.tuner__heard small {
+  font-size: 0.4em;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.tuner__meter {
+  width: 100%;
+  max-width: 520px;
+  --tone: var(--ink-soft);
+}
+
+.tuner__meter[data-state="ok"] {
+  --tone: var(--green-d);
+}
+
+.tuner__meter[data-state="low"],
+.tuner__meter[data-state="high"] {
+  --tone: var(--orange-d);
+}
+
+.tuner__track {
+  position: relative;
+  height: 44px;
+  border: 3px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.tuner__zone {
+  position: absolute;
+  inset: 0 auto 0 44%;
+  width: 12%;
+  background: color-mix(in srgb, var(--green) 35%, transparent);
+}
+
+.tuner__needle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--needle);
+  width: 8px;
+  margin-left: -4px;
+  border-radius: 4px;
+  background: var(--tone);
+  transition:
+    left 0.12s ease-out,
+    background 0.2s;
+}
+
+.tuner__meter[data-state="idle"] .tuner__needle {
+  opacity: 0.35;
+}
+
+.tuner__scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.tuner__read {
+  min-height: 72px;
+}
+
+.tuner__heard {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.tuner__msg {
+  margin: 4px 0 0;
+  font-size: 1.15rem;
+}
+
+.tuner__msg[data-state="ok"] {
+  color: var(--green-d);
+  font-weight: 700;
+}
+
+.tuner__actions {
+  justify-content: center;
+  flex-wrap: wrap;
+}
