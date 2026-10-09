@@ -4,7 +4,7 @@ import { GameResults } from '../components/GameResults';
 import { HowToPlay } from '../components/HowToPlay';
 import { Icon } from '../components/Icon';
 import { PageTitle } from '../components/PageTitle';
-import { PATTERN_ROUNDS, PIECE_COLORS, createPatternRound, patternStars } from '../games/pattern';
+import { createPatternRound, PATTERN_ROUNDS, PIECE_COLORS, patternStars } from '../games/pattern';
 import { useGroup } from '../hooks/useGroup';
 import { playNote, sfx } from '../lib/sound';
 import { speak } from '../lib/speech';

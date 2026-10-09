@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { readString, writeString } from '../lib/storage';
 import { speak } from '../lib/speech';
+import { readString, writeString } from '../lib/storage';
 import { Dialog } from './Dialog';
 import { Icon, type IconName } from './Icon';
 

@@ -142,10 +142,7 @@ export function stepRunner(s: RunnerState, dt: number, rng: Rng): RunEvent[] {
       s.combo++;
       s.bestCombo = Math.max(s.bestCombo, s.combo);
       events.push({ type: 'star', combo: s.combo });
-    } else if (
-      (o.kind === 'bump' && jumpHeight(s) > 0.35) ||
-      (o.kind === 'arch' && s.slideT > 0)
-    ) {
+    } else if ((o.kind === 'bump' && jumpHeight(s) > 0.35) || (o.kind === 'arch' && s.slideT > 0)) {
       s.stars++;
       events.push({ type: 'hop' });
     } else if (s.stumbleT <= 0) {
