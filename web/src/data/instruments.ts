@@ -1,3 +1,5 @@
+import { noteToHz } from '../lib/pitch';
+
 export interface TunerString {
   /** String number, 1 is the thinnest (the one nearest the floor when played). */
   number: number;
@@ -8,6 +10,8 @@ export interface TunerString {
 export interface Tuning {
   id: string;
   name: string;
+  /** What the tuning asks of the strings, shown under the selector. */
+  hint: string;
   /** Listed from the thinnest string down, so the tuner starts on string 1. */
   strings: [TunerString, ...TunerString[]];
 }
@@ -19,33 +23,45 @@ export interface Instrument {
   tunings: [Tuning, ...Tuning[]];
 }
 
-// Sopranino (pocket) ukulele, re-entrant. Both tunings below are standard for this size.
+// Frequencies come from the note names (equal temperament, A4 = 440 Hz), never typed by hand.
+function tuning(
+  id: string,
+  name: string,
+  hint: string,
+  notes: [string, string, string, string],
+): Tuning {
+  const [first, ...rest] = notes.map((note, i) => ({ number: i + 1, note, hz: noteToHz(note) }));
+  return { id, name, hint, strings: [first as TunerString, ...rest] };
+}
+
+// Sopranino ukulele, re-entrant. The notes are listed from string 1 (thinnest) to string 4,
+// and every tuning is a transposition of the soprano's G-C-E-A (G4 C4 E4 A4).
 export const INSTRUMENTS: [Instrument, ...Instrument[]] = [
   {
     id: 'ukulele-sopranino',
     name: 'Ukelele sopranino',
     tagline: 'Cuatro cuerdas · empieza por la más delgada',
     tunings: [
-      {
-        id: 'dgbe',
-        name: 'D G B E',
-        strings: [
-          { number: 1, note: 'E5', hz: 659.26 },
-          { number: 2, note: 'B4', hz: 493.88 },
-          { number: 3, note: 'G4', hz: 392.0 },
-          { number: 4, note: 'D5', hz: 587.33 },
-        ],
-      },
-      {
-        id: 'cfad',
-        name: 'C F A D',
-        strings: [
-          { number: 1, note: 'D5', hz: 587.33 },
-          { number: 2, note: 'A4', hz: 440.0 },
-          { number: 3, note: 'F4', hz: 349.23 },
-          { number: 4, note: 'C5', hz: 523.25 },
-        ],
-      },
+      tuning(
+        'adfb',
+        'A D F# B',
+        'Un tono arriba del estándar. Seguro con cuerdas de soprano: más brillo y tensión moderada.',
+        ['B4', 'F#4', 'D4', 'A4'],
+      ),
+      tuning(
+        'bebgc',
+        'Bb Eb G C',
+        'Un tono y medio arriba. Es el límite para cuerdas de soprano: más brillo y ataque, pero en un sopranino muy pequeño se siente dura.',
+        ['C5', 'G4', 'Eb4', 'Bb4'],
+      ),
+      tuning(
+        'dgbe',
+        'D G B E',
+        'Una quinta arriba. Pide cuerdas hechas para sopranino: más volumen y brillo. Con cuerdas de soprano la tensión es demasiada.',
+        ['E5', 'B4', 'G4', 'D5'],
+      ),
     ],
   },
 ];
+
+export const DEFAULT_TUNING_ID = 'dgbe';

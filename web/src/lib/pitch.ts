@@ -77,3 +77,25 @@ export function median(values: number[]): number {
   const mid = Math.floor(sorted.length / 2);
   return sorted.length % 2 ? (sorted[mid] ?? 0) : ((sorted[mid - 1] ?? 0) + (sorted[mid] ?? 0)) / 2;
 }
+
+const SEMITONES: Record<string, number> = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+
+/** Frequency in Hz of a note name such as "F#4" or "Bb4", in equal temperament with A4 = 440 Hz. */
+export function noteToHz(note: string): number {
+  const match = /^([A-G])([#b]?)(-?\d+)$/.exec(note);
+  if (!match) throw new Error(`Invalid note: ${note}`);
+  const [, letter = 'A', accidental = '', octave = '4'] = match;
+  const shift = accidental === '#' ? 1 : accidental === 'b' ? -1 : 0;
+  const midi = (Number(octave) + 1) * 12 + (SEMITONES[letter] ?? 0) + shift;
+  return 440 * 2 ** ((midi - 69) / 12);
+}
+
+/** Index of the target closest to `freq`, with its distance in cents. */
+export function nearestTarget(freq: number, targets: number[]): { index: number; cents: number } {
+  let best = { index: 0, cents: Number.POSITIVE_INFINITY };
+  targets.forEach((target, index) => {
+    const cents = centsOff(freq, target);
+    if (Math.abs(cents) < Math.abs(best.cents)) best = { index, cents };
+  });
+  return best;
+}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { INSTRUMENTS } from '../src/data/instruments';
-import { centsOff, detectPitch, tuneState } from '../src/lib/pitch';
+import { centsOff, detectPitch, nearestTarget, noteToHz, tuneState } from '../src/lib/pitch';
 
 const SAMPLE_RATE = 48000;
 
@@ -45,5 +45,46 @@ describe('tuning state', () => {
 
   it('lists the thinnest string first', () => {
     expect(INSTRUMENTS[0].tunings[0].strings[0].number).toBe(1);
+  });
+});
+
+describe('note frequencies', () => {
+  it('matches the equal-temperament table with A4 = 440 Hz', () => {
+    const table: Record<string, number> = {
+      C4: 261.63,
+      D4: 293.66,
+      Eb4: 311.13,
+      'F#4': 369.99,
+      G4: 392.0,
+      A4: 440.0,
+      Bb4: 466.16,
+      B4: 493.88,
+      C5: 523.25,
+      D5: 587.33,
+      E5: 659.26,
+    };
+    for (const [note, hz] of Object.entries(table)) {
+      expect(noteToHz(note)).toBeCloseTo(hz, 2);
+    }
+    expect(() => noteToHz('H4')).toThrow();
+  });
+
+  it('builds each sopranino tuning as a transposition of G-C-E-A', () => {
+    const [instrument] = INSTRUMENTS;
+    const base = [noteToHz('A4'), noteToHz('E4'), noteToHz('C4'), noteToHz('G4')];
+    const steps: Record<string, number> = { adfb: 2, bebgc: 3, dgbe: 7 };
+    for (const tuning of instrument.tunings) {
+      const shift = steps[tuning.id] ?? 0;
+      tuning.strings.forEach((string, i) => {
+        expect(string.hz).toBeCloseTo((base[i] ?? 0) * 2 ** (shift / 12), 6);
+      });
+    }
+  });
+
+  it('finds which string is sounding', () => {
+    const tuning = INSTRUMENTS[0].tunings.find((t) => t.id === 'dgbe');
+    const targets = (tuning?.strings ?? []).map((s) => s.hz);
+    expect(nearestTarget(494, targets).index).toBe(1);
+    expect(Math.abs(nearestTarget(494, targets).cents)).toBeLessThan(10);
   });
 });

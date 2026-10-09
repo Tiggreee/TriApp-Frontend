@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { PageTitle } from '../components/PageTitle';
 import { Tuner } from '../components/Tuner';
-import { INSTRUMENTS } from '../data/instruments';
+import { DEFAULT_TUNING_ID, INSTRUMENTS } from '../data/instruments';
 
 export default function Instruments() {
   const [id, setId] = useState(INSTRUMENTS[0].id);
   const instrument = INSTRUMENTS.find((i) => i.id === id) ?? INSTRUMENTS[0];
-  const [tuningId, setTuningId] = useState(instrument.tunings[0].id);
+  const [tuningId, setTuningId] = useState<string>(DEFAULT_TUNING_ID);
   const tuning = instrument.tunings.find((t) => t.id === tuningId) ?? instrument.tunings[0];
 
   return (
@@ -47,6 +47,7 @@ export default function Instruments() {
             </button>
           ))}
         </div>
+        <p className="muted small">{tuning.hint}</p>
       </section>
       <Tuner key={`${instrument.id}-${tuning.id}`} name={instrument.name} tuning={tuning} />
     </>
