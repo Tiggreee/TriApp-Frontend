@@ -176,14 +176,10 @@ export function MetalUkulele({ states }: { states: StringState[] }) {
             fill="#0b0b10"
             fillOpacity="0.55"
           />
-          {STRING_NUT.map((_, i) => (
+          {STRING_NUT.map((nutX, i) => (
             <circle
-              key={i}
-              cx={lerp(
-                STRING_NUT[i] ?? 200,
-                STRING_BRIDGE[i] ?? 200,
-                (y - NUT_Y) / (BRIDGE_Y - NUT_Y),
-              )}
+              key={nutX}
+              cx={lerp(nutX, STRING_BRIDGE[i] ?? 200, (y - NUT_Y) / (BRIDGE_Y - NUT_Y))}
               cy={y}
               r="3.2"
               fill="#d7dae4"
