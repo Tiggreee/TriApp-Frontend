@@ -12,10 +12,10 @@ const AUTO_CENTS = 100;
 
 // Tuning-peg buttons on the headstock, as % of the artwork: strings 1 and 2 left, 3 and 4 right.
 const PEGS = [
-  { x: 35, y: 8.9 },
-  { x: 35, y: 17.7 },
-  { x: 65, y: 8.9 },
-  { x: 65, y: 17.7 },
+  { x: 35, y: 8.4 },
+  { x: 35, y: 19.5 },
+  { x: 65, y: 8.4 },
+  { x: 65, y: 19.5 },
 ] as const;
 
 function playReference(hz: number) {
@@ -35,8 +35,8 @@ function playReference(hz: number) {
 }
 
 const MESSAGES = {
-  low: 'Muy grave: aprieta un poquito la clavija',
-  high: 'Muy aguda: afloja un poquito la clavija',
+  low: 'Muy grave: aprieta',
+  high: 'Muy aguda: afloja',
   ok: '¡Afinada! 🎉',
 } as const;
 

@@ -447,11 +447,12 @@
 
 .uke {
   position: relative;
+  container-type: inline-size;
   width: 100%;
   max-width: 420px;
-  aspect-ratio: 400 / 700;
+  aspect-ratio: 400 / 760;
   border-radius: var(--radius);
-  background: radial-gradient(circle at 50% 30%, #2a1420, #0b0b11 70%);
+  background: #09090e;
   overflow: hidden;
   color: #f4f1ff;
 }
@@ -464,31 +465,32 @@
 }
 
 .uke__string {
-  stroke: #cfd3dc;
+  stroke: #e6e9f2;
   transition: stroke 0.15s;
 }
 
 .uke__string[data-state="target"] {
   stroke: var(--orange);
-  filter: drop-shadow(0 0 4px var(--orange));
+  filter: drop-shadow(0 0 3px var(--orange));
 }
 
 .uke__string[data-state="ok"] {
   stroke: var(--green);
-  filter: drop-shadow(0 0 5px var(--green));
+  filter: drop-shadow(0 0 4px var(--green));
 }
 
 .uke__peg {
   position: absolute;
   display: grid;
   place-content: center;
-  width: max(44px, 12%);
+  width: max(44px, 12.5%);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  border: 3px solid #8b91a1;
+  border: 3px solid #3a3e4b;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #4b4f5c, #15161c);
-  color: #f4f1ff;
+  background: radial-gradient(circle at 35% 28%, #fbfcff, #a9afbf 50%, #5d6272);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.55);
+  color: #15161c;
   font: inherit;
   line-height: 1.05;
   cursor: pointer;
@@ -504,45 +506,52 @@
 
 .uke__peg span {
   font-size: 0.7rem;
-  opacity: 0.85;
+  font-weight: 600;
 }
 
 .uke__peg[aria-pressed="true"] {
   border-color: #fff;
+  box-shadow:
+    0 0 0 3px #e2183f,
+    0 3px 6px rgba(0, 0, 0, 0.55);
 }
 
 .uke__peg[data-heard="true"] {
-  background: radial-gradient(circle at 35% 30%, var(--orange), var(--orange-d));
-  box-shadow: 0 0 16px 4px color-mix(in srgb, var(--orange) 70%, transparent);
+  background: radial-gradient(circle at 35% 28%, #ffd9ae, var(--orange) 55%, var(--orange-d));
+  box-shadow:
+    0 0 0 3px #e2183f,
+    0 0 18px 6px color-mix(in srgb, var(--orange) 75%, transparent);
 }
 
 .uke__peg[data-ok="true"] {
-  background: radial-gradient(circle at 35% 30%, var(--green), var(--green-d));
-  box-shadow: 0 0 18px 5px color-mix(in srgb, var(--green) 75%, transparent);
+  background: radial-gradient(circle at 35% 28%, #c9ffe8, var(--green) 55%, var(--green-d));
+  box-shadow:
+    0 0 0 3px #e2183f,
+    0 0 20px 7px color-mix(in srgb, var(--green) 80%, transparent);
 }
 
 .uke__screen {
   position: absolute;
-  inset: 41% 13% 12%;
+  inset: 62.5% 12% 7%;
   display: grid;
   align-content: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-sm);
-  background: rgba(8, 8, 14, 0.62);
+  gap: 1.4cqw;
+  padding: 2cqw 3cqw;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(8, 8, 14, 0.78);
   backdrop-filter: blur(3px);
 }
 
 .tuner__label {
   margin: 0;
   color: #c9c3e6;
-  font-size: 0.95rem;
+  font-size: max(11px, 3.6cqw);
 }
 
 .tuner__hz {
   margin: 0;
-  font-size: clamp(2.2rem, 11vw, 3.4rem);
+  font-size: max(26px, 10.5cqw);
   font-weight: 700;
   line-height: 1;
 }
@@ -569,7 +578,7 @@
 
 .tuner__track {
   position: relative;
-  height: 30px;
+  height: max(20px, 6.5cqw);
   border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
@@ -606,22 +615,22 @@
   justify-content: space-between;
   margin-top: 2px;
   color: #c9c3e6;
-  font-size: 0.75rem;
+  font-size: max(10px, 2.8cqw);
 }
 
 .tuner__read {
-  min-height: 56px;
+  min-height: 14cqw;
 }
 
 .tuner__heard {
   margin: 0;
-  font-size: 1.35rem;
+  font-size: max(15px, 5cqw);
   font-weight: 600;
 }
 
 .tuner__msg {
   margin: 2px 0 0;
-  font-size: 0.95rem;
+  font-size: max(11px, 3.6cqw);
 }
 
 .tuner__msg--idle {
