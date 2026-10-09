@@ -76,6 +76,21 @@ describe('Renatown', () => {
   });
 });
 
+describe('Instrumentos', () => {
+  it('opens the sopranino tuner on the thinnest string and moves with the arrows', async () => {
+    const user = userEvent.setup();
+    renderApp('/instruments');
+    expect(await screen.findByRole('heading', { name: /instrumentos/i })).toBeInTheDocument();
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('659.26');
+    await user.click(screen.getByRole('button', { name: /cuerda siguiente/i }));
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('493.88');
+    await user.click(screen.getByRole('button', { name: 'A D F# B' }));
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('493.88');
+    await user.click(screen.getByRole('button', { name: /cuerda 4, a4/i }));
+    expect(screen.getByTestId('target-hz')).toHaveTextContent('440.00');
+  });
+});
+
 describe('Premium trial', () => {
   it('allows three 5-minute trials a day', () => {
     const now = new Date('2026-09-19T10:00:00').getTime();

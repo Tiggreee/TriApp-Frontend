@@ -436,3 +436,224 @@
   color: var(--green-d);
   margin-top: 1px;
 }
+
+/* Instrumentos: tuner */
+.tuner {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+}
+
+.uke {
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 400 / 760;
+  border-radius: var(--radius);
+  background: #09090e;
+  overflow: hidden;
+  color: #f4f1ff;
+}
+
+.uke__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.uke__string {
+  stroke: #e6e9f2;
+  transition: stroke 0.15s;
+}
+
+.uke__string[data-state="target"] {
+  stroke: var(--orange);
+  filter: drop-shadow(0 0 3px var(--orange));
+}
+
+.uke__string[data-state="ok"] {
+  stroke: var(--green);
+  filter: drop-shadow(0 0 4px var(--green));
+}
+
+.uke__peg {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  width: max(44px, 12.5%);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 3px solid #3a3e4b;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #fbfcff, #a9afbf 50%, #5d6272);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.55);
+  color: #15161c;
+  font: inherit;
+  line-height: 1.05;
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s,
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.uke__peg b {
+  font-size: 1.05rem;
+}
+
+.uke__peg span {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.uke__peg[aria-pressed="true"] {
+  border-color: #fff;
+  box-shadow:
+    0 0 0 3px #e2183f,
+    0 3px 6px rgba(0, 0, 0, 0.55);
+}
+
+.uke__peg[data-heard="true"] {
+  background: radial-gradient(circle at 35% 28%, #ffd9ae, var(--orange) 55%, var(--orange-d));
+  box-shadow:
+    0 0 0 3px #e2183f,
+    0 0 18px 6px color-mix(in srgb, var(--orange) 75%, transparent);
+}
+
+.uke__peg[data-ok="true"] {
+  background: radial-gradient(circle at 35% 28%, #c9ffe8, var(--green) 55%, var(--green-d));
+  box-shadow:
+    0 0 0 3px #e2183f,
+    0 0 20px 7px color-mix(in srgb, var(--green) 80%, transparent);
+}
+
+.uke__screen {
+  position: absolute;
+  inset: 62.5% 12% 7%;
+  display: grid;
+  align-content: center;
+  gap: 1.4cqw;
+  padding: 2cqw 3cqw;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(8, 8, 14, 0.78);
+  backdrop-filter: blur(3px);
+}
+
+.tuner__label {
+  margin: 0;
+  color: #c9c3e6;
+  font-size: max(11px, 3.6cqw);
+}
+
+.tuner__hz {
+  margin: 0;
+  font-size: max(26px, 10.5cqw);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tuner__hz small,
+.tuner__heard small {
+  font-size: 0.4em;
+  font-weight: 500;
+  color: #c9c3e6;
+}
+
+.tuner__meter {
+  --tone: #c9c3e6;
+}
+
+.tuner__meter[data-state="ok"] {
+  --tone: var(--green);
+}
+
+.tuner__meter[data-state="low"],
+.tuner__meter[data-state="high"] {
+  --tone: var(--orange);
+}
+
+.tuner__track {
+  position: relative;
+  height: max(20px, 6.5cqw);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.tuner__zone {
+  position: absolute;
+  inset: 0 auto 0 44%;
+  width: 12%;
+  background: color-mix(in srgb, var(--green) 40%, transparent);
+}
+
+.tuner__needle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--needle);
+  width: 8px;
+  margin-left: -4px;
+  border-radius: 4px;
+  background: var(--tone);
+  transition:
+    left 0.12s ease-out,
+    background 0.2s;
+}
+
+.tuner__meter[data-state="idle"] .tuner__needle {
+  opacity: 0.35;
+}
+
+.tuner__scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  color: #c9c3e6;
+  font-size: max(10px, 2.8cqw);
+}
+
+.tuner__read {
+  min-height: 14cqw;
+}
+
+.tuner__heard {
+  margin: 0;
+  font-size: max(15px, 5cqw);
+  font-weight: 600;
+}
+
+.tuner__msg {
+  margin: 2px 0 0;
+  font-size: max(11px, 3.6cqw);
+}
+
+.tuner__msg--idle {
+  color: #c9c3e6;
+}
+
+.tuner__msg[data-state="ok"] {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.tuner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tuner__needle,
+  .uke__peg,
+  .uke__string {
+    transition: none;
+  }
+}

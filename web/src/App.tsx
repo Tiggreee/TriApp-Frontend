@@ -8,6 +8,7 @@ import { useSession } from './state/session';
 
 const Music = lazy(() => import('./pages/Music'));
 const Colors = lazy(() => import('./pages/Colors'));
+const Instruments = lazy(() => import('./pages/Instruments'));
 const Avatar = lazy(() => import('./pages/Avatar'));
 const Games = lazy(() => import('./pages/Games'));
 const RunnerGame = lazy(() => import('./pages/RunnerGame'));
@@ -32,6 +33,7 @@ export function App() {
           <Route index element={<Home />} />
           <Route path="music" element={<Music />} />
           <Route path="colors" element={<Colors />} />
+          <Route path="instruments" element={<Instruments />} />
           <Route path="avatar" element={<Avatar />} />
           <Route path="games" element={<Games />} />
           <Route path="games/run" element={<RunnerGame />} />

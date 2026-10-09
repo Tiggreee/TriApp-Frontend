@@ -10,12 +10,12 @@ import {
   createRunner,
   jump,
   jumpHeight,
-  slide,
   moveLane,
   RUN_SECONDS,
   type RunnerState,
   type RunObject,
   runnerStars,
+  slide,
   stepRunner,
 } from '../games/runner';
 import { useGroup } from '../hooks/useGroup';
