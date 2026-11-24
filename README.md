@@ -10,6 +10,7 @@ Live: https://tri-app-frontend.vercel.app/
 |---|---|
 | Música | Search songs and hear 30-second previews (explicit content filtered out). Voice search, favourites. |
 | Juegos | Four mini-games with three original pop groups: **Corre** (an endless-runner style dash), **Ritmo** (rhythm), **Parejas** (memory) and **Baile** (repeat-the-dance). Nobody loses, everybody earns stars. |
+| Instrumentos | Real-time tuner for the sopranino ukulele (A‑D‑F#‑B, Bb‑Eb‑G‑C or D‑G‑B‑E, thinnest string first). Uses the microphone to show the detected Hz and how far each string is from its target. Audio never leaves the device. |
 | Colores | Pick a colour, pick a harmony, tap the bubbles to hear the colour name in Spanish. |
 | Mi personaje | Draw an avatar from a name, drawn locally so the name never leaves the device. |
 | Brillos / Consejos | Makeup tutorials and daily tips, behind a grown-up account. |

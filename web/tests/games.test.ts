@@ -1,4 +1,3 @@
-import { PATTERN_ROUNDS, createPatternRound } from '../src/games/pattern';
 import { describe, expect, it } from 'vitest';
 import { GROUPS } from '../src/data/groups';
 import {
@@ -10,6 +9,7 @@ import {
   starsFor,
 } from '../src/games/chart';
 import { createMemory, isMemoryDone, memoryReducer, memoryStars } from '../src/games/memory';
+import { createPatternRound, PATTERN_ROUNDS } from '../src/games/pattern';
 import {
   createRunner,
   jump,

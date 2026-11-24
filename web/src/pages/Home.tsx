@@ -57,6 +57,19 @@ const PLACES: Place[] = [
     },
   },
   {
+    to: '/instruments',
+    name: 'Instrumentos',
+    hint: 'Afina tu ukelele',
+    art: {
+      wall: '#ffe9d1',
+      roof: '#c8763a',
+      door: '#3ed598',
+      sign: '#c8763a',
+      roofStyle: 'gable',
+      icon: 'ukulele',
+    },
+  },
+  {
     to: '/avatar',
     name: 'Mi personaje',
     hint: 'Créalo con tu nombre',
