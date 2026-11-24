@@ -1,63 +1,69 @@
-# TriApp Frontend
+# Renatown
 
-Frontend application for a multi-feature consumer experience: music discovery, color exploration, avatar generation, and content modules.
+A kid-friendly web app built for my daughter Renata: music, colours, avatars and pop-group mini-games in a little illustrated town. No ads, no tracking, no in-game purchases.
 
-Live demo: https://tri-app-frontend.vercel.app/music
+Live: https://tri-app-frontend.vercel.app/
 
-## Product summary
+## What's inside
 
-TriApp is a full-stack portfolio project focused on modular frontend architecture, API integration patterns, and user-facing feature delivery.
+| Place | What it does |
+|---|---|
+| Música | Search songs and hear 30-second previews (explicit content filtered out). Voice search, favourites. |
+| Juegos | Four mini-games with three original pop groups: **Corre** (an endless-runner style dash), **Ritmo** (rhythm), **Parejas** (memory) and **Baile** (repeat-the-dance). Nobody loses, everybody earns stars. |
+| Colores | Pick a colour, pick a harmony, tap the bubbles to hear the colour name in Spanish. |
+| Mi personaje | Draw an avatar from a name, drawn locally so the name never leaves the device. |
+| Brillos / Consejos | Makeup tutorials and daily tips, behind a grown-up account. |
+| Zona de papás | Premium, privacy promises, account. Everything here sits behind a grown-up gate. |
 
-## Key features
+### Designed for small hands
 
-- Music search and previews
-- Color exploration and palette utilities
-- Avatar generation
-- Favorites and recent history persistence
-- JWT-based authentication flow
-- Light/dark theme support
-- Voice-assisted search (browser support dependent)
+- Big, chunky touch targets, and labels are read aloud when tapped.
+- Outside links and anything about money or accounts require solving a grown-up puzzle first.
+- Premium is paid through Stripe Checkout by an adult; the app never sees card data and never collects anything about the child.
+- The pop groups (Chispa Club, Luna Gomita, Turbo Panditas), their looks and the music are original creations. The songs are synthesised in the browser with the Web Audio API.
 
-## Tech stack
+## Stack
 
-- React 19
-- Vite
-- React Router
-- CSS Modules
-- Node.js/Express backend integration (separate repo)
+- **Monorepo:** pnpm workspaces (`web/`, `server/`)
+- **Web:** React 19, TypeScript, Vite 8, React Router, TanStack Query, Web Audio, hand-written CSS design system
+- **Server:** Node 22, Express 5, TypeScript, Mongoose 9, Zod, Helmet, pino, Stripe Checkout
+- **Quality:** Vitest (unit, component, API with an in-memory MongoDB), Biome, GitHub Actions
 
-## Repositories
-
-- Frontend: https://github.com/Tiggreee/TriApp-Frontend
-- Backend: https://github.com/Tiggreee/Triapp-Backend
-
-## Run locally
+## Run it locally
 
 ```bash
-git clone https://github.com/Tiggreee/TriApp-Frontend.git
-cd TriApp-Frontend
-npm install
-npm run dev
+corepack enable
+pnpm install
+cp server/.env.example server/.env   # set JWT_SECRET and MONGODB_URI
+cp web/.env.example web/.env
+pnpm dev                              # web on :5173, API on :3000
 ```
 
-Production build:
+Other scripts: `pnpm build`, `pnpm typecheck`, `pnpm test`, `pnpm lint`.
 
-```bash
-npm run build
+Payments are optional. Without `STRIPE_*` variables the billing endpoints answer `503` and everything else works.
+
+## Structure
+
+```
+web/
+  src/components   shared UI (Icon, Idol, Building, Dialog, ParentGate...)
+  src/pages        one file per place in town
+  src/games        pure game logic (chart, memory, simon) + tests
+  src/lib          audio synth, API client, trial, gate, speech
+  src/state        session (account, trial, theme, sound)
+server/
+  src/routes       auth, users, favourites, billing
+  tests            API tests against an in-memory MongoDB
 ```
 
 ## Deployment
 
-- Frontend: Vercel
-- Backend API: Render
+- Web: Vercel (`web/`)
+- API: Render (`server/`, start with `pnpm --filter @triapp/server start`)
 
-## Engineering focus
+## Roadmap
 
-- Clear component boundaries
-- Feature modularization
-- Reusable UI and hooks
-- Maintainable state and persistence flows
-
-## Recruiter notes
-
-This project demonstrates practical frontend delivery under real product constraints: UX continuity, API integration, authentication, and iterative feature expansion.
+- Native Android app once the web experience is solid.
+- More songs and groups.
+- Accessibility pass with a screen-reader user.

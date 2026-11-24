@@ -1,0 +1,10 @@
+{
+  "name": "Renatown · Renata's Finder",
+  "short_name": "Renatown",
+  "start_url": "/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "background_color": "#7fd6ff",
+  "theme_color": "#7fd6ff",
+  "icons": [{ "src": "/unicorn.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
