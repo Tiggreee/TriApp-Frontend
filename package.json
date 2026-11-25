@@ -16,6 +16,6 @@
     "start": "pnpm --filter @triapp/server start"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.14"
+    "@biomejs/biome": "^2.6.8"
   }
 }
